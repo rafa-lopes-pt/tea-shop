@@ -80,7 +80,13 @@
 				&:nth-child(#{$i}) {
 					top: calc($start + calc($i - 3) * 2.5%);
 					animation: loadLines 2s forwards 1 ease-in-out,
-						loopLines 12s infinite both ease-in-out #{$i * 0.4s};
+						loopLines
+							12s
+							infinite
+							both
+							ease-in-out
+							#{calc($i - 18) *
+							0.3s};
 				}
 			}
 		}
