@@ -1,0 +1,15 @@
+@use "../../base/colors" as colors;
+.icon-btn {
+	background-color: transparent;
+	font-size: 1.5rem;
+	cursor: pointer;
+
+	& i {
+		&:hover {
+			transform: scale(95%);
+		}
+		&:active {
+			transform: scale(105%);
+		}
+	}
+}

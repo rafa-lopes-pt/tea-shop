@@ -65,4 +65,16 @@ body {
   transform: scale(85%);
 }
 
+.icon-btn {
+  background-color: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.icon-btn i:hover {
+  transform: scale(95%);
+}
+.icon-btn i:active {
+  transform: scale(105%);
+}
+
 /*# sourceMappingURL=sass.css.map */
