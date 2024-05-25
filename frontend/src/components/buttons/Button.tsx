@@ -1,11 +1,16 @@
+export enum BUTTON_VARIANTS {
+	primary = "primary",
+	outlined = "outlined",
+}
+
 export default function Button({
-	variant = "primary",
+	variant = BUTTON_VARIANTS.primary,
 	children,
 	onClick = () => {},
 	className = "",
 }: {
 	onClick?: Function;
-	variant?: "primary" | "outlined";
+	variant?: BUTTON_VARIANTS;
 	children: string;
 	className?: string;
 }) {
