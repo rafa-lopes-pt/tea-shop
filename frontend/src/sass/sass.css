@@ -27,7 +27,6 @@ body {
   box-shadow: 2px 2px 15px 2px rgba(0, 77, 55, 0.5);
   transition: all 0.17s ease-in-out, box-shadow 0.3s;
   cursor: pointer;
-  margin: 0.5em;
   font-size: 0.8rem;
 }
 .btn--primary {
