@@ -4,8 +4,10 @@ import Button, { BUTTON_VARIANTS } from "../buttons/Button";
 
 export default function Navbar({
 	links,
+	className = "",
 }: {
 	links: { label: string; to?: string; action?: Function }[];
+	className?: string;
 }) {
 	const { pathname } = useLocation();
 
@@ -13,7 +15,7 @@ export default function Navbar({
 		pathname === `/${path === "/" ? "" : path}`;
 
 	return (
-		<nav className="navbar">
+		<nav className={"navbar " + className}>
 			{links.map((e) =>
 				e?.action ? (
 					<Button
