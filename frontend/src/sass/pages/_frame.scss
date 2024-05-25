@@ -7,12 +7,14 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	overflow: hidden;
+
 	&__corner {
 		position: absolute;
 
 		background-color: colors.$secondary;
 
-		$size: 40vmin;
+		$size: 35vmin;
 		width: $size;
 		height: $size;
 
@@ -23,6 +25,62 @@
 		&--bottom-right {
 			bottom: 0;
 			right: 0;
+		}
+	}
+
+	&__line {
+		position: absolute;
+		width: 200vw;
+		height: 1px;
+		transform: rotate(-45deg);
+		transform-origin: top left;
+
+		&--top {
+			$start: 0%;
+			background-color: #131;
+			@for $i from 4 to 18 {
+				&:nth-child(#{$i}) {
+					top: calc($start + calc($i - 3) * 3%);
+				}
+			}
+		}
+
+		&--bottom {
+			transform: rotate(-40deg);
+			$start: 140%;
+			background-color: #ddd;
+			@for $i from 18 to 30 {
+				&:nth-child(#{$i}) {
+					top: calc($start + calc($i - 3) * 2.5%);
+				}
+			}
+		}
+	}
+
+	&__dots {
+		position: absolute;
+		bottom: 1em;
+		left: 2em;
+
+		$box-size: 8vmax;
+		width: $box-size;
+		height: $box-size;
+
+		display: flex;
+		flex-wrap: wrap;
+
+		gap: 10%;
+
+		place-content: center;
+		place-items: center;
+
+		&__dot {
+			position: static;
+			$size: 5%;
+			width: $size;
+			height: $size;
+			background-color: #ddd;
+			border-radius: 50%;
 		}
 	}
 }

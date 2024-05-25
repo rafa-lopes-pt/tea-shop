@@ -24,12 +24,14 @@ main {
 		display: block;
 		content: "";
 		background-color: darken(colors.$bg, 3);
-		background: url("/media/bg.jpg") darken(colors.$bg, 0%);
+		background: url("/media/bg2.jpg") darken(colors.$bg, 0%);
 
 		background-blend-mode: color-dodge;
 
+		filter: brightness(90%) drop-shadow();
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-position: 50% 50%;
 
 		position: absolute;
 		top: 0;
@@ -37,9 +39,8 @@ main {
 		bottom: 0;
 		left: 0;
 
-		filter: brightness(110%);
 		z-index: -1;
 
-		box-shadow: inset 0px 0px 250px 20px colors.$dark;
+		box-shadow: inset 0px 0px 250px 20px colors.$bg;
 	}
 }
