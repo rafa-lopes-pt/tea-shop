@@ -49,16 +49,22 @@
 		}
 	}
 
+	@keyframes loopLines {
+		50% {
+			opacity: 0;
+		}
+	}
+
 	&__line {
 		position: absolute;
 		height: 1px;
 		transform: rotate(-45deg);
 		transform-origin: top left;
-		animation: loadLines 2s forwards 1 ease-in-out;
 
 		&--top {
 			$start: 0%;
 			background-color: #131;
+			animation: loadLines 2s forwards 1 ease-in-out;
 			@for $i from 4 to 18 {
 				&:nth-child(#{$i}) {
 					top: calc($start + calc($i - 3) * 3%);
@@ -73,6 +79,8 @@
 			@for $i from 18 to 30 {
 				&:nth-child(#{$i}) {
 					top: calc($start + calc($i - 3) * 2.5%);
+					animation: loadLines 2s forwards 1 ease-in-out,
+						loopLines 12s infinite both ease-in-out #{$i * 0.4s};
 				}
 			}
 		}
