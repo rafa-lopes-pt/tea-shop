@@ -9,7 +9,8 @@ export default function Navbar({
 }) {
 	const { pathname } = useLocation();
 
-	const isActive = (path: string) => pathname.startsWith("/" + path);
+	const isActive = (path: string) =>
+		pathname === `/${path === "/" ? "" : path}`;
 
 	return (
 		<nav className="navbar">
