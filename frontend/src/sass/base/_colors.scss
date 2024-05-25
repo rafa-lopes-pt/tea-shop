@@ -1,6 +1,6 @@
 $bg: #00241a;
 $light: lighten(#00241a, 90%);
-$dark: $bg;
+$dark: darken($bg, 5%);
 $primary: lighten(#00241a, 8%);
 $secondary: #e6ac1a;
 $title: #e6ac1a;

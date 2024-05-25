@@ -1,0 +1,28 @@
+@use "../base/colors" as colors;
+
+.frame {
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	&__corner {
+		position: absolute;
+
+		background-color: colors.$secondary;
+
+		$size: 40vmin;
+		width: $size;
+		height: $size;
+
+		&--top-left {
+			top: 0;
+			left: 0;
+		}
+		&--bottom-right {
+			bottom: 0;
+			right: 0;
+		}
+	}
+}
