@@ -1,0 +1,14 @@
+@use "./colors" as colors;
+* {
+	color: colors.$text-primary;
+	user-select: none;
+}
+
+:root {
+	font-size: clamp(14px, 1.5vmax, 20px);
+}
+
+body {
+	background-color: colors.$bg;
+	margin: 1rem;
+}

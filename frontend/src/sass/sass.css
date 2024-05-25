@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  border: none;
+}
+
+* {
+  color: #f0fffb;
+  user-select: none;
+}
+
+:root {
+  font-size: clamp(14px, 1.5vmax, 20px);
+}
+
+body {
+  background-color: #00241a;
+  margin: 1rem;
+}
+
+.btn {
+  padding: 0.75em 1em;
+  border-radius: 5px;
+  box-shadow: 2px 2px 15px 2px rgba(0, 77, 55, 0.5);
+  transition: all 0.17s ease-in-out, box-shadow 0.3s;
+  cursor: pointer;
+  margin: 0.5em;
+  font-size: 0.8rem;
+}
+.btn--primary {
+  background-color: #004d37;
+}
+.btn--primary:hover {
+  box-shadow: 2px 2px 25px 2px #004d37;
+  outline: 0.25px solid #e6fff8;
+}
+.btn--primary:active {
+  box-shadow: 2px 2px 25px 2px #004d37, inset 2px 2px 20px 2px #00241a;
+  outline: 1px solid #e6fff8;
+}
+.btn--outlined {
+  background-color: #f0fffb;
+  color: #004d37;
+  outline: 1px solid #004d37;
+}
+.btn--outlined:hover {
+  box-shadow: 2px 2px 25px 2px #004d37;
+}
+.btn--outlined:active {
+  box-shadow: 2px 2px 25px 2px #004d37, inset 2px 2px 20px 2px rgba(0, 77, 55, 0.35);
+  outline: 1px solid #004d37;
+}
+.btn span {
+  display: inline-block;
+  color: inherit;
+  transition: all 0.2s;
+}
+.btn:hover span {
+  transform: scale(105%);
+}
+.btn:active span {
+  transform: scale(85%);
+}
+
+/*# sourceMappingURL=sass.css.map */
