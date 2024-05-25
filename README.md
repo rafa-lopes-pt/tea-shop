@@ -23,7 +23,7 @@ For the backend, a simple REST API that would connect a document databse would d
 
 ### Design and Structuring
 Searching for inspiration from website with a huge database of designs, [Akib Abdullah](https://dribbble.com/shots/19996698-Tea-web-ui)'s caught my eye.
-I proceeded to create a [whimsical document](https://whimsical.com/tea-shop-LxYQkUrFdccPsFU7H4DxR1) where I made a sketch of what the end result should look like, as well as what components were needed, and some other things...
+I proceeded to create a [whimsical document](https://whimsical.com/tea-shop-LxYQkUrFdccPsFU7H4DxR1) where I made a sketch of what the end result should look like, as well as what components were needed, a proper user-flow diagram, what endpoints were needed, and a database schema.
 
 ### Frontend
 - Since SEO is not important in this case, **React** seems like a good option. Allowing me to make use of it's huge community and packages like **framer-motion** to create stunning animations.
@@ -33,12 +33,30 @@ I proceeded to create a [whimsical document](https://whimsical.com/tea-shop-LxYQ
   - **Headless UI** -> A UI library that provides complex components unstyled
   - **React-Toastify** -> Displays amazing toast notifications in the easiest, and super costumizable way possible
   - **Font-Awsome** -> For icons
-
+  - **Stripe** -> Payment processing
+  
 ### Backend
 - Considering the simple needs of the project, **Express JS** not only is a good option to implement a REST API, but it also pairs well with React! And since we're going to need a database, MongoDB provides an awsome free service for small projects, and is part of the **MERN** stack (Mongo, Express, React and Node)
 - Important packages
   - **zod** -> For input validation
   - **jsonwebtoken** -> User authentication
- 
-...to be continued
 
+Working with a database would be easier with an ORM (Object Relational Mapping) tool. Although at this point it would only add more complexity. The store may never grow beyond selling just tea, but if it does and more functionalities are added, implementing a tool like Prisma is no problem at all!
+
+### Hosting & CI/CD
+Ensuring that the website can grow, both in functionalities and in traffic capacity, I choose Mongo DB Altas, Render, and Netlify as service hosts. 
+  - Mongo DB Altas
+      - Free starting plan with "pay as you go" options
+      - Support for both simple and complex databases
+  - Render
+      - Free plan
+      - Takes care of basic server configuration, security, and other details, allowing me to focus on the API itself.
+      - Great features that can be later implemented if needed, like Redis or even cron jobs
+      - **GDPR DPA** compliant
+  - Netlify
+      - Free starter plan
+      - Easy deploy & build from github
+      - Website will be delivered through a CDN, ensuring faster loading times for users
+
+The project will be developed as a monorepo, wihtout the need for containerization (at least for now, being a small project with a single developer).
+Although new features should be pushed to their own branch, tested first, and merged to the main branch...for the sake of simplicity as a single developer this will be somewhat ignored.
