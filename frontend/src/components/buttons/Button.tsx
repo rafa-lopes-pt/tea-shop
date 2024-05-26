@@ -9,16 +9,18 @@ export default function Button({
 	children,
 	onClick = () => {},
 	className = "",
+	type = "button",
 }: {
 	onClick?: Function;
 	variant?: BUTTON_VARIANTS;
 	children: string;
 	className?: string;
+	type?: "button" | "submit";
 }) {
 	return (
 		<button
 			onClick={() => onClick()}
-			type="button"
+			type={type}
 			className={`btn btn--${variant} ${className}`}>
 			<span>{children}</span>
 		</button>
