@@ -1,0 +1,12 @@
+@use "../../utils/layout" as utils;
+.form {
+	@include utils.center-vertical-items();
+
+	&__header {
+		@include utils.center-vertical-items();
+		gap: 0;
+	}
+	&__body {
+		@include utils.center-vertical-items();
+	}
+}
