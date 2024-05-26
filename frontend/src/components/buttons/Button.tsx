@@ -1,6 +1,7 @@
 export enum BUTTON_VARIANTS {
 	primary = "primary",
 	outlined = "outlined",
+	link = "link",
 }
 
 export default function Button({

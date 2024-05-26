@@ -45,6 +45,24 @@
 			outline: 1px solid colors.$primary;
 		}
 	}
+	&--link {
+		background-color: transparent;
+		color: colors.$text-primary;
+		box-shadow: none;
+		&:hover {
+			background-color: rgba($color: colors.$primary, $alpha: 0.5);
+			box-shadow: 2px 2px 25px 2px
+				rgba($color: colors.$primary, $alpha: 1);
+		}
+
+		&:active {
+			box-shadow: 2px 2px 25px 2px
+					rgba($color: colors.$primary, $alpha: 1),
+				inset 2px 2px 20px 2px
+					rgba($color: colors.$primary, $alpha: 0.35);
+			outline: 1px solid colors.$primary;
+		}
+	}
 
 	& span {
 		display: inline-block;
