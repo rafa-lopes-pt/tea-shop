@@ -7,44 +7,46 @@
   border: none;
 }
 
+:root {
+  font-size: clamp(16px, 1.5vmax, 20px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #e6ac1a;
+  font-family: "Helvetica";
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
 * {
   color: #f0fffb;
   user-select: none;
-}
-
-:root {
-  font-size: clamp(14px, 1.5vmax, 20px);
 }
 
 body {
   background-color: #00241a;
   height: 100svh;
   padding: 6.5vmin;
-}
-
-main {
-  position: relative;
-  z-index: 2;
-  height: 87vmin;
-  padding: 1rem;
-}
-main::before {
-  display: block;
-  content: "";
-  background-color: #00150f;
-  background: url("/media/bg2.jpg") #00241a;
-  background-blend-mode: color-dodge;
-  filter: brightness(90%) drop-shadow();
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  box-shadow: inset 0px 0px 250px 20px #00241a;
 }
 
 .btn {
@@ -103,7 +105,7 @@ main::before {
 }
 
 .navbar {
-  font-size: 0.75rem;
+  font-size: 1rem;
   padding: 0.75em;
   display: flex;
   justify-content: space-evenly;
@@ -119,6 +121,14 @@ main::before {
   left: 0;
   overflow: hidden;
 }
+@keyframes loadCorner {
+  0% {
+    transform: scale(10%);
+  }
+  to {
+    transform: scale(100%);
+  }
+}
 .frame__corner {
   position: absolute;
   background-color: #e6ac1a;
@@ -128,20 +138,37 @@ main::before {
 .frame__corner--top-left {
   top: 0;
   left: 0;
+  animation: loadCorner 1s forwards 1 ease-in-out;
 }
 .frame__corner--bottom-right {
   bottom: 0;
   right: 0;
+  animation: loadCorner 1s forwards 1 0.1s ease-in-out;
+}
+@keyframes loadLines {
+  from {
+    width: 0vw;
+    opacity: 0;
+  }
+  to {
+    width: 200vw;
+    opacity: 1;
+  }
+}
+@keyframes loopLines {
+  50% {
+    opacity: 0;
+  }
 }
 .frame__line {
   position: absolute;
-  width: 200vw;
   height: 1px;
   transform: rotate(-45deg);
   transform-origin: top left;
 }
 .frame__line--top {
   background-color: #131;
+  animation: loadLines 2s forwards 1 ease-in-out;
 }
 .frame__line--top:nth-child(4) {
   top: 3%;
@@ -191,39 +218,67 @@ main::before {
 }
 .frame__line--bottom:nth-child(18) {
   top: 177.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 0s;
 }
 .frame__line--bottom:nth-child(19) {
   top: 180%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 0.3s;
 }
 .frame__line--bottom:nth-child(20) {
   top: 182.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 0.6s;
 }
 .frame__line--bottom:nth-child(21) {
   top: 185%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 0.9s;
 }
 .frame__line--bottom:nth-child(22) {
   top: 187.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 1.2s;
 }
 .frame__line--bottom:nth-child(23) {
   top: 190%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 1.5s;
 }
 .frame__line--bottom:nth-child(24) {
   top: 192.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 1.8s;
 }
 .frame__line--bottom:nth-child(25) {
   top: 195%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 2.1s;
 }
 .frame__line--bottom:nth-child(26) {
   top: 197.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 2.4s;
 }
 .frame__line--bottom:nth-child(27) {
   top: 200%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 2.7s;
 }
 .frame__line--bottom:nth-child(28) {
   top: 202.5%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 3s;
 }
 .frame__line--bottom:nth-child(29) {
   top: 205%;
+  animation: loadLines 2s forwards 1 ease-in-out, loopLines 12s infinite both ease-in-out 3.3s;
+}
+@keyframes loadDotsBox {
+  from {
+    transform: scale(10%);
+  }
+  to {
+    transform: scale(100%);
+  }
+}
+@keyframes loadDot {
+  from {
+    border-radius: 0;
+  }
+  to {
+    border-radius: 50%;
+  }
 }
 .frame__dots {
   position: absolute;
@@ -236,13 +291,99 @@ main::before {
   gap: 10%;
   place-content: center;
   place-items: center;
+  animation: loadDotsBox 1s forwards 1 0.3s ease-in-out;
 }
 .frame__dots__dot {
   position: static;
   width: 5%;
   height: 5%;
   background-color: #ddd;
-  border-radius: 50%;
+  animation: loadDot 1s forwards 1 ease-in-out;
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  height: 87vh;
+  padding: 0rem 1rem 1rem 0rem;
+  display: grid;
+  grid-template-areas: ". nav" "icons content";
+  grid-template-columns: 8vw 1fr;
+  grid-template-rows: 8vw 1fr;
+}
+main section {
+  grid-area: content;
+}
+main::before {
+  display: block;
+  content: "";
+  background-color: #00150f;
+  background: url("/media/bg.jpg") #00241a;
+  background-blend-mode: color-dodge;
+  filter: brightness(90%) drop-shadow();
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  box-shadow: inset 0px 0px 250px 20px #00241a;
+}
+
+.main-navbar {
+  grid-area: nav;
+  justify-self: end;
+  width: fit-content;
+  gap: 1em;
+}
+
+.social-icons {
+  grid-area: icons;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.shop-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.shop-page footer {
+  display: flex;
+}
+.shop-page footer .footer-item {
+  max-width: 400px;
+}
+.shop-section {
+  height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+}
+.shop-section__wrapper {
+  width: 80vw;
+  height: 60%;
+  background-color: rgba(221, 221, 221, 0.3333333333);
+  margin-bottom: 5%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.shop-item {
+  margin: auto;
+  min-width: 30vmin;
+  min-height: 30vmin;
+  background-color: rgba(105, 255, 85, 0.333);
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
 }
 
 /*# sourceMappingURL=sass.css.map */

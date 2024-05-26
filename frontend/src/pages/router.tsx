@@ -5,7 +5,9 @@ import {
 	createBrowserRouter,
 	createRoutesFromChildren,
 } from "react-router-dom";
-import App from "../App";
+import App from "./App";
+import ShopPage from "./shop/ShopPage";
+import SectionWrapper from "./misc/SectionWrapper";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -15,11 +17,7 @@ const router = createBrowserRouter(
 				element={<App />}>
 				<Route
 					index
-					element={
-						<>
-							<h1>Shop</h1>
-						</>
-					}
+					element={<ShopPage />}
 				/>
 				<Route
 					path="item/:id"
@@ -40,9 +38,9 @@ const router = createBrowserRouter(
 				<Route
 					path="account"
 					element={
-						<>
+						<SectionWrapper className="">
 							<h1>Account</h1>
-						</>
+						</SectionWrapper>
 					}
 				/>
 				<Route
