@@ -1,13 +1,13 @@
 import {
 	Route,
 	RouterProvider,
-	Routes,
 	createBrowserRouter,
-	createRoutesFromChildren,
+	createRoutesFromChildren
 } from "react-router-dom";
 import App from "./App";
-import ShopPage from "./shop/ShopPage";
+import AuthPage from "./auth/AuthPage";
 import SectionWrapper from "./misc/SectionWrapper";
+import ShopPage from "./shop/ShopPage";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -44,20 +44,8 @@ const router = createBrowserRouter(
 					}
 				/>
 				<Route
-					path="signup"
-					element={
-						<>
-							<h1>SignUp</h1>
-						</>
-					}
-				/>
-				<Route
 					path="login"
-					element={
-						<>
-							<h1>Login</h1>
-						</>
-					}
+					element={<AuthPage />}
 				/>
 			</Route>
 			{/* // */}
