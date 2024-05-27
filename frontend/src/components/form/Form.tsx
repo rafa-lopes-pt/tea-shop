@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import Button, { BUTTON_VARIANTS } from "../buttons/Button";
 import React, { FormEvent } from "react";
+import Button from "../buttons/Button";
 
 export function Form({
 	children,
@@ -24,20 +24,6 @@ export function Form({
 	);
 }
 export namespace Form {
-	export const ToggleVisibilityButton = ({
-		onClick,
-		children,
-	}: {
-		children: string;
-		onClick: Function;
-	}) => (
-		<Button
-			variant={BUTTON_VARIANTS.link}
-			onClick={onClick}>
-			{children}
-		</Button>
-	);
-
 	export const Header = ({
 		title,
 		children,
