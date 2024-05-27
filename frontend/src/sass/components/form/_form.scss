@@ -8,5 +8,14 @@
 	}
 	&__body {
 		@include utils.center-vertical-items();
+
+		&,
+		& > * {
+			width: 100%;
+		}
+	}
+
+	& button[type="submit"] {
+		width: fit-content;
 	}
 }

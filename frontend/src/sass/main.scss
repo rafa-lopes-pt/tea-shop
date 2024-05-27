@@ -7,7 +7,10 @@
 @use "components/button/button";
 @use "components/button/icon-button";
 @use "components/navbar/navbar";
+@use "components/form/form";
+@use "components/input/_input";
 //pages
 @use "pages/frame";
 @use "pages/app";
 @use "pages/shop";
+@use "pages/auth";
