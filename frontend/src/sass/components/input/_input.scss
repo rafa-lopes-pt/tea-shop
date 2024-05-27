@@ -1,0 +1,54 @@
+@use "../../base/colors" as colors;
+
+.input {
+	position: relative;
+	width: 100%;
+	padding: 0.3em 0.5em;
+	background-color: colors.$light;
+	border-radius: 10px;
+	outline: 2px solid transparent;
+	transition: all 0.15s ease;
+
+	&:focus-within {
+		box-shadow: inset 2px 2px 20px 2px
+			rgba($color: colors.$dark, $alpha: 0.5);
+		outline: 2px solid colors.$light;
+	}
+
+	&__element {
+		padding: 0.25em 0.5em;
+		font-size: 1rem;
+		background-color: transparent;
+		color: colors.$text-secondary;
+
+		&:focus {
+			border: none;
+			outline: none;
+		}
+	}
+
+	&__label {
+		display: block;
+		position: absolute;
+		opacity: 0;
+		bottom: 1.75rem;
+		color: colors.$text-primary;
+		transition: 0.2s ease-in-out transform;
+		font-size: 0.8em;
+	}
+
+	&__element:placeholder-shown + &__label {
+		visibility: hidden;
+		z-index: -1;
+		transition: 0.2s ease-in-out;
+	}
+
+	&__element:not(:placeholder-shown) + &__label,
+	&__element:focus:not(:placeholder-shown) + &__label {
+		visibility: visible;
+		z-index: 1;
+		opacity: 1;
+		transform: translateY(-10px);
+		transition: 0.2s ease-in-out transform;
+	}
+}
