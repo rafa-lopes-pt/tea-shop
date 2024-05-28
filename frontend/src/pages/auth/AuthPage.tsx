@@ -1,8 +1,8 @@
+import { MotionProps } from "framer-motion";
 import { useState } from "react";
 import SectionWrapper from "../misc/SectionWrapper";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
-import { AnimatePresenceProps, MotionProps } from "framer-motion";
 
 export default function AuthPage() {
 	const [showSignupScreen, setShowSignupScreen] = useState(false);

@@ -1,7 +1,7 @@
 import z from "zod";
-import { RegExpValidators } from "../../../components/form/regex-validators";
+import { RegExpValidators } from "./regex-validators";
 
-const SignupSchema = z
+export const SignupSchema = z
 	.object({
 		name: z
 			.string({ required_error: "Required" })
@@ -22,5 +22,3 @@ const SignupSchema = z
 	.required();
 
 export type SignupSchemaType = z.infer<typeof SignupSchema>;
-
-export default SignupSchema;

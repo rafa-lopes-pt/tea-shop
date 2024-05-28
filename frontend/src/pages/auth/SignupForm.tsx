@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import {
+	SignupSchema,
+	SignupSchemaType,
+} from "../../../../shared/schemas/signup.schema";
 import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
-import { AuthCtx } from "../../store/auth.context";
-import SignupSchema, { SignupSchemaType } from "./form/signup.validator";
-import { zodResolver } from "@hookform/resolvers/zod";
 export default function SignupForm({
 	onChangeScreen,
 	animationProps,

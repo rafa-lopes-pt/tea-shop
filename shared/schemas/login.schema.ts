@@ -1,7 +1,7 @@
 import z from "zod";
-import { RegExpValidators } from "../../../components/form/regex-validators";
+import { RegExpValidators } from "./regex-validators";
 
-const LoginSchema = z
+export const LoginSchema = z
 	.object({
 		email: z
 			.string({ required_error: "Required" })
@@ -15,5 +15,3 @@ const LoginSchema = z
 	.required();
 
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
-
-export default LoginSchema;

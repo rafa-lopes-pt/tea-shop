@@ -1,8 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import {
+	LoginSchema,
+	LoginSchemaType,
+} from "../../../../shared/schemas/login.schema";
 import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
-import LoginSchema, { LoginSchemaType } from "./form/login.validator";
-import { zodResolver } from "@hookform/resolvers/zod";
 export default function LoginForm({
 	onChangeScreen,
 	animationProps,
@@ -13,7 +16,6 @@ export default function LoginForm({
 	const { register, handleSubmit, formState } = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 	});
-
 	return (
 		<Form
 			animationProps={animationProps}
