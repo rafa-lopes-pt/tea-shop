@@ -7,6 +7,7 @@
   text-decoration: none;
   color: inherit;
   border: none;
+  background-color: transparent;
 }
 
 :root {
@@ -167,10 +168,28 @@ body {
   border-radius: 10px;
   outline: 2px solid transparent;
   transition: all 0.15s ease;
+  /*
+  focus vs focus-within
+  focus within targets descendants
+  With forms, when the user tries to submit and missed a field, the missing one will be focused.
+  since the actual input is inside the .input wrapper, focus-within gets targeted as well
+  */
 }
 .input:focus-within {
   box-shadow: inset 2px 2px 20px 2px rgba(0, 11, 8, 0.5);
-  outline: 2px solid #f0fffb;
+  outline: 1px solid #f0fffb;
+}
+.input__invalid-text {
+  color: #f0fffb;
+  position: absolute;
+  bottom: calc(100% + 0.2em);
+  right: 0em;
+  font-size: 0.5em;
+  background-color: #f55;
+  padding: 0.2em 0.5em;
+  border-radius: 10px;
+  z-index: -1;
+  text-transform: capitalize;
 }
 .input__element {
   padding: 0.25em 0.5em;
@@ -181,6 +200,7 @@ body {
 .input__element:focus {
   border: none;
   outline: none;
+  background-color: transparent;
 }
 .input__label {
   display: block;
