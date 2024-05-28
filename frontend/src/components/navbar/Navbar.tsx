@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavLink from "./NavLink";
 import Button, { BUTTON_VARIANTS } from "../buttons/Button";
 
@@ -10,7 +10,7 @@ export default function Navbar({
 	className?: string;
 }) {
 	const { pathname } = useLocation();
-
+	const navigate = useNavigate();
 	const isActive = (path: string) =>
 		pathname === `/${path === "/" ? "" : path}`;
 
@@ -20,7 +20,10 @@ export default function Navbar({
 				e?.action ? (
 					<Button
 						key={`navbar-action-${e.label}-to-${e?.action}`}
-						onClick={e?.action}
+						onClick={() => {
+							e?.action && e.action();
+							if (e?.to) navigate(e.to);
+						}}
 						variant={BUTTON_VARIANTS.outlined}>
 						{e.label}
 					</Button>
