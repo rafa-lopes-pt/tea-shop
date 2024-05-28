@@ -1,28 +1,56 @@
-import { InputHTMLAttributes } from "react";
-
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-	label: string;
+import { InputHTMLAttributes, Ref, forwardRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+	label?: string;
+	invalidText?: string;
 }
 
-export default function Input({
-	label,
-	type = "text",
-	spellCheck = false,
-	...props
-}: Props) {
-	return (
-		<div className="input">
-			<input
-				{...props}
-				type={type}
-				className="input__element"
-				placeholder={label}
-			/>
-			<label
-				htmlFor={props?.id}
-				className="input__label">
-				{label}
-			</label>
-		</div>
-	);
-}
+const Input = forwardRef(
+	(
+		{
+			label = "",
+			type = "text",
+			invalidText,
+			spellCheck = false,
+			...props
+		}: InputProps,
+		ref: Ref<HTMLInputElement>
+	) => {
+		return (
+			<div className="input">
+				<input
+					{...props}
+					ref={ref}
+					type={type}
+					spellCheck={spellCheck}
+					className="input__element"
+					placeholder={label}
+				/>
+				<label
+					htmlFor={props?.id}
+					className="input__label">
+					{label}
+				</label>
+				<AnimatePresence>
+					{invalidText && (
+						<motion.p
+							initial={{ opacity: 0, translateY: "100%" }}
+							animate={{
+								opacity: 1,
+								translateY: "0%",
+							}}
+							exit={{
+								opacity: 0,
+								translateY: "100%",
+							}}
+							transition={{ duration: 0.3 }}
+							className="input__invalid-text">
+							{invalidText}
+						</motion.p>
+					)}
+				</AnimatePresence>
+			</div>
+		);
+	}
+);
+export default Input;
