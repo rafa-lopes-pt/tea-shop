@@ -1,33 +1,42 @@
-import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
-import Input from "../../components/input/Input";
+import LoginSchema, { LoginSchemaType } from "./form/login.validator";
+import { zodResolver } from "@hookform/resolvers/zod";
 export default function LoginForm({
-	onChangeToSignup,
+	onChangeScreen,
 	animationProps,
 }: {
-	onChangeToSignup: Function;
+	onChangeScreen: Function;
 	animationProps: any;
 }) {
+	const { register, handleSubmit, formState } = useForm<LoginSchemaType>({
+		resolver: zodResolver(LoginSchema),
+	});
+
 	return (
-		<Form animationProps={animationProps}>
+		<Form
+			animationProps={animationProps}
+			onSubmit={handleSubmit((data) => console.log(data))}>
 			<Form.Header title="Login">
 				<Button
 					variant={BUTTON_VARIANTS.link}
-					onClick={onChangeToSignup}>
+					onClick={onChangeScreen}>
 					Don't have an account yet?
 				</Button>
 			</Form.Header>
 
 			<Form.Body>
-				<Input
-					label="Email"
-					type="email"
+				<Form.Email
+					register={register}
+					formState={formState}
 				/>
-				<Input
-					label="Password"
-					type="password"
+
+				<Form.Password
+					register={register}
+					formState={formState}
 				/>
+
 				<Form.Submit>Login</Form.Submit>
 			</Form.Body>
 		</Form>

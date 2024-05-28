@@ -2,11 +2,12 @@ import { useState } from "react";
 import SectionWrapper from "../misc/SectionWrapper";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import { AnimatePresenceProps, MotionProps } from "framer-motion";
 
 export default function AuthPage() {
 	const [showSignupScreen, setShowSignupScreen] = useState(false);
 
-	const animationProps = {
+	const animationProps: MotionProps = {
 		initial: { rotateY: "90deg" },
 		animate: { rotateY: "0deg" },
 		transition: { duration: 0.35 },
@@ -18,17 +19,18 @@ export default function AuthPage() {
 			{/* */}
 			{!showSignupScreen && (
 				<LoginForm
-					onChangeToSignup={() => setShowSignupScreen(true)}
+					onChangeScreen={() => setShowSignupScreen(true)}
 					animationProps={animationProps}
 				/>
 			)}
 
 			{showSignupScreen && (
 				<SignupForm
-					onChangeToLogin={() => setShowSignupScreen(false)}
+					onChangeScreen={() => setShowSignupScreen(false)}
 					animationProps={animationProps}
 				/>
 			)}
+
 			{/* */}
 		</SectionWrapper>
 	);

@@ -120,4 +120,14 @@ export namespace Form {
 			name="password"
 		/>
 	);
+
+	export const Name = <T extends FieldValues>(
+		props: FormControlPresetProps<T>
+	) => (
+		<Control
+			{...props}
+			label="Name"
+			name="name"
+		/>
+	);
 }
