@@ -1,16 +1,10 @@
 import z from "zod";
-import { RegExpValidators } from "./regex-validators";
+import ZodValidatorSchema from "./zod-validator-schema";
 
 export const LoginSchema = z
 	.object({
-		email: z
-			.string({ required_error: "Required" })
-			.min(1, { message: "Required" })
-			.regex(RegExpValidators.email, { message: "Invalid" }),
-
-		password: z
-			.string({ required_error: "Required" })
-			.min(1, { message: "Required" }),
+		email: ZodValidatorSchema.email,
+		password: ZodValidatorSchema.requiredNonEmptyString,
 	})
 	.required();
 
