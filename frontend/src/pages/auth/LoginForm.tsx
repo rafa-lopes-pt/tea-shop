@@ -6,6 +6,10 @@ import {
 } from "../../../../shared/schemas/login.schema";
 import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
+import { AuthCtx } from "../../store/auth.context";
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function LoginForm({
 	onChangeScreen,
 	animationProps,
@@ -16,10 +20,25 @@ export default function LoginForm({
 	const { register, handleSubmit, formState } = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 	});
+
+	const auth = useContext(AuthCtx);
+	const navigate = useNavigate();
+
+	const onSubmitHandler = (data: LoginSchemaType) => {
+		auth?.login &&
+			toast.promise(
+				auth?.login(data).then(() => navigate("/")),
+				{
+					pending: "Loggin in...",
+					error: "Invalid Credentials",
+				}
+			);
+	};
+
 	return (
 		<Form
 			animationProps={animationProps}
-			onSubmit={handleSubmit((data) => console.log(data))}>
+			onSubmit={handleSubmit(onSubmitHandler)}>
 			<Form.Header title="Login">
 				<Button
 					variant={BUTTON_VARIANTS.link}

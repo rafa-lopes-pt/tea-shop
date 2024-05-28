@@ -1,32 +1,31 @@
-import { ReactNode, createContext, useState } from "react";
-//IMPROVE: Move this to models folder
-// but first plan out the best structure for reusing these files in backend code too
-type USER_SCHEMA = {
-	image: string;
-	email: string;
-	name: string;
-	notifyByEmail: boolean;
-	notifyBySms: boolean;
-	billingInfo: {
-		country: string;
-		city: string;
-		street: string;
-		zipCode: string;
-	};
-};
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { LoginSchemaType } from "../../../shared/schemas/login.schema";
+import { UserSchemaType } from "../../../shared/schemas/user.schema";
 type AuthCtxProperties = {
 	isLoggedIn: boolean;
-	login: () => Promise<any>;
+	login: (data: LoginSchemaType) => Promise<any>;
 	logout: () => void;
-	user: USER_SCHEMA | null;
-	setUser: (data: USER_SCHEMA) => void;
+	user: UserSchemaType | null;
+	setUser: (data: UserSchemaType) => void;
 };
 
 export const AuthCtx = createContext<AuthCtxProperties | null>(null);
 
 export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [user, setUser] = useState<USER_SCHEMA | null>(null);
+	const [user, setUser] = useState<UserSchemaType | null>(null);
+
+	useEffect(() => {
+		//Get stuff from localstorage
+
+		const localData = window.sessionStorage.getItem("session");
+
+		if (localData) {
+			const { user, isLoggedIn } = JSON.parse(localData);
+			setUser(user);
+			setIsLoggedIn(isLoggedIn);
+		}
+	}, []);
 
 	const fakeRequest = (returnData: any) =>
 		new Promise((resolve) => {
@@ -38,7 +37,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	async function login() {
 		return fakeRequest(true).then(() => {
 			setIsLoggedIn(true);
-			setUser({
+			const user = {
 				name: "Rafa",
 				email: "rafalopessecond@gmail.com",
 				image: "",
@@ -50,12 +49,18 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 					street: "Casal das Cabras",
 					zipCode: "1234-567",
 				},
-			});
+			};
+			setUser(user);
+			window.sessionStorage.setItem(
+				"session",
+				JSON.stringify({ user, isLoggedIn: true })
+			);
 		});
 	}
 	function logout() {
 		setUser(null);
 		setIsLoggedIn(false);
+		window.sessionStorage.removeItem("session");
 	}
 
 	return (

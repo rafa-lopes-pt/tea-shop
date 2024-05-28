@@ -6,17 +6,17 @@ import Navbar from "../components/navbar/Navbar";
 import { AuthCtx } from "../store/auth.context";
 import Frame from "./misc/Frame";
 
-const AuthenticatedNavItems = [
-	{ label: "Shop", to: "/" },
-	{ label: "Profile", to: "account" },
-	{ label: "Logout", action: () => {} },
-];
-const UnauthenticatedNavItems = [
-	{ label: "Shop", to: "/" },
-	{ label: "Login", to: "login" },
-];
 function App() {
 	const auth = useContext(AuthCtx);
+	const AuthenticatedNavItems = [
+		{ label: "Shop", to: "/" },
+		{ label: "Profile", to: "account" },
+		{ label: "Logout", to: "/", action: auth?.logout },
+	];
+	const UnauthenticatedNavItems = [
+		{ label: "Shop", to: "/" },
+		{ label: "Login", to: "login" },
+	];
 
 	return (
 		<>
