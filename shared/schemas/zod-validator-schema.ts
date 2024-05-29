@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { ZodBoolean } from "zod";
 import RegExpValidators from "../validators/regex-validators";
 
 namespace ZodValidatorSchema {
@@ -42,7 +42,9 @@ namespace ZodValidatorSchema {
 	/**
 	 * Checks for a boolean value
 	 */
-	export const bool = z.boolean({ required_error: "Required" });
+	export const boolean = z.boolean({
+		required_error: "Required",
+	});
 	/**
 	 * Checks for a generic format of international zip codes
 	 */
@@ -50,5 +52,19 @@ namespace ZodValidatorSchema {
 		RegExpValidators.zipCodeGeneric,
 		{ message: "Invalid zip-code" }
 	);
+	/**
+	 * Checks for a positive finite number with maximum 2 decimal points
+	 */
+	export const price = z
+		.number({ required_error: "Required" })
+		.finite("Must be a finite number")
+		.positive("Must be a positive number")
+		.refine(
+			(n) =>
+				RegExpValidators.price.test(n.toString()),
+			{
+				message: "Not a valid format for price",
+			}
+		);
 }
 export default ZodValidatorSchema;

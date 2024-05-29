@@ -6,8 +6,8 @@ export const UserSchema = z.object({
 	image: ZodValidatorSchema.requiredNonEmptyString,
 	email: ZodValidatorSchema.email,
 	name: ZodValidatorSchema.alphabeticOnly,
-	notifyByEmail: ZodValidatorSchema.bool,
-	notifyBySms: ZodValidatorSchema.bool,
+	notifyByEmail: ZodValidatorSchema.boolean,
+	notifyBySms: ZodValidatorSchema.boolean,
 	billingInfo: z.object({
 		country: ZodValidatorSchema.alphabeticWithWhiteSpaces,
 		city: ZodValidatorSchema.alphabeticWithWhiteSpaces,

@@ -7,5 +7,6 @@ namespace RegExpValidators {
 	export const alphanumericWithWhiteSpaces = /^[\w\s]+$/;
 	export const alphabeticWithWhiteSpaces = /^[A-z\s]+$/;
 	export const zipCodeGeneric = /^\d+-*\d+$/;
+	export const price = /^\d+\.\d{1,2}$|^\d+$/;
 }
 export default RegExpValidators;
