@@ -493,9 +493,64 @@ main::before {
   margin: auto;
   min-width: 30vmin;
   min-height: 30vmin;
-  background-color: rgba(105, 255, 85, 0.333);
-  border-top-left-radius: 50%;
-  border-bottom-right-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 2px 8px 20px 2px rgba(0, 11, 8, 0.5);
+  border: 1px solid rgba(240, 255, 251, 0.3);
+  cursor: pointer;
+}
+.shop-item img {
+  height: 30vmin;
+  width: fit-content;
+  align-self: center;
+}
+.shop-item__title {
+  font-size: 1.15rem;
+  text-align: center;
+  padding: 0.25em 0.35em;
+  background-color: #004d37;
+  min-height: 2.625em;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.shop-item__title h2 {
+  font-size: inherit;
+  line-height: 1.05em;
+  margin: 0;
+}
+.shop-item__description {
+  position: absolute;
+  top: 0%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color: rgba(0, 36, 26, 0.8);
+  padding: 0.5em;
+}
+.shop-item, .shop-item img, .shop-item__title, .shop-item__description {
+  transition: all 0.2s ease-in;
+}
+.shop-item:hover .shop-item__description {
+  opacity: 1;
+}
+.shop-item:hover img, .shop-item:hover .shop-item__title {
+  filter: blur(3px);
+}
+.shop-item:hover img {
+  transform: scale(1.1);
+  transition: all 0.2s ease-in;
 }
 
 .auth__wrapper {

@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ShopItem from "./ShopItem";
-//IMPROVE: list shoudl be of type shopItem[]
+import ServerAPI from "../../apis/server.endpoints";
+import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
+
 export default function ShopSectionContainer({
-	list,
 	className = "",
 }: {
-	list: any[];
 	className?: string;
 }) {
+	const [shopItems, setShopItems] = useState<ShopItemSchemaType[] | null>(
+		null
+	);
+
+	useEffect(() => {
+		// should the shop sections get more complex, and each section should be
+		// fetched separately, ShopSectionContainer should accept a section name to be used in the fetch process
+		ServerAPI.getShopItems().then((res) => setShopItems(res));
+	}, []);
+
 	return (
 		<div className={"shop-section__wrapper " + className}>
-			<div className={"shop-section"}>
-				{list.map((e, i) => (
-					<ShopItem
-						data={e}
-						key={`shop-item-${e?.name}-${e?.price}-${i}`}
-					/>
-				))}
-			</div>
+			{/* FIX: Add skelleton while loading */}
+			{!shopItems && <p>LOADING... PLZ FIX ME</p>}
+
+			{shopItems && (
+				<div className={"shop-section"}>
+					{shopItems.map((e, i) => (
+						<ShopItem
+							data={e}
+							key={`shop-item-${e?.name}-${e?.price}-${i}`}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }

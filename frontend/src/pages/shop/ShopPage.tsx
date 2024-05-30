@@ -1,15 +1,17 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import SectionWrapper from "../misc/SectionWrapper";
 import ShopSectionContainer from "./ShopSectionContainer";
+import ServerAPI from "../../apis/server.endpoints";
+import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 export default function ShopPage() {
 	return (
 		<SectionWrapper className="shop-page">
 			<h1>Tea Shop</h1>
 
 			{/* slot for sections navbar*/}
-			{/* Products Carousel */}
-			<ShopSectionContainer list={new Array(4).fill("")} />
+
+			<ShopSectionContainer />
+
 			<footer>
 				<div className="footer-item">
 					<h4 className="footer-item__title">Free Shipping</h4>
