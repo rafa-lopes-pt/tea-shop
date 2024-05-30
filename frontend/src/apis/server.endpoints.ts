@@ -19,7 +19,7 @@ namespace ServerAPI {
 		// return baseFetch(...)
 		const DUMMY_ShopItems: ShopItemSchemaType[] = [
 			{
-				image: "fix this",
+				image: "/media/tea.jpg",
 				name: "White Tea Leaves",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
@@ -28,7 +28,7 @@ namespace ServerAPI {
 				price: 19.99,
 			},
 			{
-				image: "fix this",
+				image: "/media/tea.jpg",
 				name: "Dried Tea Leaves",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
@@ -37,7 +37,7 @@ namespace ServerAPI {
 				price: 22.99,
 			},
 			{
-				image: "fix this",
+				image: "/media/tea.jpg",
 				name: "Immortality Tea Leaves",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
@@ -46,7 +46,7 @@ namespace ServerAPI {
 				price: 189.99,
 			},
 			{
-				image: "fix this",
+				image: "/media/tea.jpg",
 				name: "Deathbringer Tea Leaves",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
