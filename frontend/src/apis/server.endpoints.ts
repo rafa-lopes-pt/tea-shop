@@ -12,7 +12,7 @@ namespace ServerAPI {
 		new Promise<T>((resolve) =>
 			setTimeout(() => {
 				resolve(returnData);
-			}, 700)
+			}, 1500)
 		);
 
 	export async function getShopItems() {
