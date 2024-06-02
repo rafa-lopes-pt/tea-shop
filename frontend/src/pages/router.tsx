@@ -2,12 +2,13 @@ import {
 	Route,
 	RouterProvider,
 	createBrowserRouter,
-	createRoutesFromChildren
+	createRoutesFromChildren,
 } from "react-router-dom";
 import App from "./App";
 import AuthPage from "./auth/AuthPage";
 import SectionWrapper from "./misc/SectionWrapper";
 import ShopPage from "./shop/ShopPage";
+import ItemDisplay from "./item/ItemDisplay";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -21,11 +22,7 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="item/:id"
-					element={
-						<>
-							<h1>item</h1>
-						</>
-					}
+					element={<ItemDisplay />}
 				/>
 				<Route
 					path="cart"

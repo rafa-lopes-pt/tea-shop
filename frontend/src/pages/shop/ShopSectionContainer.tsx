@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShopItem from "./ShopItem";
 import ServerAPI from "../../apis/server.endpoints";
 import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
+import { ShopDataCtx } from "../../store/shop/shop-data.context";
 
 export default function ShopSectionContainer({
 	className = "",
 }: {
 	className?: string;
 }) {
-	const [shopItems, setShopItems] = useState<ShopItemSchemaType[] | null>(
-		null
-	);
-
-	useEffect(() => {
-		// should the shop sections get more complex, and each section should be
-		// fetched separately, ShopSectionContainer should accept a section name to be used in the fetch process
-		ServerAPI.getShopItems().then((res) => setShopItems(res));
-	}, []);
+	const shopItems = useContext(ShopDataCtx)?.data;
+	// @ts-ignore
+	console.log(shopItems);
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
