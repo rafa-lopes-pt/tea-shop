@@ -1,18 +1,22 @@
-import { motion } from "framer-motion";
+import { MotionProps, motion } from "framer-motion";
 export default function SectionWrapper({
 	children,
 	className,
+	motionProps = {
+		initial: { opacity: 0 },
+		animate: { opacity: 1 },
+		exit: { opacity: 1 },
+		transition: { duration: 2 },
+	},
 }: {
 	children: any;
 	className: string;
+	motionProps?: MotionProps;
 }) {
 	return (
 		<motion.section
 			className={className}
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 2 }}
-			exit={{ opacity: 0 }}>
+			{...motionProps}>
 			{children}
 		</motion.section>
 	);
