@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
-import CyclicArray from "../../../../shared/types/CyclicArray.class";
+import CyclicArray from "../../../../shared/types/ds/CyclicArray.ds";
 import ServerAPI from "../../apis/server.endpoints";
 
 type ShopDataCtxProperties = {

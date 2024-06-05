@@ -1,3 +1,4 @@
+@import "react-toastify/dist/ReactToastify.css";
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -42,12 +43,12 @@ h4 {
 }
 
 * {
-  color: #f0fffb;
   user-select: none;
 }
 
 body {
   background-color: #00241a;
+  color: #f0fffb;
   height: 100svh;
   padding: 6.5vmin;
 }
@@ -222,6 +223,10 @@ body {
   opacity: 1;
   transform: translateY(-10px);
   transition: 0.2s ease-in-out transform;
+}
+
+:root {
+  --toastify-text-color-dark: colors.$text-secondary;
 }
 
 .frame {

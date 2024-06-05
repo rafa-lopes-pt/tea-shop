@@ -1,12 +1,11 @@
 @use "./colors" as colors;
 * {
-	color: colors.$text-primary;
 	user-select: none;
 }
 
 body {
 	background-color: colors.$bg;
-
+	color: colors.$text-primary;
 	height: 100svh;
 	padding: 6.5vmin;
 }
