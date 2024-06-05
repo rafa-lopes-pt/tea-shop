@@ -7,7 +7,9 @@ export const ShopItemSchema = z
 		name: ZodValidatorSchema.alphanumericWithWhiteSpaces,
 		slogan: ZodValidatorSchema.alphabeticWithWhiteSpaces,
 		price: ZodValidatorSchema.price,
-		text: z.array(ZodValidatorSchema.alphanumericWithWhiteSpaces),
+		text: ZodValidatorSchema.alphanumericWithWhiteSpaces,
+		benefits: ZodValidatorSchema.alphanumericWithWhiteSpaces,
+		pairings: ZodValidatorSchema.alphanumericWithWhiteSpaces,
 	})
 	.required();
 
