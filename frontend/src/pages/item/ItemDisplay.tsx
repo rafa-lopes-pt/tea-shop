@@ -1,6 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Button from "../../components/buttons/Button";
 import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import SectionWrapper from "../misc/SectionWrapper";
+import IconButton, { ICONS } from "../../components/buttons/IconButton";
 
 export default function ItemDisplay() {
 	const { id } = useParams();
@@ -20,34 +23,51 @@ export default function ItemDisplay() {
 	// console.log(shopData.test());
 
 	return (
-		<div>
-			<h1>{item.name}</h1>
-			{/* <img src={item.image} /> */}
-			<button
-				onClick={() => {
-					console.log("prev");
+		<SectionWrapper className="item-display">
+			<header>
+				<IconButton
+					icon={ICONS.left}
+					className="item-display__navigation item-display__navigation--prev"
+					onClick={() => navigate("/item/" + shopData.previous.name)}
+				/>
+				<span className="item-display__title">
+					<h1>{item.name}</h1>
+					<p>{item.slogan}</p>
+				</span>
 
-					navigate("/item/" + shopData.previous.name);
-				}}>
-				Previous
-			</button>
-			<br />
-			<button
-				onClick={() => {
-					console.log("next");
+				<IconButton
+					icon={ICONS.right}
+					className="item-display__navigation item-display__navigation--next"
+					onClick={() => navigate("/item/" + shopData.next.name)}
+				/>
+			</header>
 
-					navigate("/item/" + shopData.next.name);
-				}}>
-				Next
-			</button>
+			<p className="item-display__text"> {item.text}</p>
 
-			<br />
+			<div className="item-display__price">
+				<p>{item.price} $</p>
 
-			<p>{item.price}</p>
+				<span>
+					{" "}
+					<Button>Buy Now</Button>
+					<Button variant="outlined">Add To Cart</Button>
+				</span>
+			</div>
 
-			{item.text.map((e, i) => (
-				<p key={`item-display-text-description-p-${i}`}>{e}</p>
-			))}
-		</div>
+			<footer>
+				<article>
+					<h2>Benefits</h2>
+					{item.benefits}
+				</article>
+				<article>
+					<h2>Pairings</h2>
+					{item.benefits}
+				</article>
+			</footer>
+
+			<div className="item-display__image-wrapper">
+				<img src={item.image} />
+			</div>
+		</SectionWrapper>
 	);
 }

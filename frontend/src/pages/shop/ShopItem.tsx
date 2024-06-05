@@ -22,7 +22,7 @@ export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 			<span className="shop-item__title">
 				<h2>{data.name}</h2>
 			</span>
-			<p className="shop-item__description">{data.text[0]}</p>
+			<p className="shop-item__description">{data.text}</p>
 		</div>
 	);
 }
