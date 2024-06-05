@@ -1,6 +1,13 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { UserSchemaType } from "../../../shared/schemas/user.schema";
+import {
+	notifyToastPromiseEnd,
+	notifyToastPromiseError,
+	notifyToastPromiseLoading,
+} from "../components/toasts/promise.notifier";
+import { notifyInfoToast } from "../components/toasts/toast.notifier";
+
 type AuthCtxProperties = {
 	isLoggedIn: boolean;
 	login: (data: LoginSchemaType) => Promise<any>;
@@ -16,8 +23,6 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	const [user, setUser] = useState<UserSchemaType | null>(null);
 
 	useEffect(() => {
-		//Get stuff from localstorage
-
 		const localData = window.sessionStorage.getItem("session");
 
 		if (localData) {
@@ -31,36 +36,50 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 		new Promise((resolve) => {
 			setTimeout(() => {
 				resolve(returnData);
-			}, 300);
+			}, 3000);
 		});
 
 	async function login() {
-		return fakeRequest(true).then(() => {
-			setIsLoggedIn(true);
-			const user = {
-				name: "Rafa",
-				email: "rafalopessecond@gmail.com",
-				image: "",
-				notifyByEmail: true,
-				notifyBySms: false,
-				billingInfo: {
-					country: "Portugal",
-					city: "Tomar",
-					street: "Casal das Cabras",
-					zipCode: "1234-567",
-				},
-			};
-			setUser(user);
-			window.sessionStorage.setItem(
-				"session",
-				JSON.stringify({ user, isLoggedIn: true })
-			);
-		});
+		const toastId = notifyToastPromiseLoading();
+
+		return fakeRequest(true)
+			.then(() => {
+				setIsLoggedIn(true);
+				const user = {
+					name: "Rafa",
+					email: "rafalopessecond@gmail.com",
+					image: "",
+					notifyByEmail: true,
+					notifyBySms: false,
+					billingInfo: {
+						country: "Portugal",
+						city: "Tomar",
+						street: "Casal das Cabras",
+						zipCode: "1234-567",
+					},
+				};
+				setUser(user);
+				window.sessionStorage.setItem(
+					"session",
+					JSON.stringify({ user, isLoggedIn: true })
+				);
+
+				notifyToastPromiseEnd(toastId);
+			})
+			.catch((err) => {
+				console.log("check err type- 401 or other");
+				if (err.code === 401) {
+					notifyToastPromiseError(toastId, "Invalid Credentials");
+				} else {
+					notifyToastPromiseError(toastId, "Something went wrong");
+				}
+			});
 	}
-	function logout() {
+	async function logout() {
 		setUser(null);
 		setIsLoggedIn(false);
 		window.sessionStorage.removeItem("session");
+		notifyInfoToast("Logged Out");
 	}
 
 	return (

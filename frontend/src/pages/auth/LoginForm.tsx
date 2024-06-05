@@ -10,6 +10,7 @@ import { AuthCtx } from "../../store/auth.context";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import notifyToastPromise from "../../components/toasts/promise.notifier";
 export default function LoginForm({
 	onChangeScreen,
 	animationProps,
@@ -25,14 +26,9 @@ export default function LoginForm({
 	const navigate = useNavigate();
 
 	const onSubmitHandler = (data: LoginSchemaType) => {
-		auth?.login &&
-			toast.promise(
-				auth?.login(data).then(() => navigate("/")),
-				{
-					pending: "Loggin in...",
-					error: "Invalid Credentials",
-				}
-			);
+		if (!auth?.login) return;
+
+		auth?.login(data).then(() => navigate("/"));
 	};
 
 	return (
