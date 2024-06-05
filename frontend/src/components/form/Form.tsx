@@ -36,7 +36,7 @@ export namespace Form {
 		formState?: FormState<T>;
 	}
 	/**
-	 * Requires the definition of name property
+	 * Control that requires the definition of name property
 	 */
 	interface FormControlProps<T extends FieldValues>
 		extends InputProps,
@@ -93,6 +93,8 @@ export namespace Form {
 	export const Submit = ({ children }: { children: string }) => (
 		<Button type="submit">{children}</Button>
 	);
+
+	export const Separator = () => <hr className="form__separator" />;
 
 	/**
 	 * ==== Preset Components ====

@@ -12,12 +12,13 @@ const Input = forwardRef(
 			type = "text",
 			invalidText,
 			spellCheck = false,
+			className = "",
 			...props
 		}: InputProps,
 		ref: Ref<HTMLInputElement>
 	) => {
 		return (
-			<div className="input">
+			<div className={"input " + className}>
 				<input
 					{...props}
 					ref={ref}

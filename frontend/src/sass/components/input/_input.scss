@@ -8,7 +8,8 @@
 	border-radius: 10px;
 	outline: 2px solid transparent;
 	transition: all 0.15s ease;
-
+	font-size: 1.1rem;
+	text-align: left;
 	/*
 	focus vs focus-within
 	focus within targets descendants
@@ -26,7 +27,7 @@
 		position: absolute;
 		bottom: calc(100% + 0.2em);
 		right: 0em;
-		font-size: 0.5em;
+		font-size: 0.75em;
 		background-color: colors.$invalid;
 		padding: 0.2em 0.5em;
 		border-radius: 10px;
@@ -36,10 +37,10 @@
 
 	&__element {
 		padding: 0.25em 0.5em;
-		font-size: 1rem;
+		font-size: 1em;
 		background-color: transparent;
 		color: colors.$text-secondary;
-
+		width: 100%;
 		&:focus {
 			border: none;
 			outline: none;
@@ -51,10 +52,10 @@
 		display: block;
 		position: absolute;
 		opacity: 0;
-		bottom: 1.75rem;
+		bottom: 2rem;
 		color: colors.$text-primary;
 		transition: 0.2s ease-in-out transform;
-		font-size: 0.8em;
+		font-size: 0.95em;
 	}
 
 	&__element:placeholder-shown + &__label {

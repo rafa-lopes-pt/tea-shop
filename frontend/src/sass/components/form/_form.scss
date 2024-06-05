@@ -1,10 +1,8 @@
 @use "../../utils/layout" as utils;
+@use "../../base/colors" as colors;
 .form {
-	@include utils.center-vertical-items();
-
 	&__header {
 		@include utils.center-vertical-items();
-		gap: 0;
 	}
 	&__body {
 		@include utils.center-vertical-items();
@@ -13,9 +11,23 @@
 		& > * {
 			width: 100%;
 		}
+
+		gap: 1.5em;
+		margin: 1.5em 0em;
 	}
 
 	& button[type="submit"] {
 		width: fit-content;
+	}
+
+	&__control {
+		// margin: 1.5em 0em;
+	}
+
+	&__separator {
+		width: 100%;
+		height: 1px;
+		background-color: colors.$text-primary;
+		margin: 1em 0em;
 	}
 }

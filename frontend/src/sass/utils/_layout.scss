@@ -4,7 +4,7 @@
 	place-content: center;
 	place-items: center;
 	text-align: center;
-	gap: 1em;
+	gap: 0;
 }
 @mixin center-in-parent() {
 	position: absolute;
