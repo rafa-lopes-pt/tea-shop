@@ -1,18 +1,12 @@
-export enum BUTTON_VARIANTS {
-	primary = "primary",
-	outlined = "outlined",
-	link = "link",
-}
-
 export default function Button({
-	variant = BUTTON_VARIANTS.primary,
+	variant = "primary",
 	children,
 	onClick = () => {},
 	className = "",
 	type = "button",
 }: {
 	onClick?: Function;
-	variant?: BUTTON_VARIANTS;
+	variant?: "primary" | "outlined" | "link";
 	children: string;
 	className?: string;
 	type?: "button" | "submit";

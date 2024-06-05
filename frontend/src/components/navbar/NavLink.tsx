@@ -1,13 +1,12 @@
 import { NavLink as RouterLink } from "react-router-dom";
-import { BUTTON_VARIANTS } from "../buttons/Button";
 
 export default function NavLink({
 	to,
-	variant = BUTTON_VARIANTS.outlined,
+	variant = "outlined",
 	children,
 }: {
 	to: string;
-	variant?: BUTTON_VARIANTS;
+	variant?: "primary" | "outlined";
 	children: any;
 }) {
 	return (

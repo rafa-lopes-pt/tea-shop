@@ -4,7 +4,7 @@ import {
 	SignupSchema,
 	SignupSchemaType,
 } from "../../../../shared/schemas/signup.schema";
-import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
+import Button from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
 export default function SignupForm({
 	onChangeScreen,
@@ -23,7 +23,7 @@ export default function SignupForm({
 			onSubmit={handleSubmit((data) => console.log(data))}>
 			<Form.Header title="Register">
 				<Button
-					variant={BUTTON_VARIANTS.link}
+					variant="link"
 					onClick={onChangeScreen}>
 					Login with your account
 				</Button>

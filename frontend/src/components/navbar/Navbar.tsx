@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "../buttons/Button";
 import NavLink from "./NavLink";
-import Button, { BUTTON_VARIANTS } from "../buttons/Button";
 
 export default function Navbar({
 	links,
@@ -24,7 +24,7 @@ export default function Navbar({
 							e?.action && e.action();
 							if (e?.to) navigate(e.to);
 						}}
-						variant={BUTTON_VARIANTS.outlined}>
+						variant="outlined">
 						{e.label}
 					</Button>
 				) : (
@@ -32,9 +32,7 @@ export default function Navbar({
 						key={`navbar-link-${e.label}-to-${e?.to}`}
 						to={e?.to || ""}
 						variant={
-							isActive(e?.to || "")
-								? BUTTON_VARIANTS.primary
-								: BUTTON_VARIANTS.outlined
+							isActive(e?.to || "") ? "primary" : "outlined"
 						}>
 						{e.label}
 					</NavLink>

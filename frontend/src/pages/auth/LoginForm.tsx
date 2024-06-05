@@ -1,16 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
 	LoginSchema,
 	LoginSchemaType,
 } from "../../../../shared/schemas/login.schema";
-import Button, { BUTTON_VARIANTS } from "../../components/buttons/Button";
+import Button from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
 import { AuthCtx } from "../../store/auth.context";
-import { useContext } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import notifyToastPromise from "../../components/toasts/promise.notifier";
 export default function LoginForm({
 	onChangeScreen,
 	animationProps,
@@ -37,7 +35,7 @@ export default function LoginForm({
 			onSubmit={handleSubmit(onSubmitHandler)}>
 			<Form.Header title="Login">
 				<Button
-					variant={BUTTON_VARIANTS.link}
+					variant="link"
 					onClick={onChangeScreen}>
 					Don't have an account yet?
 				</Button>
