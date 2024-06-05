@@ -6,7 +6,7 @@ export default function Button({
 	type = "button",
 }: {
 	onClick?: Function;
-	variant?: "primary" | "outlined" | "link";
+	variant?: "primary" | "outlined" | "link" | "danger";
 	children: string;
 	className?: string;
 	type?: "button" | "submit";
