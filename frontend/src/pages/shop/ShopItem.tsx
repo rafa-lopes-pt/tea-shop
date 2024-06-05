@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 import CyclicArray from "../../../../shared/types/ds/CyclicArray.ds";
+import { ShopDataCtx } from "../../store/shop/shop-data.context";
 
 export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 	const navigate = useNavigate();

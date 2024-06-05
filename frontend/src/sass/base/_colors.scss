@@ -1,9 +1,9 @@
-$bg: #00241a;
-$light: lighten(#00241a, 90%);
+$bg: #001f14;
+$light: lighten($bg, 90%);
 $dark: darken($bg, 5%);
-$primary: lighten(#00241a, 8%);
+$primary: lighten($bg, 8%);
 $secondary: #e6ac1a;
-$title: #e6ac1a;
+$title: $secondary;
 $text-primary: $light;
 $text-secondary: $dark;
 //validation

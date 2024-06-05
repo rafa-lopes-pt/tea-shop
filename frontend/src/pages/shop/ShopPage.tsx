@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import SectionWrapper from "../misc/SectionWrapper";
 import ShopSectionContainer from "./ShopSectionContainer";
-import ServerAPI from "../../apis/server.endpoints";
-import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 export default function ShopPage() {
 	return (
 		<SectionWrapper className="shop-page">

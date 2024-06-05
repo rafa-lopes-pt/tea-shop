@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import ShopItem from "./ShopItem";
-import ServerAPI from "../../apis/server.endpoints";
-import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
+import { useContext } from "react";
 import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import ShopItem from "./ShopItem";
 
 export default function ShopSectionContainer({
 	className = "",

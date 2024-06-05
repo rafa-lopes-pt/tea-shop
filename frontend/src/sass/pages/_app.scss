@@ -1,14 +1,21 @@
 @use "../base/colors" as colors;
 main {
+	// DEV
+
+	&,
+	& > * {
+		// border: 1px solid red;
+	}
+	//
+
 	position: relative;
 
 	z-index: 2;
 	height: 87vh;
 
-	padding: 0rem 1rem 1rem 0rem;
 	display: grid;
 	grid-template-areas:
-		". nav"
+		".         nav"
 		"icons content";
 	grid-template-columns: 8vw 1fr;
 	grid-template-rows: 8vw 1fr;
@@ -20,12 +27,11 @@ main {
 	&::before {
 		display: block;
 		content: "";
-		background-color: darken(colors.$bg, 3);
-		background: url("/media/bg.jpg") darken(colors.$bg, 0%);
+		background: url("/media/bg.jpg") lighten(colors.$bg, 10%);
 
-		background-blend-mode: color-dodge;
+		background-blend-mode: multiply;
 
-		filter: brightness(90%) drop-shadow();
+		filter: brightness(1);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: 50% 50%;
@@ -56,4 +62,5 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
+	padding: 1em;
 }

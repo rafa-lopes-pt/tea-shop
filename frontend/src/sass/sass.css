@@ -47,8 +47,8 @@ h4 {
 }
 
 body {
-  background-color: #00241a;
-  color: #f0fffb;
+  background-color: #001f14;
+  color: #ebfff8;
   height: 100svh;
   padding: 6.5vmin;
 }
@@ -56,46 +56,46 @@ body {
 .btn {
   padding: 0.75em 1em;
   border-radius: 5px;
-  box-shadow: 2px 2px 15px 2px rgba(0, 77, 55, 0.5);
+  box-shadow: 2px 2px 15px 2px rgba(0, 72, 46, 0.5);
   transition: all 0.17s ease-in-out, box-shadow 0.3s;
   cursor: pointer;
   font-size: 0.8em;
 }
 .btn--primary {
-  background-color: #004d37;
+  background-color: #00482e;
 }
 .btn--primary:hover {
-  box-shadow: 2px 2px 25px 2px #004d37;
-  outline: 0.25px solid #e6fff8;
+  box-shadow: 2px 2px 25px 2px #00482e;
+  outline: 0.25px solid #e1fff4;
 }
 .btn--primary:active {
-  box-shadow: 2px 2px 25px 2px #004d37, inset 2px 2px 20px 2px #00241a;
-  outline: 1px solid #e6fff8;
+  box-shadow: 2px 2px 25px 2px #00482e, inset 2px 2px 20px 2px #001f14;
+  outline: 1px solid #e1fff4;
 }
 .btn--outlined {
-  background-color: #f0fffb;
-  color: #004d37;
-  outline: 1px solid #004d37;
+  background-color: #ebfff8;
+  color: #00482e;
+  outline: 1px solid #00482e;
 }
 .btn--outlined:hover {
-  box-shadow: 2px 2px 25px 2px #004d37;
+  box-shadow: 2px 2px 25px 2px #00482e;
 }
 .btn--outlined:active {
-  box-shadow: 2px 2px 25px 2px #004d37, inset 2px 2px 20px 2px rgba(0, 77, 55, 0.35);
-  outline: 1px solid #004d37;
+  box-shadow: 2px 2px 25px 2px #00482e, inset 2px 2px 20px 2px rgba(0, 72, 46, 0.35);
+  outline: 1px solid #00482e;
 }
 .btn--link {
   background-color: transparent;
-  color: #f0fffb;
+  color: #ebfff8;
   box-shadow: none;
 }
 .btn--link:hover {
-  background-color: rgba(0, 77, 55, 0.5);
-  box-shadow: 2px 2px 25px 2px #004d37;
+  background-color: rgba(0, 72, 46, 0.5);
+  box-shadow: 2px 2px 25px 2px #00482e;
 }
 .btn--link:active {
-  box-shadow: 2px 2px 25px 2px #004d37, inset 2px 2px 20px 2px rgba(0, 77, 55, 0.35);
-  outline: 1px solid #004d37;
+  box-shadow: 2px 2px 25px 2px #00482e, inset 2px 2px 20px 2px rgba(0, 72, 46, 0.35);
+  outline: 1px solid #00482e;
 }
 .btn span {
   display: inline-block;
@@ -165,7 +165,7 @@ body {
   position: relative;
   width: 100%;
   padding: 0.3em 0.5em;
-  background-color: #f0fffb;
+  background-color: #ebfff8;
   border-radius: 10px;
   outline: 2px solid transparent;
   transition: all 0.15s ease;
@@ -177,11 +177,11 @@ body {
   */
 }
 .input:focus-within {
-  box-shadow: inset 2px 2px 20px 2px rgba(0, 11, 8, 0.5);
-  outline: 1px solid #f0fffb;
+  box-shadow: inset 2px 2px 20px 2px rgba(0, 6, 4, 0.5);
+  outline: 1px solid #ebfff8;
 }
 .input__invalid-text {
-  color: #f0fffb;
+  color: #ebfff8;
   position: absolute;
   bottom: calc(100% + 0.2em);
   right: 0em;
@@ -196,7 +196,7 @@ body {
   padding: 0.25em 0.5em;
   font-size: 1rem;
   background-color: transparent;
-  color: #000b08;
+  color: #000604;
 }
 .input__element:focus {
   border: none;
@@ -208,7 +208,7 @@ body {
   position: absolute;
   opacity: 0;
   bottom: 1.75rem;
-  color: #f0fffb;
+  color: #ebfff8;
   transition: 0.2s ease-in-out transform;
   font-size: 0.8em;
 }
@@ -422,9 +422,8 @@ main {
   position: relative;
   z-index: 2;
   height: 87vh;
-  padding: 0rem 1rem 1rem 0rem;
   display: grid;
-  grid-template-areas: ". nav" "icons content";
+  grid-template-areas: ".         nav" "icons content";
   grid-template-columns: 8vw 1fr;
   grid-template-rows: 8vw 1fr;
 }
@@ -434,10 +433,9 @@ main section {
 main::before {
   display: block;
   content: "";
-  background-color: #00150f;
-  background: url("/media/bg.jpg") #00241a;
-  background-blend-mode: color-dodge;
-  filter: brightness(90%) drop-shadow();
+  background: url("/media/bg.jpg") #005235;
+  background-blend-mode: multiply;
+  filter: brightness(1);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -447,7 +445,7 @@ main::before {
   bottom: 0;
   left: 0;
   z-index: -1;
-  box-shadow: inset 0px 0px 250px 20px #00241a;
+  box-shadow: inset 0px 0px 250px 20px #001f14;
 }
 
 .main-navbar {
@@ -463,12 +461,15 @@ main::before {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding: 1em;
 }
 
 .shop-page {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  overflow: hidden;
+  padding: 1em;
 }
 .shop-page footer {
   display: flex;
@@ -485,10 +486,8 @@ main::before {
   gap: 1em;
 }
 .shop-section__wrapper {
-  width: 80vw;
-  height: 60%;
   background-color: rgba(221, 221, 221, 0.3333333333);
-  margin-bottom: 5%;
+  border-radius: 5px;
   overflow-y: hidden;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -503,24 +502,26 @@ main::before {
   position: relative;
   overflow: hidden;
   border-radius: 5px;
-  box-shadow: 2px 8px 20px 2px rgba(0, 11, 8, 0.5);
-  border: 1px solid rgba(240, 255, 251, 0.3);
+  box-shadow: 2px 8px 20px 2px rgba(0, 6, 4, 0.5);
+  border: 1px solid rgba(235, 255, 248, 0.3);
   cursor: pointer;
 }
 .shop-item img {
   height: 30vmin;
   width: fit-content;
   align-self: center;
+  pointer-events: none;
 }
 .shop-item__title {
   font-size: 1.15rem;
   text-align: center;
   padding: 0.25em 0.35em;
-  background-color: #004d37;
+  background-color: #00482e;
   min-height: 2.625em;
   display: flex;
   place-content: center;
   place-items: center;
+  box-shadow: inset 2px 2px 10px 1px #007b4f;
 }
 .shop-item__title h2 {
   font-size: inherit;
@@ -541,7 +542,7 @@ main::before {
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;
-  background-color: rgba(0, 36, 26, 0.8);
+  background-color: rgba(0, 31, 20, 0.8);
   padding: 0.5em;
 }
 .shop-item, .shop-item img, .shop-item__title, .shop-item__description {
@@ -567,9 +568,7 @@ main::before {
 
 .item-display {
   border-radius: 10px;
-  box-shadow: 2px 2px 20px 2px #00241a;
   padding: 1em;
-  background-color: rgba(0, 36, 26, 0.8);
   position: relative;
   display: grid;
   grid-template-areas: "title img" "text img" "price img" "footer footer";
@@ -616,7 +615,7 @@ main::before {
   width: 75%;
   justify-self: center;
   position: relative;
-  box-shadow: 2px 2px 10px 2px rgba(240, 255, 251, 0.3);
+  box-shadow: 2px 2px 10px 2px rgba(235, 255, 248, 0.3);
 }
 .item-display__image-wrapper img {
   width: 100%;
@@ -651,7 +650,7 @@ main::before {
   width: 100%;
 }
 .item-display footer {
-  padding: 0.5rem;
+  padding: 0rem;
   padding-top: 2em;
   grid-area: footer;
   display: flex;

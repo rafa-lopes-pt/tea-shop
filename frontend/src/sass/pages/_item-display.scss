@@ -8,9 +8,7 @@
 	}
 	//
 	border-radius: 10px;
-	box-shadow: 2px 2px 20px 2px colors.$bg;
 	padding: 1em;
-	background-color: rgba($color: colors.$bg, $alpha: 0.8);
 	position: relative;
 	display: grid;
 	grid-template-areas:
@@ -110,7 +108,7 @@
 		}
 	}
 	& footer {
-		padding: 0.5rem;
+		padding: 0rem;
 		padding-top: 2em;
 		grid-area: footer;
 		display: flex;
