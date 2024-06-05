@@ -5,6 +5,7 @@ export const ShopItemSchema = z
 	.object({
 		image: ZodValidatorSchema.requiredNonEmptyString,
 		name: ZodValidatorSchema.alphanumericWithWhiteSpaces,
+		slogan: ZodValidatorSchema.alphabeticWithWhiteSpaces,
 		price: ZodValidatorSchema.price,
 		text: z.array(ZodValidatorSchema.alphanumericWithWhiteSpaces),
 	})

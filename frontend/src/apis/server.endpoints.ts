@@ -21,6 +21,7 @@ namespace ServerAPI {
 			{
 				image: "/media/tea.jpg",
 				name: "White Tea Leaves",
+				slogan: "The amazing white tea",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
 					"Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
@@ -30,6 +31,7 @@ namespace ServerAPI {
 			{
 				image: "/media/tea.jpg",
 				name: "Dried Tea Leaves",
+				slogan: "The amazing tea",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
 					"Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
@@ -39,6 +41,7 @@ namespace ServerAPI {
 			{
 				image: "/media/tea.jpg",
 				name: "Immortality Tea Leaves",
+				slogan: "The amazing tea",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
 					"Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
@@ -48,6 +51,7 @@ namespace ServerAPI {
 			{
 				image: "/media/tea.jpg",
 				name: "Deathbringer Tea Leaves",
+				slogan: "The amazing tea",
 				text: [
 					"Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
 					"Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
