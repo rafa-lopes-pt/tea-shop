@@ -35,6 +35,7 @@ export default function FileInput({
 				src={src}
 				alt={alt}
 			/>
+			<i className="fa-solid fa-file-arrow-up file-input__icon"></i>
 			<input
 				ref={ref}
 				className="visually-hidden "

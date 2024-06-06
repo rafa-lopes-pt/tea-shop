@@ -1,5 +1,5 @@
 @use "../../base/colors" as colors;
-
+@use "../../utils/layout" as layout;
 .file-input {
 	$size: 10vw;
 	width: $size;
@@ -13,10 +13,23 @@
 
 	&:hover {
 		box-shadow: inset 0px 0px 70px 10px colors.$dark;
+
+		& img {
+			transform: translate(-50%, -50%) scale(1.25);
+			opacity: 0.5;
+		}
 	}
-	&:hover img {
-		transform: translate(-50%, -50%) scale(1.25);
+
+	&:hover &__icon {
 		opacity: 0.5;
+	}
+
+	&__icon {
+		opacity: 0;
+		font-size: $size/2;
+		transition: all 0.25s ease-in-out;
+		z-index: 1;
+		@include layout.center-in-parent();
 	}
 
 	& img {
