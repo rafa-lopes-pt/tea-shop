@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import React, { FormHTMLAttributes } from "react";
+import React, { FormHTMLAttributes, HTMLAttributes } from "react";
 import { FieldValues, FormState, Path, UseFormRegister } from "react-hook-form";
-import Button from "../buttons/Button";
+import Button, { ButtonProps } from "../buttons/Button";
 import Input, { InputProps } from "../input/Input";
+import Toggle from "../buttons/Toggle";
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
 	//NOTE: Couldn't figure out the proper type, ts creates a conflict with HTMLFormAttributes and MotionProps
@@ -40,15 +41,17 @@ export namespace Form {
 	 */
 	interface FormControlProps<T extends FieldValues>
 		extends InputProps,
-			FormControlValidationProps<T> {
-		name: string;
+		FormControlValidationProps<T> {
+		name: Path<T>;
 	}
 	/**
 	 * Used for preset form components that already have a name defined
 	 */
 	interface FormControlPresetProps<T extends FieldValues>
 		extends InputProps,
-			FormControlValidationProps<T> {}
+		FormControlValidationProps<T> {
+		name?: Path<T>;
+	}
 
 	export const Header = ({
 		title,
@@ -68,6 +71,7 @@ export namespace Form {
 	);
 
 	/**
+	 * Detects the input type and creates the appropriate component.
 	 * Creates a form input and registers a field with the value of name property
 	 * Automatically sets the invalidText prop from formState
 	 */
@@ -77,12 +81,43 @@ export namespace Form {
 		className = "",
 		...props
 	}: FormControlProps<T>) => {
+
+
+		if (typeof formState?.defaultValues?.[props.name] === "boolean") {
+			return (
+				<Toggle
+					{...props}
+					{...register(props.name)}
+					className={"form__control " + className}
+				/>
+			);
+		}
+
+		/**
+		 * Gets the error message of the target formStatus field, even if its nested
+		 */
+		const getErrorMessage = (targetFieldName: string, value: any): string | undefined => {
+			//No error message
+			if (!targetFieldName || !value) { return undefined }
+
+			//Check if the target field is nested inside another field
+			if (/\./.test(targetFieldName)) {
+				return getErrorMessage(targetFieldName.split(".")[1], value[targetFieldName.split(".")[0]]);
+			}
+			//Return the error message of the target field
+			else {
+				return value?.[targetFieldName]?.message as string | undefined;
+			}
+
+		}
+
+
 		return (
 			<Input
 				{...props}
-				{...register(props.name as Path<T>)}
+				{...register(props.name)}
 				className={"form__control " + className}
-				invalidText={formState?.errors[props.name]?.message as string}
+				invalidText={getErrorMessage(props.name, formState?.errors)}
 			/>
 		);
 	};
@@ -90,8 +125,8 @@ export namespace Form {
 	/**
 	 * Creates a form button with type submit
 	 */
-	export const Submit = ({ children }: { children: string }) => (
-		<Button type="submit">{children}</Button>
+	export const Submit = (props: ButtonProps) => (
+		<Button  {...props} type="submit" />
 	);
 
 	export const Separator = () => <hr className="form__separator" />;
@@ -102,34 +137,34 @@ export namespace Form {
 	 *
 	 */
 	export const Email = <T extends FieldValues>(
-		props: FormControlPresetProps<T>
+		{ name = "email" as Path<T>, label = "Email", ...props }: FormControlPresetProps<T>
 	) => (
 		<Control
 			{...props}
-			label="Email"
-			type="email"
-			name="email"
+			label={label}
+			type={"email"}
+			name={name}
 		/>
 	);
 
 	export const Password = <T extends FieldValues>(
-		props: FormControlPresetProps<T>
+		{ name = "password" as Path<T>, label = "Password", ...props }: FormControlPresetProps<T>
 	) => (
 		<Control
 			{...props}
-			label="Password"
+			label={label}
 			type="password"
-			name="password"
+			name={name}
 		/>
 	);
 
 	export const Name = <T extends FieldValues>(
-		props: FormControlPresetProps<T>
+		{ name = "name" as Path<T>, label = "Name", ...props }: FormControlPresetProps<T>
 	) => (
 		<Control
 			{...props}
-			label="Name"
-			name="name"
+			label={label}
+			name={name}
 		/>
 	);
 }
