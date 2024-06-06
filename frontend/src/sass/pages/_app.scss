@@ -22,6 +22,7 @@ main {
 
 	& section {
 		grid-area: content;
+		position: relative;
 	}
 
 	&::before {
