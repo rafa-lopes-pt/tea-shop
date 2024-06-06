@@ -92,4 +92,9 @@
 	&:active span {
 		transform: scale(85%);
 	}
+
+	&:disabled{
+		opacity: 0.5;
+		pointer-events: none;
+	}
 }

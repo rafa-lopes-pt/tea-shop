@@ -1,19 +1,20 @@
+import { ButtonHTMLAttributes } from "react";
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	variant?: "primary" | "outlined" | "link" | "danger";
+
+}
 export default function Button({
 	variant = "primary",
-	children,
-	onClick = () => {},
 	className = "",
 	type = "button",
-}: {
-	onClick?: Function;
-	variant?: "primary" | "outlined" | "link" | "danger";
-	children: string;
-	className?: string;
-	type?: "button" | "submit";
-}) {
+	children,
+	...props
+}: ButtonProps
+) {
 	return (
 		<button
-			onClick={() => onClick()}
+			{...props}
 			type={type}
 			className={`btn btn--${variant} ${className}`}>
 			<span>{children}</span>
