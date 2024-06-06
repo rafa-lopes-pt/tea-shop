@@ -1,7 +1,7 @@
 @use "../../base/colors" as colors;
 @use "../../utils/layout" as layout;
 .file-input {
-	$size: 10vw;
+	$size: 8rem;
 	width: $size;
 	height: $size;
 	overflow: hidden;
