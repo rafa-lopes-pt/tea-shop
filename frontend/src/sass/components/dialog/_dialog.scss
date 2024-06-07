@@ -1,0 +1,86 @@
+@use "../../utils/layout" as layout;
+@use "../../base/colors" as colors;
+
+.dialog {
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 50;
+	transition: all 0.2s ease;
+
+	&[data-backdrop="true"]::before {
+		transition: all 0.2s ease;
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: #3335;
+		z-index: -1;
+	}
+
+	&__container {
+		@include layout.center-in-parent();
+		background-color: colors.$light;
+		padding: 1em;
+		border-radius: 8px;
+		min-width: 33vw;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+
+		border: 5px solid colors.$invalid;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 0.25em;
+
+		font-size: 1.75rem;
+
+		padding-bottom: 0.25em;
+		border-bottom: 1px solid colors.$invalid;
+
+		&[data-danger] &__title,
+		&[data-danger] &__icon {
+			color: colors.$invalid;
+		}
+
+		&__title {
+			margin: 0;
+			font-size: 1em;
+		}
+
+		&__icon {
+			font-size: 1em;
+			color: colors.$text-secondary;
+		}
+	}
+
+	&__body {
+		color: colors.$text-secondary;
+		font-size: 1.2rem;
+		// text-wrap: wrap;
+		// white-space: nowrap;
+		// word-break: break-all;
+		// line-break: anywhere;
+		padding: 0em 0.75em;
+	}
+
+	&__footer {
+		margin-top: 0.75em;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__confirm {
+		margin-left: auto;
+	}
+}
