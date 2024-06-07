@@ -8,9 +8,11 @@ import Frame from "./misc/Frame";
 
 function App() {
 	const auth = useContext(AuthCtx);
+
 	const AuthenticatedNavItems = [
 		{ label: "Shop", to: "/" },
 		{ label: "Profile", to: "account" },
+		{ label: "Cart", to: "account/cart" },
 		{ label: "Logout", to: "/", action: auth?.logout },
 	];
 	const UnauthenticatedNavItems = [
@@ -21,7 +23,7 @@ function App() {
 	return (
 		<>
 			<Frame />
-			<main>
+			<main id="main">
 				<Navbar
 					links={
 						auth?.isLoggedIn
