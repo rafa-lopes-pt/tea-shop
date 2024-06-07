@@ -9,6 +9,7 @@ import AuthPage from "./auth/AuthPage";
 import SectionWrapper from "./misc/SectionWrapper";
 import ShopPage from "./shop/ShopPage";
 import ItemDisplay from "./item/ItemDisplay";
+import AccountPage from "./account/AccountPage";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -33,12 +34,8 @@ const router = createBrowserRouter(
 					}
 				/>
 				<Route
-					path="account"
-					element={
-						<SectionWrapper className="">
-							<h1>Account</h1>
-						</SectionWrapper>
-					}
+					path="account/:tab?"
+					element={<AccountPage />}
 				/>
 				<Route
 					path="login"
