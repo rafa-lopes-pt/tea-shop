@@ -5,10 +5,10 @@ import {
 	notifyToastPromiseEnd,
 	notifyToastPromiseError,
 	notifyToastPromiseLoading,
-} from "../components/toasts/promise.notifier";
-import { notifyInfoToast } from "../components/toasts/toast.notifier";
+} from "../components/alerts/toasts/promise.notifier";
+import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
 
-type AuthCtxProperties = {
+export type AuthCtxProperties = {
 	isLoggedIn: boolean;
 	login: (data: LoginSchemaType) => Promise<any>;
 	logout: () => void;
@@ -42,23 +42,22 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	async function login() {
 		const toastId = notifyToastPromiseLoading();
 
-		return fakeRequest(true)
-			.then(() => {
+		return fakeRequest({
+			name: "Rafa",
+			email: "rafalopessecond@gmail.com",
+			image: "https://avatars.githubusercontent.com/u/45339818?v=4",
+			notifyByEmail: true,
+			notifyBySms: false,
+			billingInfo: {
+				country: "Portugal",
+				city: "Tomar",
+				street: "Casal das Cabras",
+				zipCode: "1234-567",
+			},
+		})
+			.then((user) => {
 				setIsLoggedIn(true);
-				const user = {
-					name: "Rafa",
-					email: "rafalopessecond@gmail.com",
-					image: "",
-					notifyByEmail: true,
-					notifyBySms: false,
-					billingInfo: {
-						country: "Portugal",
-						city: "Tomar",
-						street: "Casal das Cabras",
-						zipCode: "1234-567",
-					},
-				};
-				setUser(user);
+				setUser(user as UserSchemaType);
 				window.sessionStorage.setItem(
 					"session",
 					JSON.stringify({ user, isLoggedIn: true })
