@@ -75,15 +75,16 @@ body {
 }
 .btn--outlined {
   background-color: #ebfff8;
-  color: #00482e;
-  outline: 1px solid #00482e;
+  color: #000604;
+  outline: 1px solid #ebfff8;
+  box-shadow: 2px 2px 15px 2px rgba(0, 6, 4, 0.5);
 }
 .btn--outlined:hover {
-  box-shadow: 2px 2px 25px 2px #00482e;
+  box-shadow: 2px 2px 20px 2px rgba(0, 6, 4, 0.75);
 }
 .btn--outlined:active {
-  box-shadow: 2px 2px 25px 2px #00482e, inset 2px 2px 20px 2px rgba(0, 72, 46, 0.35);
-  outline: 1px solid #00482e;
+  box-shadow: 2px 2px 25px 2px #000604, inset 2px 2px 20px 2px rgba(0, 6, 4, 0.35);
+  outline: 1px solid #ebfff8;
 }
 .btn--link {
   background-color: transparent;
@@ -119,6 +120,10 @@ body {
 }
 .btn:active span {
   transform: scale(85%);
+}
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .icon-btn {
@@ -156,7 +161,7 @@ body {
   place-items: center;
   text-align: center;
   gap: 0;
-  gap: 1.5em;
+  gap: 2em;
   margin: 1.5em 0em;
 }
 .form__body, .form__body > * {
@@ -251,8 +256,8 @@ body {
 }
 
 .file-input {
-  width: 10vw;
-  height: 10vw;
+  width: 8rem;
+  height: 8rem;
   overflow: hidden;
   border-radius: 50%;
   background-color: #ebfff8;
@@ -272,7 +277,7 @@ body {
 }
 .file-input__icon {
   opacity: 0;
-  font-size: 5vw;
+  font-size: 4rem;
   transition: all 0.25s ease-in-out;
   z-index: 1;
   position: absolute;
@@ -341,6 +346,97 @@ body {
 .toggle__input {
   opacity: 0;
   position: absolute;
+}
+
+.tabs-container {
+  padding: 1em;
+}
+.tabs-container__tab {
+  position: absolute;
+  top: calc(20% + 1em);
+  right: 1em;
+  bottom: 1em;
+  left: 1em;
+}
+.tabs-container__nav__button {
+  border-radius: 0%;
+}
+.tabs-container__nav__button:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.tabs-container__nav__button:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.dialog {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+.dialog[data-backdrop=true]::before {
+  transition: all 0.2s ease;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(51, 51, 51, 0.3333333333);
+  z-index: -1;
+}
+.dialog__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ebfff8;
+  padding: 1em;
+  border-radius: 8px;
+  min-width: 33vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border: 5px solid #f55;
+}
+.dialog__header {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  font-size: 1.75rem;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #f55;
+}
+.dialog__header[data-danger] .dialog__header__title, .dialog__header[data-danger] .dialog__header__icon {
+  color: #f55;
+}
+.dialog__header__title {
+  margin: 0;
+  font-size: 1em;
+}
+.dialog__header__icon {
+  font-size: 1em;
+  color: #000604;
+}
+.dialog__body {
+  color: #000604;
+  font-size: 1.2rem;
+  padding: 0em 0.75em;
+}
+.dialog__footer {
+  margin-top: 0.75em;
+  display: flex;
+  justify-content: space-between;
+}
+.dialog__confirm {
+  margin-left: auto;
 }
 
 .frame {
@@ -532,7 +628,7 @@ body {
   animation: loadDot 1s forwards 1 ease-in-out;
 }
 
-main {
+#main {
   position: relative;
   z-index: 2;
   height: 87vh;
@@ -541,10 +637,11 @@ main {
   grid-template-columns: 8vw 1fr;
   grid-template-rows: 8vw 1fr;
 }
-main section {
+#main section {
   grid-area: content;
+  position: relative;
 }
-main::before {
+#main::before {
   display: block;
   content: "";
   background: url("/media/bg.jpg") #005235;

@@ -12,6 +12,8 @@
 @use "components/toast/toast";
 @use "components/input/file-input";
 @use "components/button/toggle";
+@use "components/containers/tabs-container";
+@use "components/dialog/dialog";
 //pages
 @use "pages/frame";
 @use "pages/app";
