@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode, useState } from 'react'
-import Button from '../../buttons/Button'
+import Button from '../buttons/Button'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export default function TabContainer({ id, tabs }: { tabs: { label: string, content: ReactNode }[], id: string }) {
