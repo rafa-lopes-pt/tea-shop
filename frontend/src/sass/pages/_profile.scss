@@ -1,0 +1,40 @@
+@use "../base/typography" as typography;
+
+.profile {
+	margin: auto;
+	width: 70%;
+	height: 60vh;
+	max-height: 100%;
+	overflow: auto;
+	padding: 1em;
+
+	& header {
+		display: flex;
+		align-items: center;
+
+		gap: 3em;
+
+		& .user-info__name {
+			@include typography.title();
+			margin: 0;
+			font-size: 3rem;
+		}
+	}
+
+	&__actions,
+	&__actions span {
+		padding: 0em 1em;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__actions span {
+		gap: 1em;
+	}
+}
+
+.user-info {
+	&__section-title {
+		font-size: 1.35rem;
+	}
+}
