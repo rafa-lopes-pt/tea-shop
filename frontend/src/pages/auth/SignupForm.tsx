@@ -24,7 +24,7 @@ export default function SignupForm({
 			<Form.Header title="Register">
 				<Button
 					variant="link"
-					onClick={onChangeScreen}>
+					onClick={() => onChangeScreen()}>
 					Login with your account
 				</Button>
 			</Form.Header>

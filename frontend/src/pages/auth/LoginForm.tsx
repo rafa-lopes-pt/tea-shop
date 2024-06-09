@@ -36,7 +36,7 @@ export default function LoginForm({
 			<Form.Header title="Login">
 				<Button
 					variant="link"
-					onClick={onChangeScreen}>
+					onClick={() => onChangeScreen()}>
 					Don't have an account yet?
 				</Button>
 			</Form.Header>
