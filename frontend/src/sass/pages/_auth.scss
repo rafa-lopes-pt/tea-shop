@@ -1,10 +1,9 @@
 @use "../utils/layout" as utils;
 
 .auth {
-	&__wrapper {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -70%);
-	}
+	//center content visually in screen due to main grid layout
+	display: flex;
+	place-content: center;
+	place-items: center;
+	transform: translate(-4vw, -0vw);
 }
