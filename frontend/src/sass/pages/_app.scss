@@ -1,13 +1,5 @@
 @use "../base/colors" as colors;
 #main {
-	// DEV
-
-	&,
-	& > * {
-		// border: 1px solid red;
-	}
-	//
-
 	position: relative;
 
 	z-index: 2;
