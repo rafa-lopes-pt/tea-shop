@@ -1,0 +1,112 @@
+@use "../../../base/colors" as colors;
+
+.accordion-item {
+	// transition: all 0.5s ease;
+	// max-height: 100%;
+
+	color: colors.$text-secondary;
+
+	&:first-child &__header {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	&:last-child[data-collapsed="true"] &__header {
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	&:last-child &__body-wrapper {
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+
+	&__header {
+		background-color: colors.$light;
+		padding: 0.5em 1em;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		cursor: pointer;
+		transition: all 0.25s ease-in-out;
+
+		box-shadow: inset 2px 2px 10px 2px rgba($color: colors.$dark, $alpha: 0);
+
+		text-align: center;
+		gap: 1em;
+
+		min-width: 100%;
+
+		&__content {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1em;
+
+			transition: all 0.15s ease-out;
+
+			& * {
+				transition: all 0.2s ease;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			& *:hover {
+				overflow: visible;
+			}
+		}
+
+		&__icon {
+			transition: all 0.15s ease-out;
+		}
+
+		&:hover {
+			box-shadow: inset 2px 2px 15px 4px
+				rgba($color: colors.$dark, $alpha: 0.2);
+		}
+
+		&:hover &__icon {
+			transform: scale(1.2);
+		}
+		&:hover &__content {
+			transform: scale(1.025);
+		}
+
+		&:active &__icon {
+			transform: scale(0.9);
+		}
+	}
+
+	&[data-collapsed="false"] &__header {
+		box-shadow: inset 2px 2px 10px 2px
+			rgba($color: colors.$dark, $alpha: 0.5);
+
+		& .accordion-item__header__icon {
+			transform: rotateX(180deg);
+		}
+
+		&:hover .accordion-item__header__icon {
+			transform: scale(1.2) rotateX(180deg);
+		}
+
+		&:active .accordion-item__header__icon {
+			transform: scale(0.9) rotateX(180deg);
+		}
+	}
+
+	&__body-wrapper {
+		background-color: rgba(
+			$color: lighten(colors.$primary, 10%),
+			$alpha: 0.5
+		);
+		color: colors.$text-primary;
+		overflow: hidden;
+	}
+
+	&__body {
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25em;
+		& > * {
+			padding: 0.2em 0.5em;
+			border-bottom: 1px solid colors.$light;
+		}
+	}
+}
