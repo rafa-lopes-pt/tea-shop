@@ -9,6 +9,8 @@
 	left: 0;
 	overflow: hidden;
 
+	$looping-animation-duration: 20s;
+
 	@keyframes loadCorner {
 		0% {
 			transform: scale(10%);
@@ -29,23 +31,21 @@
 		&--top-left {
 			top: 0;
 			left: 0;
-			animation: loadCorner 1s forwards 1 ease-in-out;
+			animation: loadCorner 1s forwards 1 0.05s ease-in-out;
 		}
 		&--bottom-right {
 			bottom: 0;
 			right: 0;
-			animation: loadCorner 1s forwards 1 0.1s ease-in-out;
+			animation: loadCorner 1s forwards 1 0.15s ease-in-out;
 		}
 	}
 
 	@keyframes loadLines {
 		from {
-			width: 0vw;
-			opacity: 0;
+			transform: scale(0.5) rotate(-45deg);
 		}
 		to {
-			width: 200vw;
-			opacity: 1;
+			transform: scale(1) rotate(-45deg);
 		}
 	}
 
@@ -57,36 +57,37 @@
 
 	&__line {
 		position: absolute;
-		height: 1px;
+		height: 0.1vmin;
+		width: 200vw;
 		transform: rotate(-45deg);
 		transform-origin: top left;
 
 		&--top {
-			$start: 0%;
-			background-color: #131;
+			$start: 0px;
+			background-color: colors.$bg;
 			animation: loadLines 2s forwards 1 ease-in-out;
-			@for $i from 4 to 18 {
+			@for $i from 1 to 14 {
 				&:nth-child(#{$i}) {
-					top: calc($start + calc($i - 3) * 3%);
+					top: calc($start + calc($i) * 7.5%);
 				}
 			}
 		}
 
 		&--bottom {
-			transform: rotate(-40deg);
-			$start: 140%;
-			background-color: #ddd;
-			@for $i from 18 to 30 {
+			$start: 75vmin;
+			left: -50%;
+			transform-origin: 50%;
+			background-color: colors.$light;
+			@for $i from 1 to 13 {
 				&:nth-child(#{$i}) {
-					top: calc($start + calc($i - 3) * 2.5%);
+					top: calc($start + calc($i) * 3%);
 					animation: loadLines 2s forwards 1 ease-in-out,
 						loopLines
-							12s
+							#{$looping-animation-duration}
 							infinite
 							both
 							ease-in-out
-							#{calc($i - 18) *
-							0.3s};
+							#{calc($i * 0.3s)};
 				}
 			}
 		}
@@ -100,20 +101,17 @@
 			transform: scale(100%);
 		}
 	}
-	@keyframes loadDot {
-		from {
-			border-radius: 0;
-		}
-		to {
-			border-radius: 50%;
+	@keyframes loopDot {
+		50% {
+			opacity: 0;
+			transform: translate(33%, 33%) scale(0.5);
 		}
 	}
 
 	&__dots {
 		position: absolute;
-		bottom: 1em;
-		left: 2em;
-
+		bottom: 3vmin;
+		left: 4vmin;
 		$box-size: 8vmax;
 		width: $box-size;
 		height: $box-size;
@@ -126,7 +124,7 @@
 		place-content: center;
 		place-items: center;
 
-		animation: loadDotsBox 1s forwards 1 0.3s ease-in-out;
+		animation: loadDotsBox 1.5s both 1 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 
 		&__dot {
 			position: static;
@@ -134,8 +132,19 @@
 			width: $size;
 			height: $size;
 			background-color: #ddd;
+			border-radius: 50%;
 
-			animation: loadDot 1s forwards 1 ease-in-out;
+			$animation-duration: $looping-animation-duration;
+			@for $i from 1 to 50 {
+				&:nth-child(#{$i}) {
+					animation: loopDot
+						#{$animation-duration}
+						both
+						infinite
+						ease-in-out
+						#{calc($i * $animation-duration/100)};
+				}
+			}
 		}
 	}
 }
