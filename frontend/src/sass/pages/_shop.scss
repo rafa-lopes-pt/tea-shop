@@ -1,4 +1,5 @@
 @use "../base/colors" as colors;
+@use "../utils/layout" as layout;
 .shop-page {
 	display: flex;
 	flex-direction: column;
@@ -26,15 +27,14 @@
 	&__wrapper {
 		background-color: #ddd5;
 		border-radius: 5px;
-		overflow-y: hidden;
-		overflow-x: auto;
-		scroll-behavior: smooth;
 	}
 
 	height: 100%;
 	min-width: 100%;
+	overflow-y: hidden;
+	overflow-x: auto;
+	scroll-behavior: smooth;
 	display: flex;
-	align-items: center;
 	padding: 1em;
 	gap: 1em;
 }
@@ -92,20 +92,25 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
+
 		z-index: 10;
 		opacity: 0;
 		font-size: 0.9rem;
-		display: inline-flex;
-
-		align-items: center;
+		display: flex;
+		place-content: center;
+		place-items: center;
 		text-align: center;
-		//crop text
-		text-overflow: ellipsis;
-		overflow: hidden;
 
 		background-color: rgba($color: colors.$bg, $alpha: 0.8);
 
-		padding: 0.5em;
+		padding: 1em;
+
+		p {
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
+			-webkit-box-orient: vertical;
+		}
 	}
 
 	//Hover animation
