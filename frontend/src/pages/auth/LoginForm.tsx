@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,9 +16,11 @@ export default function LoginForm({
 	onChangeScreen: Function;
 	animationProps: any;
 }) {
-	const { register, handleSubmit, formState } = useForm<LoginSchemaType>({
+	const { register, handleSubmit, formState, reset } = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 	});
+
+
 
 	const auth = useContext(AuthCtx);
 	const navigate = useNavigate();
@@ -26,17 +28,27 @@ export default function LoginForm({
 	const onSubmitHandler = (data: LoginSchemaType) => {
 		if (!auth?.login) return;
 
-		auth?.login(data).then(() => navigate("/"));
+
+
+
+		auth?.login(data)
+			.then(() => navigate("/"))
+			.catch(() => {
+				reset();
+			});
 	};
 
 	return (
 		<Form
 			animationProps={animationProps}
-			onSubmit={handleSubmit(onSubmitHandler)}>
+			onSubmit={handleSubmit(onSubmitHandler)}
+		>
 			<Form.Header title="Login">
 				<Button
 					variant="link"
-					onClick={() => onChangeScreen()}>
+					onClick={() => onChangeScreen()}
+					disabled={formState.isSubmitted}
+				>
 					Don't have an account yet?
 				</Button>
 			</Form.Header>
@@ -45,14 +57,18 @@ export default function LoginForm({
 				<Form.Email
 					register={register}
 					formState={formState}
+					disabled={formState.isSubmitted}
 				/>
 
 				<Form.Password
 					register={register}
 					formState={formState}
+					disabled={formState.isSubmitted}
 				/>
 
-				<Form.Submit>Login</Form.Submit>
+				<Form.Submit disabled={formState.isSubmitted}>
+					Login
+				</Form.Submit>
 			</Form.Body>
 		</Form>
 	);
