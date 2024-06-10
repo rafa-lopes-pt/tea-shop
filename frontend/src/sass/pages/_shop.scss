@@ -1,13 +1,13 @@
 @use "../base/colors" as colors;
 @use "../utils/layout" as layout;
+@use "../utils/media-queries" as media-query;
+
 .shop-page {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	overflow: hidden;
 	padding: 1em;
-
-	// background: rgba($color: colors.$bg, $alpha: 0.8);
 
 	& footer {
 		display: flex;
@@ -19,6 +19,13 @@
 			}
 			&__text {
 			}
+		}
+
+		@include media-query.small-screen() {
+			flex-direction: column;
+			padding: 0em 1em;
+			gap: 1em;
+			text-align: center;
 		}
 	}
 }
