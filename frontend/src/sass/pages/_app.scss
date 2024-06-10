@@ -1,9 +1,10 @@
 @use "../base/colors" as colors;
+@use "../utils/media-queries" as media-query;
 #main {
 	position: relative;
-
 	z-index: 2;
-	height: 87vh;
+	height: 90svh;
+	border: 2px solid palevioletred;
 
 	display: grid;
 	grid-template-areas:
@@ -11,12 +12,6 @@
 		"icons content";
 	grid-template-columns: 8vw 1fr;
 	grid-template-rows: 8vw 1fr;
-
-	& > section {
-		grid-area: content;
-		position: relative;
-		border: 2px solid red;
-	}
 
 	&::before {
 		display: block;
@@ -40,14 +35,38 @@
 
 		box-shadow: inset 0px 0px 250px 20px colors.$bg;
 	}
+
+	@include media-query.small-screen() {
+		grid-template-areas: "content";
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+
+		.main-navbar {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+		}
+	}
+}
+#main > section {
+	grid-area: content;
+	position: relative;
+	border: 2px solid red;
+	padding: 1em;
 }
 
 .main-navbar {
 	grid-area: nav;
 	justify-self: end;
-	//
 	width: fit-content;
 	gap: 1em;
+
+	@include media-query.small-screen() {
+		justify-self: start;
+		width: 100%;
+	}
 }
 .social-icons {
 	grid-area: icons;
@@ -60,5 +79,8 @@
 
 	& > * {
 		max-width: 100%;
+	}
+	@include media-query.small-screen() {
+		display: none;
 	}
 }
