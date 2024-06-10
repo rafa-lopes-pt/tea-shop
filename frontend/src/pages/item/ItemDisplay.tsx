@@ -20,7 +20,6 @@ export default function ItemDisplay() {
 	// this is dev code only
 	if (!item) throw new Error("Shop Item not found");
 
-	// console.log(shopData.test());
 
 	return (
 		<SectionWrapper className="item-display">
