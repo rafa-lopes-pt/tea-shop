@@ -1,6 +1,6 @@
 @use "../../utils/layout" as layout;
 @use "../../base/colors" as colors;
-
+@use "../../utils/media-queries" as media-query;
 .dialog {
 	overflow: hidden;
 	position: absolute;
@@ -29,13 +29,17 @@
 		background-color: colors.$light;
 		padding: 1em;
 		border-radius: 8px;
-		min-width: 33vw;
+		width: 33vw;
 
 		display: flex;
 		flex-direction: column;
 		gap: 1em;
 
 		border: 5px solid colors.$invalid;
+
+		@include media-query.small-screen() {
+			min-width: 80vw;
+		}
 	}
 
 	&__header {
@@ -67,11 +71,9 @@
 	&__body {
 		color: colors.$text-secondary;
 		font-size: 1.2rem;
-		// text-wrap: wrap;
-		// white-space: nowrap;
-		// word-break: break-all;
-		// line-break: anywhere;
 		padding: 0em 0.75em;
+		max-height: 33vh;
+		overflow: auto;
 	}
 
 	&__footer {
