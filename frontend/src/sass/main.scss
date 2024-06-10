@@ -14,6 +14,8 @@
 @use "components/button/toggle";
 @use "components/containers/tabs-container";
 @use "components/dialog/dialog";
+@use "components/containers/accordion/accordion-item";
+@use "components/containers/accordion/accordion-container";
 //pages
 @use "pages/frame";
 @use "pages/app";
