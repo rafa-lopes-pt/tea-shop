@@ -1,43 +1,46 @@
+import { Children, ReactElement, cloneElement, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../buttons/Button";
+import IconButton, { ICONS } from "../buttons/IconButton";
 import NavLink from "./NavLink";
-
 export default function Navbar({
-	links,
 	className = "",
+	children
 }: {
-	links: { label: string; to?: string; action?: Function }[];
+	children?: ReactElement | ReactElement[];
 	className?: string;
 }) {
-	const { pathname } = useLocation();
-	const navigate = useNavigate();
-	const isActive = (path: string) =>
-		pathname === `/${path === "/" ? "" : path}`;
 
-	return (
-		<nav className={"navbar " + className}>
-			{links.map((e) =>
-				e?.action ? (
-					<Button
-						key={`navbar-action-${e.label}-to-${e?.action}`}
-						onClick={() => {
-							e?.action && e.action();
-							if (e?.to) navigate(e.to);
-						}}
-						variant="outlined">
-						{e.label}
-					</Button>
-				) : (
-					<NavLink
-						key={`navbar-link-${e.label}-to-${e?.to}`}
-						to={e?.to || ""}
-						variant={
-							isActive(e?.to || "") ? "primary" : "outlined"
-						}>
-						{e.label}
-					</NavLink>
-				)
-			)}
+	const [show, setShow] = useState(false)
+
+	return <div className="main-navbar">
+
+		{/*== Only on small screens ==*/}
+		<div className="main-navbar__background" data-show={show}>&nbsp;</div>
+
+		<IconButton
+			icon={ICONS.hamburger}
+			className="main-navbar__hamburger-icon" onClick={() => setShow(prev => !prev)} />
+		{/*==========================*/}
+
+		<nav className="main-navbar__nav" data-open={show}>
+			<ul className="main-navbar__list">
+
+				{
+					Children.map(children, (child) => {
+						if (child && child.type === NavLink) {
+
+							return cloneElement(child, { onDismissOverlay: () => setShow(false) })
+
+						}
+						return child;
+					})
+				}
+
+
+
+			</ul>
 		</nav>
-	);
+
+	</div>
+
 }
