@@ -37,8 +37,10 @@
 	}
 
 	@include media-query.small-screen() {
-		grid-template-areas: "content";
-		grid-template-columns: 1fr;
+		grid-template-areas:
+			"content"
+			"icons";
+		grid-template-columns: 1fr auto;
 		grid-template-rows: 1fr;
 
 		.main-navbar {
@@ -81,6 +83,9 @@
 		max-width: 100%;
 	}
 	@include media-query.small-screen() {
-		display: none;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-evenly;
+		font-size: 0.5rem;
 	}
 }

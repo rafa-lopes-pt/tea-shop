@@ -966,8 +966,8 @@ body {
 }
 @media (hover: none) or (max-width: 750px) {
   #main {
-    grid-template-areas: "content";
-    grid-template-columns: 1fr;
+    grid-template-areas: "content" "icons";
+    grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
   }
   #main .main-navbar {
@@ -1012,7 +1012,10 @@ body {
 }
 @media (hover: none) or (max-width: 750px) {
   .social-icons {
-    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 0.5rem;
   }
 }
 
