@@ -1,9 +1,12 @@
 @use "../../base/colors" as colors;
 @use "../../utils/layout" as layout;
 .file-input {
-	$size: 8rem;
+	$size: 20vmax;
 	width: $size;
 	height: $size;
+	max-width: 200px;
+	max-height: 200px;
+
 	overflow: hidden;
 	border-radius: 50%;
 	background-color: colors.$light;
@@ -33,8 +36,7 @@
 	}
 
 	& img {
-		width: 100%;
-		aspect-ratio: square;
+		height: 100%;
 		position: absolute;
 		top: 50%;
 		left: 50%;
