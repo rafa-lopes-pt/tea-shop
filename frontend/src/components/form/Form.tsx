@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { FormHTMLAttributes, HTMLAttributes } from "react";
+import React, { FormEvent, FormHTMLAttributes, HTMLAttributes } from "react";
 import { FieldValues, FormState, Path, UseFormRegister } from "react-hook-form";
 import Button, { ButtonProps } from "../buttons/Button";
 import Input, { InputProps } from "../input/Input";
@@ -8,13 +8,30 @@ import Toggle from "../buttons/Toggle";
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
 	//NOTE: Couldn't figure out the proper type, ts creates a conflict with HTMLFormAttributes and MotionProps
 	animationProps?: any;
+	middleware?: Function;
+	honeyPotFieldName?: string;
 }
+
 export function Form({
 	children,
 	animationProps,
 	className = "",
+	honeyPotFieldName,
+	onSubmit,
 	...props
 }: FormProps) {
+
+	const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		//check honeypot
+		if (honeyPotFieldName && (new FormData(e.target as HTMLFormElement)).get(honeyPotFieldName)) {
+			return; //begone foul bot! YOU SHALL NOT PASS!!!
+		}
+
+		onSubmit && onSubmit(e);
+	}
+
 	return (
 		<motion.form
 			{...animationProps}
@@ -22,7 +39,10 @@ export function Form({
 			noValidate={
 				props?.noValidate === undefined ? true : props.noValidate
 			}
-			className={"form " + className}>
+			className={"form " + className}
+			onSubmit={onSubmitHandler}
+		>
+			{honeyPotFieldName && <input type="text" name={honeyPotFieldName} className="form__control--special" />}
 			{children}
 		</motion.form>
 	);
