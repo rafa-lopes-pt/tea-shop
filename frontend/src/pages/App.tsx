@@ -5,19 +5,22 @@ import IconButton, { ICONS } from "../components/buttons/IconButton";
 import Navbar from "../components/navbar/Navbar";
 import { AuthCtx } from "../store/auth.context";
 import Frame from "./misc/Frame";
+import NavLink from "../components/navbar/NavLink";
 
 function App() {
 	const auth = useContext(AuthCtx);
 
+
 	const AuthenticatedNavItems = [
-		{ label: "Shop", to: "/" },
-		{ label: "Profile", to: "account" },
-		{ label: "Cart", to: "account/cart" },
-		{ label: "Logout", to: "/", action: auth?.logout },
-	];
+		<NavLink to="/">Shop</NavLink>,
+		<NavLink to="account">Profile</NavLink>,
+		<NavLink to="account/cart">Cart</NavLink>,
+		<NavLink to="/" indicateRoute={false} action={auth?.logout}>Logout</NavLink>
+	]
+
 	const UnauthenticatedNavItems = [
-		{ label: "Shop", to: "/" },
-		{ label: "Login", to: "login" },
+		<NavLink to="/">Shop</NavLink>,
+		<NavLink to="login">Login</NavLink>
 	];
 
 	return (
@@ -25,12 +28,9 @@ function App() {
 			<Frame />
 			<main id="main">
 				<Navbar
-					links={
-						auth?.isLoggedIn
-							? AuthenticatedNavItems
-							: UnauthenticatedNavItems
-					}
-					className="main-navbar"></Navbar>
+					className="main-navbar">
+					{auth?.isLoggedIn ? AuthenticatedNavItems : UnauthenticatedNavItems}
+				</Navbar>
 
 				{/* social icons */}
 
@@ -43,7 +43,7 @@ function App() {
 				<AnimatePresence>
 					<Outlet></Outlet>
 				</AnimatePresence>
-			</main>
+			</main >
 		</>
 	);
 }
