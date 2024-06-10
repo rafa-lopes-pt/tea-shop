@@ -28,8 +28,10 @@ export default function LoginForm({
 	const onSubmitHandler = (data: LoginSchemaType) => {
 		if (!auth?.login) return;
 
+		console.log(data);
 
 
+		return
 
 		auth?.login(data)
 			.then(() => navigate("/"))
@@ -42,6 +44,7 @@ export default function LoginForm({
 		<Form
 			animationProps={animationProps}
 			onSubmit={handleSubmit(onSubmitHandler)}
+			honeyPotFieldName="username"
 		>
 			<Form.Header title="Login">
 				<Button
@@ -66,7 +69,8 @@ export default function LoginForm({
 					disabled={formState.isSubmitted}
 				/>
 
-				<Form.Submit disabled={formState.isSubmitted}>
+
+				<Form.Submit disabled={formState.isSubmitting}>
 					Login
 				</Form.Submit>
 			</Form.Body>

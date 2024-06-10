@@ -20,7 +20,9 @@ export default function SignupForm({
 	return (
 		<Form
 			animationProps={animationProps}
-			onSubmit={handleSubmit((data) => console.log(data))}>
+			onSubmit={handleSubmit((data) => console.log(data))}
+			honeyPotFieldName="username"
+		>
 			<Form.Header title="Register">
 				<Button
 					variant="link"
