@@ -11,26 +11,30 @@ function App() {
 	const auth = useContext(AuthCtx);
 
 
-	const AuthenticatedNavItems = [
-		<NavLink to="/">Shop</NavLink>,
-		<NavLink to="account">Profile</NavLink>,
-		<NavLink to="account/cart">Cart</NavLink>,
-		<NavLink to="/" indicateRoute={false} action={auth?.logout}>Logout</NavLink>
-	]
+	const AuthenticatedNavItems =
+		<Navbar
+			className="main-navbar">
+			<NavLink to="/">Shop</NavLink>
+			<NavLink to="account">Profile</NavLink>
+			<NavLink to="cart">Cart</NavLink>
+			<NavLink to="/" indicateRoute={false} action={auth?.logout}>Logout</NavLink>
+		</Navbar>
 
-	const UnauthenticatedNavItems = [
-		<NavLink to="/">Shop</NavLink>,
-		<NavLink to="login">Login</NavLink>
-	];
+	const UnauthenticatedNavItems =
+		<Navbar
+			className="main-navbar">
+			<NavLink to="/">Shop</NavLink>
+			<NavLink to="login">Login</NavLink>
+		</Navbar>
 
 	return (
 		<>
 			<Frame />
 			<main id="main">
-				<Navbar
-					className="main-navbar">
-					{auth?.isLoggedIn ? AuthenticatedNavItems : UnauthenticatedNavItems}
-				</Navbar>
+				
+				{auth?.isLoggedIn ? AuthenticatedNavItems : UnauthenticatedNavItems}
+
+
 
 				{/* social icons */}
 
