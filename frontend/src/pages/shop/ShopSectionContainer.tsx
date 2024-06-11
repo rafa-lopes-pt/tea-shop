@@ -8,8 +8,7 @@ export default function ShopSectionContainer({
 	className?: string;
 }) {
 	const shopItems = useContext(ShopDataCtx)?.data;
-	// @ts-ignore
-	console.log(shopItems);
+
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
