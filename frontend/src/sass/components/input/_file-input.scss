@@ -29,7 +29,7 @@
 
 	&__icon {
 		opacity: 0;
-		font-size: $size/2;
+		font-size: $size/3;
 		transition: all 0.25s ease-in-out;
 		z-index: 1;
 		@include layout.center-in-parent();
