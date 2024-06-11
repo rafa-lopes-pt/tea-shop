@@ -31,7 +31,20 @@ export default function AuthPage() {
 				/>
 			)}
 
+
 			{/* */}
+
+			<div className="auth__image">
+				<div className="auth__image__shape auth__image__shape--1"></div>
+				<div className="auth__image__img auth__image__img--1" />
+				<div className="auth__image__img auth__image__img--2" />
+			</div>
+
+
+
+
+
+
 		</SectionWrapper>
 	);
 }

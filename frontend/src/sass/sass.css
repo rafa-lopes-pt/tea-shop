@@ -1135,9 +1135,102 @@ body {
 
 .auth {
   display: flex;
-  place-content: center;
+  justify-content: space-evenly;
   place-items: center;
   transform: translate(-4vw, 0vw);
+}
+.auth__image {
+  width: 20vw;
+  height: 20vw;
+  position: relative;
+}
+.auth__image__img {
+  width: 16vw;
+  height: 16vw;
+  background-blend-mode: multiply;
+  box-shadow: inset 2px 2px 30px 5px rgba(235, 255, 248, 0.2);
+  filter: brightness(0.75) contrast(1.1);
+  transition: all 0.2s ease-in-out;
+}
+.auth__image__img--1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px 50% 5px 50%;
+  transform: translate(-75%, -25%);
+  background: url("/media/tea.jpg") rgba(230, 172, 26, 0.8);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+.auth__image__img--1:hover {
+  border-top-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+}
+.auth__image__img--2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 50% 5px 50% 5px;
+  transform: translate(-25%, -75%);
+  background: url("/media/white_tea.jpg") rgba(230, 172, 26, 0.8);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.auth__image__img--2:hover {
+  border-top-right-radius: 25%;
+}
+@keyframes loop-shapes {
+  0% {
+    border-top-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  25% {
+    border-top-left-radius: 60%;
+    border-bottom-right-radius: 10%;
+    border-top-right-radius: 0%;
+    border-bottom-left-radius: 40%;
+  }
+  75% {
+    border-top-left-radius: 20%;
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 40%;
+  }
+  100% {
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 20%;
+    border-top-right-radius: 70%;
+    border-bottom-left-radius: 10%;
+  }
+}
+.auth__image__shape {
+  z-index: -100;
+  position: absolute;
+  background-color: #e6ac1a;
+  box-shadow: 2px 2px 40px 1px #e6ac1a;
+  animation: loop-shapes 3s infinite alternate both linear;
+}
+.auth__image__shape--1 {
+  top: 0%;
+  right: 0%;
+  bottom: 0;
+  left: 0;
+}
+@media (hover: none) or (max-width: 750px) {
+  .auth {
+    transform: translate(0vw, 0vw);
+  }
+  .auth__image {
+    display: none;
+  }
 }
 
 .item-display {
