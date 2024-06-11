@@ -21,23 +21,19 @@ export default function LoginForm({
 	});
 
 
-
 	const auth = useContext(AuthCtx);
 	const navigate = useNavigate();
 
-	const onSubmitHandler = (data: LoginSchemaType) => {
+	const onSubmitHandler = async (data: LoginSchemaType) => {
 		if (!auth?.login) return;
 
-		console.log(data);
 
-
-		return
-
-		auth?.login(data)
+		return auth?.login(data)
 			.then(() => navigate("/"))
 			.catch(() => {
 				reset();
 			});
+
 	};
 
 	return (
@@ -50,7 +46,7 @@ export default function LoginForm({
 				<Button
 					variant="link"
 					onClick={() => onChangeScreen()}
-					disabled={formState.isSubmitted}
+					disabled={formState.isSubmitting}
 				>
 					Don't have an account yet?
 				</Button>
@@ -60,13 +56,13 @@ export default function LoginForm({
 				<Form.Email
 					register={register}
 					formState={formState}
-					disabled={formState.isSubmitted}
+					disabled={formState.isSubmitting}
 				/>
 
 				<Form.Password
 					register={register}
 					formState={formState}
-					disabled={formState.isSubmitted}
+					disabled={formState.isSubmitting}
 				/>
 
 
