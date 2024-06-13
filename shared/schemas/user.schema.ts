@@ -1,6 +1,6 @@
 import z from "zod";
 import ZodValidatorSchema from "./zod-validator-schema";
-
+import { BillingInfoSchema } from "./billing-info.schema";
 export const UserSchema = z.object({
 	//FIX: image probably should be validated like this...
 	image: ZodValidatorSchema.requiredNonEmptyString,
@@ -8,11 +8,6 @@ export const UserSchema = z.object({
 	name: ZodValidatorSchema.alphabeticOnly,
 	notifyByEmail: ZodValidatorSchema.boolean,
 	notifyBySms: ZodValidatorSchema.boolean,
-	billingInfo: z.object({
-		country: ZodValidatorSchema.alphabeticWithWhiteSpaces,
-		city: ZodValidatorSchema.alphabeticWithWhiteSpaces,
-		street: ZodValidatorSchema.alphanumericWithWhiteSpaces,
-		zipCode: ZodValidatorSchema.zipCode,
-	}),
+	billingInfo: BillingInfoSchema,
 });
 export type UserSchemaType = z.infer<typeof UserSchema>;

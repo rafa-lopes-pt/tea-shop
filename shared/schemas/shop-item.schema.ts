@@ -3,6 +3,7 @@ import ZodValidatorSchema from "./zod-validator-schema";
 
 export const ShopItemSchema = z
 	.object({
+		id: ZodValidatorSchema.requiredNonEmptyString,
 		image: ZodValidatorSchema.requiredNonEmptyString,
 		name: ZodValidatorSchema.alphanumericWithWhiteSpaces,
 		slogan: ZodValidatorSchema.alphabeticWithWhiteSpaces,
