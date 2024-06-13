@@ -10,6 +10,7 @@ import SectionWrapper from "./misc/SectionWrapper";
 import ShopPage from "./shop/ShopPage";
 import ItemDisplay from "./item/ItemDisplay";
 import AccountPage from "./account/AccountPage";
+import CartPage from "./cart/CartPage";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -27,10 +28,7 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="cart"
-					element={
-						<>
-							<h1>Cart</h1>
-						</>
+					element={<CartPage />
 					}
 				/>
 				<Route
