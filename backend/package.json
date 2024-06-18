@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nodemon --watch src src/index.ts",
     "lint": "npx eslint .",
-    "act": "gh act -W ../.github/workflows",
     "build": "lint && tsc"
   },
   "keywords": [],
