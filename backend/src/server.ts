@@ -10,6 +10,7 @@ server.use(morgan("dev"));
 server.use(cors());
 server.use(express.json());
 
+//====== ROUTES
 server.get("/health", (_, res) => {
 	res.status(HTTPCodes.ClientError.IM_A_TEAPOT).json({
 		message: "Server is running, but refused to brew coffee with a teapot",
@@ -18,19 +19,26 @@ server.get("/health", (_, res) => {
 
 server.use(router);
 
-server.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-	console.error(err);
+//====== ERROR HANDLING
 
+server.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
 	if (err instanceof HttpError) {
-		return res.status(err.status).json(err.message);
+		err.log();
+		return res
+			.status(err.statusCode)
+			.json({ ...err, message: err.message });
 	}
 
-	return res.status(500).json("Unexpected Server Error");
-});
+	console.error(err);
 
+	res.status(500).json(
+		"Unexpected Server Error, please contact development team"
+	);
+});
 server.use("*", (_, res) => {
 	res.status(HTTPCodes.ServerError.NOT_IMPLEMENTED).json(
 		"Endpoint not implemented"
 	);
 });
+
 export default server;

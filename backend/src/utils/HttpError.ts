@@ -29,4 +29,13 @@ export default class HttpError extends Error {
 		this.context = context;
 		this.name = statusCode;
 	}
+
+	log() {
+		console.error(
+			this.statusCode,
+			this.name,
+			this.message,
+			this.context || ""
+		);
+	}
 }
