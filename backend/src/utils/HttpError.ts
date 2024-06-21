@@ -6,7 +6,7 @@ const ErrorCodes = {
 } as const;
 
 type HttpErrorContext = {
-	error?: Error;
+	error?: unknown;
 	cause?: string;
 	context?: any;
 };
