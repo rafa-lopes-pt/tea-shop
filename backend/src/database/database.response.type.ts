@@ -1,7 +1,6 @@
-import { Document, WithId } from "mongodb";
 
-export type DatabaseResponse = {
-	error?: any;
-	message: string;
-	data?: WithId<Document>;
-};
+export type DatabaseResponse<dto> = Promise<{
+	data?: dto;
+	error?: unknown;
+	message?: string;
+}>;

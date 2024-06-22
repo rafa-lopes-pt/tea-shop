@@ -1,4 +1,11 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import {
+	FindCursor,
+	MongoClient,
+	ObjectId,
+	ServerApiVersion,
+	WithId,
+	WithoutId,
+} from "mongodb";
 import { DatabaseResponse } from "./database.response.type";
 /**
  * Wraps the a MongoClient and exposes basic CRUD methods to safely operate with the database.
@@ -35,22 +42,24 @@ export default class MongoClientWrapper {
 	/**
 	 * Handles errors and checks if action was successful
 	 */
-	async insertOne(
+	async insertOne<dto>(
 		database: string,
 		collection: string,
-		data: any
-	): Promise<DatabaseResponse> {
+		data: WithoutId<dto>
+	): DatabaseResponse<ObjectId> {
 		try {
+			await this._client.connect();
+
 			const db_response = await this._client
 				.db(database)
 				.collection(collection)
 				.insertOne(data);
 
 			if (!db_response.acknowledged) {
-				return {
-					message: `Data was not acknowledged into ${collection} collection from ${database} database`,
-				};
+				throw new Error("Data not acknowledged");
 			}
+
+			return { data: db_response.insertedId };
 		} catch (error) {
 			return {
 				message: `Error while inserting data into into ${collection} collection from ${database} database`,
@@ -59,30 +68,30 @@ export default class MongoClientWrapper {
 		} finally {
 			this.close();
 		}
-
-		return { message: "Inserted successfully" };
 	}
 	/**
 	 * Handles errors and checks if action was successful
 	 */
-	async deleteOne(
+	async deleteOne<dto>(
 		database: string,
 		collection: string,
-		filters: any
-	): Promise<DatabaseResponse> {
+		filters: Partial<dto>
+	): DatabaseResponse<boolean> {
 		try {
+			await this._client.connect();
+
 			const db_response = await this._client
 				.db(database)
 				.collection(collection)
 				.deleteOne(filters);
 
 			if (db_response.deletedCount === 0)
-				return {
-					message: `Could not find resource with filters: ${filters} to delete from ${collection} collection from ${database}`,
-				};
-			return { message: "Deleted successfully" };
+				throw new Error("Could not find resource");
+
+			return { data: true };
 		} catch (error) {
 			return {
+				data: false,
 				message: `Could not delete requested data from ${collection} collection from ${database}`,
 				error,
 			};
@@ -93,26 +102,25 @@ export default class MongoClientWrapper {
 	/**
 	 * Handles errors and checks if action was successful
 	 */
-	async updateOne(
+	async updateOne<dto>(
 		database: string,
 		collection: string,
-		filters: any,
-		data: any
-	): Promise<DatabaseResponse> {
+		filters: Partial<dto>,
+		data: WithoutId<dto>
+	): DatabaseResponse<ObjectId> {
 		try {
-			const { _id, ...documentData } = data;
+			await this._client.connect();
+
 			const db_response = await this._client
 				.db(database)
 				.collection(collection)
-				.replaceOne(filters, documentData);
+				.replaceOne(filters, data);
 
 			if (!db_response.acknowledged) {
-				return {
-					message: `Data was not acknowledged into ${collection} collection from ${database} database`,
-				};
+				throw new Error("Data not acknowledged");
 			}
 
-			return { message: "Updated successfully" };
+			return { data: db_response.upsertedId };
 		} catch (error) {
 			return {
 				error,
@@ -125,12 +133,25 @@ export default class MongoClientWrapper {
 	/**
 	 * Returns a cursor for the actual data
 	 */
-	find(database: string, collection: string, filters: any) {
+	async find<dto>(
+		database: string,
+		collection: string,
+		filters: Partial<WithId<dto>>
+	): DatabaseResponse<FindCursor<WithId<dto>>> {
 		try {
-			return this._client
-				.db(database)
-				.collection(collection)
-				.find(filters);
+			await this._client.connect();
+
+			return {
+				data: this._client
+					.db(database)
+					.collection(collection)
+					.find(filters) as FindCursor<WithId<dto>>,
+			};
+		} catch (error) {
+			return {
+				error,
+				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
+			};
 		} finally {
 			this.close();
 		}
@@ -138,23 +159,35 @@ export default class MongoClientWrapper {
 	/**
 	 * Returns a document, or null if it can't find anything
 	 */
-	async findOne(database: string, collection: string, filters: any) {
+	async findOne<dto>(
+		database: string,
+		collection: string,
+		filters: Partial<WithId<dto>>
+	): DatabaseResponse<WithId<dto>> {
 		try {
-			return this._client
-				.db(database)
-				.collection(collection)
-				.findOne(filters);
+			await this._client.connect();
+
+			return {
+				data: (await this._client
+					.db(database)
+					.collection(collection)
+					.findOne(filters)) as WithId<dto>,
+			};
+		} catch (error) {
+			return {
+				error,
+				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
+			};
 		} finally {
 			this.close();
 		}
 	}
-	async has(database: string, collection: string, filters: any) {
-		try {
-			return (await this.findOne(database, collection, filters))
-				? true
-				: false;
-		} finally {
-			this.close();
-		}
+	async has<dto>(
+		database: string,
+		collection: string,
+		filters: Partial<WithId<dto>>
+	): DatabaseResponse<boolean> {
+		const response = await this.findOne(database, collection, filters);
+		return { ...response, data: response.data ? true : false };
 	}
 }
