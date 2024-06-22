@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { WithId } from "mongodb";
 import HTTPCodes from "simple-http-codes";
-import { DbUserSchemaType } from "../../../repositories/auth/DbUser.type";
+import { DbUserSchemaType } from "../../../repositories/DbUser.type";
 import HttpError from "../../../utils/HttpError";
 import { compareHash, signToken } from "../../../utils/crypto";
 import { authRepo } from "./auth.router";

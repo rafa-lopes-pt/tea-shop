@@ -1,6 +1,6 @@
 
 import Repository from "./Repository";
-import { DbUserSchemaType } from "./auth/DbUser.type";
+import { DbUserSchemaType } from "./DbUser.type";
 
 const USERS_DATABASE = "users";
 const USERS_COLLECTION = "users_list";

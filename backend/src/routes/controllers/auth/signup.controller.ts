@@ -6,7 +6,7 @@ import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
 import HttpError from "../../../utils/HttpError";
 import { hashData } from "../../../utils/crypto";
 import { authRepo } from "./auth.router";
-import { DbUserSchemaType } from "../../../repositories/auth/DbUser.type";
+import { DbUserSchemaType } from "../../../repositories/DbUser.type";
 
 export default async function signupController(
 	req: Request,
