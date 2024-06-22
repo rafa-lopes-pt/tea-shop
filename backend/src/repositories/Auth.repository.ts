@@ -6,7 +6,7 @@ const USERS_DATABASE = "users";
 const USERS_COLLECTION = "users_list";
 
 export default class AuthRepository extends Repository<UserSchemaType> {
-	insert(data: UserSchemaType) {
+	insert(data: UserSchemaType & { password: string }) {
 		return this.client.insertOne(USERS_DATABASE, USERS_COLLECTION, data);
 	}
 
