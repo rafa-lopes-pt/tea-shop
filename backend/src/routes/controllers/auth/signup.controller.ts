@@ -6,6 +6,7 @@ import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
 import HttpError from "../../../utils/HttpError";
 import { hashData } from "../../../utils/crypto";
 import { authRepo } from "./auth.router";
+import { DbUserSchemaType } from "../../../repositories/auth/DbUser.type";
 
 export default async function signupController(
 	req: Request,
@@ -35,7 +36,7 @@ export default async function signupController(
 
 	const hashedPassword = await hashData(password);
 
-	const user: UserSchemaType = {
+	const user: DbUserSchemaType = {
 		name,
 		email,
 		password: hashedPassword,

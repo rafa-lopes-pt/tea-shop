@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
+import { WithId } from "mongodb";
 import HTTPCodes from "simple-http-codes";
-import { authRepo } from "./auth.router";
+import { DbUserSchemaType } from "../../../repositories/auth/DbUser.type";
 import HttpError from "../../../utils/HttpError";
 import { compareHash, signToken } from "../../../utils/crypto";
-import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
-import { WithId } from "mongodb";
+import { authRepo } from "./auth.router";
 
 export default async function loginController(
 	req: Request,
@@ -15,7 +15,7 @@ export default async function loginController(
 
 	//validate email and retrieve used data
 
-	let existingUser: WithId<UserSchemaType> | undefined;
+	let existingUser: WithId<DbUserSchemaType> | undefined;
 
 	try {
 		const response = await authRepo.findOne({ email });
