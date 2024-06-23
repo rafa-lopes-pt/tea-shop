@@ -11,7 +11,7 @@ server.use(morgan("dev"));
 server.use(cors());
 server.use(cookieParser());
 server.use(express.json());
-server.use(timeoutMiddleware());
+server.use(timeoutMiddleware(15000));
 
 //====== ROUTES
 
@@ -25,24 +25,25 @@ server.use(router);
 
 //====== ERROR HANDLING
 
-server.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
-	if (error instanceof HttpError) {
-		error.log();
-		return res
-			.status(error.statusCode)
-			.json({ ...error, message: error.message });
+server.use(
+	(error: Error, _req: Request, res: Response, _next: NextFunction) => {
+		if (error instanceof HttpError) {
+			error.log();
+			return res
+				.status(error.statusCode)
+				.json({ ...error, message: error.message });
+		}
+
+		console.error(error);
+
+		return res.status(500).json({
+			message: "Unexpected Server Error, please contact development team",
+			error,
+		});
+
+		_next(); //just so that eslint doesn't complain...its a very specific scenario, don't blame me
 	}
-
-	console.error(error);
-
-
-	return res.status(500).json({
-		message: "Unexpected Server Error, please contact development team",
-		error,
-	});
-
-	_next()//just so that eslint doesn't complain...its a very specific scenario, don't blame me
-});
+);
 
 server.use("*", (_, res) => {
 	res.status(HTTPCodes.ServerError.NOT_IMPLEMENTED).json({
