@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
-import MongoClientWrapper from "./database/MongoClientWrapper";
-import server from "./server";
 import dbClient from "./database/DatabaseClient";
+import server from "./server";
 
 dotenv.config();
 

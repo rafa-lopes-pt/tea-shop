@@ -2,11 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import { SignupSchemaType } from "../../../../../shared/schemas/signup.schema";
 
-import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
+import { DbUserSchemaType } from "../../../repositories/DbUser.type";
 import HttpError from "../../../utils/HttpError";
 import { hashData } from "../../../utils/crypto";
 import { authRepo } from "./auth.router";
-import { DbUserSchemaType } from "../../../repositories/DbUser.type";
 
 export default async function signupController(
 	req: Request,

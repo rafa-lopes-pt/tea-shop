@@ -8,7 +8,7 @@ const ErrorCodes = {
 type HttpErrorContext = {
 	error?: unknown;
 	cause?: string;
-	context?: any;
+	context?: unknown;
 };
 
 export default class HttpError extends Error {

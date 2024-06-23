@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { AnyZodObject, ZodError, z } from "zod";
+import { ZodError, z } from "zod";
 import HttpError from "../../utils/HttpError";
 
 export default function createBodyValidatorMiddleware(schema: z.ZodSchema) {
