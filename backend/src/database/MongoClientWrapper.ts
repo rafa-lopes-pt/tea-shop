@@ -106,21 +106,25 @@ export default class MongoClientWrapper {
 		database: string,
 		collection: string,
 		filters: Partial<dto>,
-		data: WithoutId<dto>
-	): DatabaseResponse<ObjectId> {
+		data: Partial<WithoutId<dto>>
+	): DatabaseResponse<dto> {
 		try {
 			await this._client.connect();
 
 			const db_response = await this._client
 				.db(database)
 				.collection(collection)
-				.replaceOne(filters, data);
+				.findOneAndUpdate(
+					filters,
+					{ $set: data },
+					{ returnDocument: "after" }
+				);
 
-			if (!db_response.acknowledged) {
+			if (!db_response) {
 				throw new Error("Data not acknowledged");
 			}
 
-			return { data: db_response.upsertedId };
+			return { data: db_response as dto };
 		} catch (error) {
 			return {
 				error,

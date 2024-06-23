@@ -1,12 +1,13 @@
 import Repository from "./Repository";
 import { DbUserSchemaType } from "./DbUser.type";
 import dbClient from "../database/DatabaseClient";
+import { UserSchemaType } from "../../../shared/schemas/user.schema";
 
 const USERS_DATABASE = "users";
 const USERS_COLLECTION = "users_list";
 
 class UserRepo extends Repository<DbUserSchemaType> {
-	insert(data: DbUserSchemaType & { password: string }) {
+	insert(data: UserSchemaType & { password: string }) {
 		return this.client.insertOne(USERS_DATABASE, USERS_COLLECTION, data);
 	}
 
@@ -21,7 +22,10 @@ class UserRepo extends Repository<DbUserSchemaType> {
 	has(filters: Partial<DbUserSchemaType>) {
 		return this.client.has(USERS_DATABASE, USERS_COLLECTION, filters);
 	}
-	update(filters: Partial<DbUserSchemaType>, data: DbUserSchemaType) {
+	update(
+		filters: Partial<DbUserSchemaType>,
+		data: Partial<DbUserSchemaType>
+	) {
 		return this.client.updateOne(
 			USERS_DATABASE,
 			USERS_COLLECTION,
