@@ -4,7 +4,7 @@ import HTTPCodes from "simple-http-codes";
 import { DbUserSchemaType } from "../../../repositories/DbUser.type";
 import HttpError from "../../../utils/HttpError";
 import { compareHash, signToken } from "../../../utils/crypto";
-import { authRepo } from "./auth.router";
+import UserRepository from "../../../repositories/User.repository";
 
 export default async function loginController(
 	req: Request,
@@ -18,7 +18,7 @@ export default async function loginController(
 	let existingUser: WithId<DbUserSchemaType> | undefined;
 
 	try {
-		const response = await authRepo.findOne({ email });
+		const response = await UserRepository.findOne({ email });
 
 		if (response.error) {
 			throw new HttpError("BAD_GATEWAY", response.message, {

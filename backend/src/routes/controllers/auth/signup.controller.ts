@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import { SignupSchemaType } from "../../../../../shared/schemas/signup.schema";
-
 import { DbUserSchemaType } from "../../../repositories/DbUser.type";
+import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
 import { hashData } from "../../../utils/crypto";
-import { authRepo } from "./auth.router";
 
 export default async function signupController(
 	req: Request,
@@ -15,7 +14,7 @@ export default async function signupController(
 	const { name, email, password } = req.body as SignupSchemaType;
 
 	try {
-		const db_response = await authRepo.has({ email });
+		const db_response = await UserRepository.has({ email });
 		if (db_response.data) {
 			return res
 				.status(HTTPCodes.ClientError.CONFLICT)
@@ -44,7 +43,7 @@ export default async function signupController(
 	};
 
 	try {
-		const response = await authRepo.insert(user);
+		const response = await UserRepository.insert(user);
 
 		if (response.error) {
 			throw new HttpError("BAD_GATEWAY", response.message, {

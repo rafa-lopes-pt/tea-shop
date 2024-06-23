@@ -1,11 +1,11 @@
-
 import Repository from "./Repository";
 import { DbUserSchemaType } from "./DbUser.type";
+import dbClient from "../database/DatabaseClient";
 
 const USERS_DATABASE = "users";
 const USERS_COLLECTION = "users_list";
 
-export default class AuthRepository extends Repository<DbUserSchemaType> {
+class UserRepo extends Repository<DbUserSchemaType> {
 	insert(data: DbUserSchemaType & { password: string }) {
 		return this.client.insertOne(USERS_DATABASE, USERS_COLLECTION, data);
 	}
@@ -33,3 +33,6 @@ export default class AuthRepository extends Repository<DbUserSchemaType> {
 		return this.client.deleteOne(USERS_DATABASE, USERS_COLLECTION, filters);
 	}
 }
+
+const UserRepository = new UserRepo(dbClient);
+export default UserRepository;
