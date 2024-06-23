@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import { SignupSchemaType } from "../../../../../shared/schemas/signup.schema";
-import { DbUserSchemaType } from "../../../repositories/DbUser.type";
+import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
 import { hashData } from "../../../utils/crypto";
@@ -25,7 +25,7 @@ export default async function signupController(
 			throw new HttpError("BAD_GATEWAY", db_response.message, {
 				error: db_response.error,
 				context: "checking if user exists for signup",
-				cause: "authRepo has method",
+				cause: "repository has method",
 			});
 		}
 	} catch (err) {
@@ -34,7 +34,7 @@ export default async function signupController(
 
 	const hashedPassword = await hashData(password);
 
-	const user: DbUserSchemaType = {
+	const user: UserSchemaType & { password: string } = {
 		name,
 		email,
 		password: hashedPassword,
@@ -49,7 +49,7 @@ export default async function signupController(
 			throw new HttpError("BAD_GATEWAY", response.message, {
 				error: response.error,
 				context: "creating new user at signup",
-				cause: "authRepo insert method",
+				cause: "repository insert method",
 			});
 		}
 	} catch (err) {
