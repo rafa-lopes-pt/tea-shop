@@ -1,0 +1,62 @@
+[
+	{
+		"id": "white-tea-123",
+		"image": "https://example.com/white-tea.jpg",
+		"name": "Silver Needle White Tea",
+		"slogan": "Delicate and Refreshing",
+		"price": 19.99,
+		"text": "Experience the pure essence of white tea with our Silver Needle White Tea. Made from young, unopened tea buds, this tea offers a delicate and subtly sweet flavor with a light, floral aroma. Perfect for a refreshing and invigorating cup any time of day.",
+		"benefits": "Rich in antioxidants, may boost immunity, promote relaxation, and potentially aid in oral health and lowering bad cholesterol levels.",
+		"pairings": "Light and Sweet: Delicate pastries, scones, or shortbread cookies enhance the tea's natural sweetness. Subtly Savory: Pair with mild cheeses, crackers with a hint of herbs, or light salads with a touch of fruit for a delightful contrast. Seafood Symphony: Complement the subtle flavors of the tea with simply prepared fish, shrimp, or other seafood dishes."
+	},
+	{
+		"id": "oolong-tea-012",
+		"image": "https://example.com/oolong-tea.jpg",
+		"name": "Fragrant Tieguanyin Oolong",
+		"slogan": "Floral and Fruity",
+		"price": 24.95,
+		"text": "Embark on a flavor adventure with our Tieguanyin oolong tea. This partially oxidized tea bridges the gap between green and black teas, offering a complex profile with floral and fruity notes. Enjoy its smooth, lingering taste hot or explore brewing it cold for a refreshing twist.",
+		"benefits": "May improve bone health, regulate blood sugar, promote relaxation",
+		"pairings": "Fruits, nuts, light cheeses, desserts with stone fruits"
+	},
+	{
+		"id": "green-tea-456",
+		"image": "https://example.com/green-tea.jpg",
+		"name": "Vibrant Sencha Green Tea",
+		"slogan": "Fresh and Grassy",
+		"price": 14.99,
+		"text": "Indulge in the invigorating essence of Sencha green tea. Cultivated in Japan, this tea boasts a vibrant green color and delivers a refreshingly grassy flavor with subtle umami notes. Enjoy it hot or iced for a delightful and energizing experience.",
+		"benefits": "Rich in antioxidants, may aid in weight management, promote cognitive function",
+		"pairings": "Light salads, vegetables, sushi, grilled fish"
+	},
+	{
+		"id": "black-tea-789",
+		"image": "https://example.com/black-tea.jpg",
+		"name": "Robust English Breakfast Tea",
+		"slogan": "Full-Bodied and Bold",
+		"price": 17.5,
+		"text": "Awaken your senses with our robust English Breakfast tea. This classic blend of black teas offers a rich, full-bodied flavor with a hint of malty sweetness. Perfect for a morning pick-me-up or a satisfying afternoon tea break.",
+		"benefits": "May improve alertness, support gut health, promote heart health",
+		"pairings": "Toast with butter or jam, scones with clotted cream, breakfast pastries"
+	},
+	{
+		"id": "pu-erh-tea-345",
+		"image": "https://example.com/pu-erh-tea.jpg",
+		"name": "Earthy Ripe Pu-erh Tea",
+		"slogan": "Smooth and Earthy",
+		"price": 29.99,
+		"text": "Experience the unique depth of our aged Ripe Pu-erh tea. This fermented tea boasts a smooth, earthy flavor with hints of chocolate and wood. Enjoy its comforting warmth on its own or explore pairing it with richer dishes.",
+		"benefits": "May aid in digestion, promote gut health, potentially lower cholesterol",
+		"pairings": "Red meat, stews, aged cheeses, chocolate"
+	},
+	{
+		"id": "herbal-tea-678",
+		"image": "https://example.com/peppermint-tea.jpg",
+		"name": "Soothing Peppermint Herbal Infusion",
+		"slogan": "Refreshing and Calming",
+		"price": 12.99,
+		"text": "Unwind with the refreshing aroma and taste of our Peppermint herbal infusion. This caffeine-free blend is crafted with dried peppermint leaves, offering a naturally soothing and invigorating experience. Perfect after a meal or to unwind before bed.",
+		"benefits": "May aid in digestion, promote relaxation, freshen breath",
+		"pairings": "On its own, light desserts (like fruit salad)"
+	}
+]
