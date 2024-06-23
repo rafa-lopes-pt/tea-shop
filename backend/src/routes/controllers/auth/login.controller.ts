@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { WithId } from "mongodb";
 import HTTPCodes from "simple-http-codes";
 import { DbUserSchemaType } from "../../../repositories/DbUser.type";
+import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
 import { compareHash, signToken } from "../../../utils/crypto";
-import UserRepository from "../../../repositories/User.repository";
 
 export default async function loginController(
 	req: Request,
@@ -24,7 +24,7 @@ export default async function loginController(
 			throw new HttpError("BAD_GATEWAY", response.message, {
 				error: response.error,
 				context: "searching for existing email on database",
-				cause: "findOne method from MongoClientWrapper",
+				cause: "repository findOne method",
 			});
 		}
 
@@ -71,7 +71,6 @@ export default async function loginController(
 
 	res.cookie("auth_token", token, { httpOnly: true });
 
-	res.status(HTTPCodes.Success.OK).json({
-		user: existingUser,
-	});
+	const { _id, password: _hashedPassword, ...user } = existingUser;
+	res.status(HTTPCodes.Success.OK).json({ user });
 }
