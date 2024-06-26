@@ -4,7 +4,8 @@ import RegExpValidators from "../validators/regex-validators";
 namespace ZodValidatorSchema {
 	export const requiredNonEmptyString = z
 		.string({ required_error: "Required" })
-		.min(1, { message: "Required" });
+		.min(1, { message: "Required" })
+		.trim();
 
 	export const email = requiredNonEmptyString.regex(RegExpValidators.email, {
 		message: "Invalid",
