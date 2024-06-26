@@ -5,7 +5,7 @@ import HttpError from "../../utils/HttpError";
 export default function createBodyValidatorMiddleware(schema: z.ZodSchema) {
 	return (req: Request, _res: Response, next: NextFunction) => {
 		try {
-			schema.parse(req.body);
+			req.body = schema.parse(req.body);
 
 			return next();
 		} catch (error) {
@@ -13,7 +13,7 @@ export default function createBodyValidatorMiddleware(schema: z.ZodSchema) {
 				"BAD_REQUEST",
 				"missing or invalid fields at " + req.url,
 				{
-					error: (error as ZodError).formErrors.fieldErrors,
+					error: (error as ZodError).errors,
 				}
 			);
 		}
