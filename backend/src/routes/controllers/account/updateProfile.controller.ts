@@ -9,13 +9,8 @@ export default async function updateProfileController(
 	res: Response,
 	next: NextFunction
 ) {
+	//dataToUpdate is guaranteed to have at least 1 field defined
 	const dataToUpdate = req.body as UpdateProfileSchemaType;
-
-	if (!dataToUpdate) {
-		return res
-			.status(HTTPCodes.ClientError.BAD_REQUEST)
-			.json({ message: "missing fields to update" });
-	}
 
 	try {
 		const db_response = await UserRepository.update(
@@ -24,11 +19,15 @@ export default async function updateProfileController(
 		);
 
 		if (db_response.error) {
-			throw new HttpError("BAD_GATEWAY", db_response.message, {
-				error: db_response.error,
-				context: "updating user profile info",
-				cause: "repository update method",
-			});
+			throw new HttpError(
+				HTTPCodes.ServerError.BAD_GATEWAY,
+				db_response.message,
+				{
+					error: db_response.error,
+					context: "updating user profile info",
+					cause: "repository update method",
+				}
+			);
 		}
 
 		if (db_response.data) {

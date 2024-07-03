@@ -2,12 +2,13 @@ import bcrypt from "bcrypt";
 import { configDotenv } from "dotenv";
 import jwt from "jsonwebtoken";
 import HttpError from "./HttpError";
+import HTTPCodes from "simple-http-codes";
 configDotenv();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 if (!JWT_SECRET) {
 	throw new HttpError(
-		"FAILED_DEPENDENCY",
+		HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
 		"missing jwt_secret env variable",
 		{ context: "loading jwt secret" }
 	);

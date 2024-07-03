@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
+import HTTPCodes from "simple-http-codes";
 
 export default async function deleteAccountController(
 	_req: Request,
@@ -13,10 +14,14 @@ export default async function deleteAccountController(
 		});
 
 		if (db_response.error) {
-			throw new HttpError("BAD_GATEWAY", db_response.message, {
-				error: db_response.error,
-				context: "deleting account",
-			});
+			throw new HttpError(
+				HTTPCodes.ServerError.BAD_GATEWAY,
+				db_response.message,
+				{
+					error: db_response.error,
+					context: "deleting account",
+				}
+			);
 		}
 
 		next();

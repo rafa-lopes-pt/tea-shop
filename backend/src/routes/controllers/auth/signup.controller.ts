@@ -22,11 +22,15 @@ export default async function signupController(
 		}
 
 		if (db_response.error) {
-			throw new HttpError("BAD_GATEWAY", db_response.message, {
-				error: db_response.error,
-				context: "checking if user exists for signup",
-				cause: "repository has method",
-			});
+			throw new HttpError(
+				HTTPCodes.ServerError.BAD_GATEWAY,
+				db_response.message,
+				{
+					error: db_response.error,
+					context: "checking if user exists for signup",
+					cause: "repository has method",
+				}
+			);
 		}
 	} catch (err) {
 		return next(err);
@@ -46,11 +50,15 @@ export default async function signupController(
 		const response = await UserRepository.insert(user);
 
 		if (response.error) {
-			throw new HttpError("BAD_GATEWAY", response.message, {
-				error: response.error,
-				context: "creating new user at signup",
-				cause: "repository insert method",
-			});
+			throw new HttpError(
+				HTTPCodes.ServerError.BAD_GATEWAY,
+				response.message,
+				{
+					error: response.error,
+					context: "creating new user at signup",
+					cause: "repository insert method",
+				}
+			);
 		}
 	} catch (err) {
 		return next(err);

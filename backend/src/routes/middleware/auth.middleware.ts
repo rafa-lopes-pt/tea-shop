@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../../utils/crypto";
 import HttpError from "../../utils/HttpError";
-import Token from "../controllers/auth/Token.type";
+import Token from "../../types/Token.type";
+import HTTPCodes from "simple-http-codes";
 
 export default async function authMiddleware(
 	req: Request,
@@ -34,7 +35,7 @@ export default async function authMiddleware(
 	} catch (error) {
 		return next(
 			new HttpError(
-				"UNAUTHORIZED",
+				HTTPCodes.ClientError.UNAUTHORIZED,
 				(error as Error)?.message || "invalid access token",
 				{
 					error,
