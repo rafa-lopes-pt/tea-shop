@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { WithId } from "mongodb";
 import HTTPCodes from "simple-http-codes";
-import { DbUserSchemaType } from "../../../repositories/DbUser.type";
+import { DbUserSchemaType } from "../../../repositories/types/DbUser.type";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
 import { compareHash, signToken } from "../../../utils/crypto";
@@ -15,17 +15,21 @@ export default async function loginController(
 
 	//validate email and retrieve used data
 
-	let existingUser: WithId<DbUserSchemaType> | undefined;
+	let existingUser: WithId<DbUserSchemaType> | undefined | null;
 
 	try {
 		const response = await UserRepository.findOne({ email });
 
 		if (response.error) {
-			throw new HttpError("BAD_GATEWAY", response.message, {
-				error: response.error,
-				context: "searching for existing email on database",
-				cause: "repository findOne method",
-			});
+			throw new HttpError(
+				HTTPCodes.ServerError.BAD_GATEWAY,
+				response.message,
+				{
+					error: response.error,
+					context: "searching for existing email on database",
+					cause: "repository findOne method",
+				}
+			);
 		}
 
 		existingUser = response.data;
@@ -58,7 +62,7 @@ export default async function loginController(
 	} catch (error) {
 		return next(
 			new HttpError(
-				"FAILED_DEPENDENCY",
+				HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
 				"Logging in failed, please try again later.",
 				{
 					context: "Signing jwt token",
