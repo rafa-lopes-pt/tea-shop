@@ -5,7 +5,7 @@ import HTTPCodes from "simple-http-codes";
  * @default 10s
  */
 export default function timeoutMiddleware(time: number = 10000) {
-	return (req: Request, res: Response, next: NextFunction) => {
+	return (_req: Request, res: Response, next: NextFunction) => {
 		res.setTimeout(time, () => {
 			const message = `Request timed out in ${time}ms`;
 
