@@ -4,9 +4,13 @@ import {
 	ObjectId,
 	ServerApiVersion,
 	WithId,
-	WithoutId,
+	WithoutId
 } from "mongodb";
-import { DatabaseResponse } from "./database.response.type";
+import {
+	DatabaseData,
+	DatabaseFilters,
+	DatabaseResponse,
+} from "./database.types";
 /**
  * Wraps the a MongoClient and exposes basic CRUD methods to safely operate with the database.
  * These methods check for successful actions, and catch errors and return them in the form
@@ -45,8 +49,8 @@ export default class MongoClientWrapper {
 	async insertOne<dto>(
 		database: string,
 		collection: string,
-		data: WithoutId<dto>
-	): DatabaseResponse<ObjectId> {
+		data: DatabaseData<dto>
+	): DatabaseResponse<ObjectId | string> {
 		try {
 			await this._client.connect();
 
@@ -75,7 +79,7 @@ export default class MongoClientWrapper {
 	async deleteOne<dto>(
 		database: string,
 		collection: string,
-		filters: Partial<dto>
+		filters: DatabaseFilters<dto>
 	): DatabaseResponse<boolean> {
 		try {
 			await this._client.connect();
@@ -105,8 +109,8 @@ export default class MongoClientWrapper {
 	async updateOne<dto>(
 		database: string,
 		collection: string,
-		filters: Partial<dto>,
-		data: Partial<WithoutId<dto>>
+		filters: DatabaseFilters<dto>,
+		data: Partial<WithoutId<DatabaseData<dto>>>
 	): DatabaseResponse<dto> {
 		try {
 			await this._client.connect();
@@ -140,7 +144,7 @@ export default class MongoClientWrapper {
 	async find<dto>(
 		database: string,
 		collection: string,
-		filters: Partial<WithId<dto>>
+		filters: DatabaseFilters<dto>
 	): DatabaseResponse<FindCursor<WithId<dto>>> {
 		try {
 			await this._client.connect();
@@ -166,8 +170,8 @@ export default class MongoClientWrapper {
 	async findOne<dto>(
 		database: string,
 		collection: string,
-		filters: Partial<WithId<dto>>
-	): DatabaseResponse<WithId<dto>> {
+		filters: DatabaseFilters<dto>
+	): DatabaseResponse<WithId<dto> | null> {
 		try {
 			await this._client.connect();
 
@@ -175,7 +179,7 @@ export default class MongoClientWrapper {
 				data: (await this._client
 					.db(database)
 					.collection(collection)
-					.findOne(filters)) as WithId<dto>,
+					.findOne(filters)) as WithId<dto> | null,
 			};
 		} catch (error) {
 			return {
@@ -189,7 +193,7 @@ export default class MongoClientWrapper {
 	async has<dto>(
 		database: string,
 		collection: string,
-		filters: Partial<WithId<dto>>
+		filters: DatabaseFilters<dto>
 	): DatabaseResponse<boolean> {
 		const response = await this.findOne(database, collection, filters);
 		return { ...response, data: response.data ? true : false };
