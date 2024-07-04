@@ -1,10 +1,8 @@
 import express from "express";
-import products from "./initial-products.json";
+import listShopItemsController from "./listShopItems.controller";
 
 const router = express.Router();
 
-router.get("/", (_, res) => {
-	res.status(200).json({ products });
-});
+router.get("/", listShopItemsController);
 
 export default router;
