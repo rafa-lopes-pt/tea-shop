@@ -10,9 +10,7 @@ type ErrorNumbers = (typeof ErrorCodes)[keyof typeof ErrorCodes];
 type ErrorNames = keyof typeof ErrorCodes;
 
 const getErrorName = (code: ErrorNumbers) =>
-	[...Object.entries(ErrorCodes)].filter(
-		([_key, value]) => value === code
-	)[0][0];
+	[...Object.entries(ErrorCodes)].filter((entry) => entry[1] === code)[0][0];
 
 const defaultErrorMessage = (
 	code: (typeof ErrorCodes)[keyof typeof ErrorCodes]
