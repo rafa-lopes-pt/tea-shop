@@ -12,6 +12,7 @@ export default async function signupController(
 ) {
 	const { name, email, password } = req.body as SignupSchemaType;
 
+	//check if user already exists
 	try {
 		const db_response = await UserRepository.has({ email });
 		if (db_response.data) {
@@ -37,6 +38,7 @@ export default async function signupController(
 
 	const hashedPassword = await hashData(password);
 
+	//create activation token
 	let token;
 	try {
 		token = await signToken(
@@ -60,8 +62,8 @@ export default async function signupController(
 			)
 		);
 	}
-	console.log("will redirect");
 
+	//redirect to mailing service
 	res.redirect(
 		HTTPCodes.Redirection.FOUND,
 		`/send-activation-link/${email}?token=${token}`
