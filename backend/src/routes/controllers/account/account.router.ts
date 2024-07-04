@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
-router.put(
+router.patch(
 	"/",
 	createBodyValidatorMiddleware(UpdateProfileSchema),
 	updateProfileController
