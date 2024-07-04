@@ -5,7 +5,7 @@ import HttpError from "../../utils/HttpError";
 import GmailApiCredentials from "../types/GmailApiCredentials.type";
 
 export default async function sendMailController(
-	req: Request,
+	_req: Request,
 	res: Response,
 	next: NextFunction
 ) {
@@ -36,22 +36,11 @@ export default async function sendMailController(
 				accessToken,
 			},
 		});
-		//send mail
 
-		const toEmail = req.params.email;
-
-		const mailOptions = {
-			from: "Rafael Lopes <rafalopessecond@gmail.com>",
-			to: toEmail,
-			subject: "Activate your Tea-Shop Account!",
-			text: "yay it works! :)",
-			// html
-		};
-
-		await transporter?.sendMail(mailOptions);
+		await transporter?.sendMail(res.locals.mail);
 
 		res.status(HTTPCodes.Success.OK).send({
-			message: "Email sent to: " + toEmail,
+			message: "Activation link sent to" + res.locals.mail.to,
 		});
 	} catch (error) {
 		return next(error);

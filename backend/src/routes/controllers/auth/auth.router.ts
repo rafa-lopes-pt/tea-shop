@@ -5,6 +5,7 @@ import createBodyValidatorMiddleware from "../../middleware/createBodyValidator.
 import loginController from "./login.controller";
 import logoutController from "./logout.controller";
 import signupController from "./signup.controller";
+import activateController from "./activate.controller";
 
 const router = express.Router();
 
@@ -13,6 +14,8 @@ router.post(
 	createBodyValidatorMiddleware(SignupSchema),
 	signupController
 );
+
+router.get("/activate/:token", activateController);
 
 router.post(
 	"/login",

@@ -4,12 +4,17 @@ import oauth2callbackController from "./controllers/oauth2callback.controller";
 import renewRefreshTokenController from "./controllers/renewRefreshToken.controller";
 import sendMailController from "./controllers/sendMail.controller";
 import createOauthClientMiddleware from "./middleware/createOauthClient.middleware";
+import createActivationLinkEmail from "./middleware/templates/createActivationLinkEmail.middleware";
 
 const router = express.Router();
 
 //defines credentials and an oAuthClient in the res.locals
 router.use(createOauthClientMiddleware);
-router.get("/send/:email", sendMailController);
+router.get(
+	"/send-activation-link/:email",
+	createActivationLinkEmail,
+	sendMailController
+);
 /*
   Protect agains CSRF attacks
  */

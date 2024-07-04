@@ -15,7 +15,7 @@ export default async function (
 	next: NextFunction
 ) {
 	// Handle the OAuth 2.0 server response
-	let q = url.parse(req.url, true).query;
+	const q = url.parse(req.url, true).query;
 
 	const sessionState = (
 		req.session as session.Session &
@@ -44,7 +44,7 @@ export default async function (
 	} else {
 		const code = q.code as string;
 		// Get access and refresh tokens (if access_type is offline)
-		let { tokens } = (await res.locals.oauth2Client.getToken(
+		const { tokens } = (await res.locals.oauth2Client.getToken(
 			code
 		)) as unknown as {
 			tokens: { refresh_token: string };

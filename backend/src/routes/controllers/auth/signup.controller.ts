@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import { SignupSchemaType } from "../../../../../shared/schemas/signup.schema";
-import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
-import { hashData } from "../../../utils/crypto";
+import { hashData, signToken } from "../../../utils/crypto";
 
 export default async function signupController(
 	req: Request,
@@ -38,31 +37,33 @@ export default async function signupController(
 
 	const hashedPassword = await hashData(password);
 
-	const user: UserSchemaType & { password: string } = {
-		name,
-		email,
-		password: hashedPassword,
-		notifyByEmail: false,
-		notifyBySms: false,
-	};
-
+	let token;
 	try {
-		const response = await UserRepository.insert(user);
-
-		if (response.error) {
-			throw new HttpError(
-				HTTPCodes.ServerError.BAD_GATEWAY,
-				response.message,
+		token = await signToken(
+			{
+				name,
+				email,
+				password: hashedPassword,
+			},
+			"15m"
+		);
+	} catch (error) {
+		return next(
+			new HttpError(
+				HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
+				"Unable to sign token",
 				{
-					error: response.error,
-					context: "creating new user at signup",
-					cause: "repository insert method",
+					context: "creating account activation token",
+					cause: "signToken method",
+					error,
 				}
-			);
-		}
-	} catch (err) {
-		return next(err);
+			)
+		);
 	}
+	console.log("will redirect");
 
-	res.status(HTTPCodes.Success.CREATED).json();
+	res.redirect(
+		HTTPCodes.Redirection.FOUND,
+		`/send-activation-link/${email}?token=${token}`
+	);
 }
