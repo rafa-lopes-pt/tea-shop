@@ -4,7 +4,7 @@ import {
 	ObjectId,
 	ServerApiVersion,
 	WithId,
-	WithoutId
+	WithoutId,
 } from "mongodb";
 import {
 	DatabaseData,
@@ -70,7 +70,7 @@ export default class MongoClientWrapper {
 				error,
 			};
 		} finally {
-			this.close();
+			await this.close();
 		}
 	}
 	/**
@@ -100,7 +100,7 @@ export default class MongoClientWrapper {
 				error,
 			};
 		} finally {
-			this.close();
+			await this.close();
 		}
 	}
 	/**
@@ -135,7 +135,7 @@ export default class MongoClientWrapper {
 				message: `Could not update requested data: ${data} from ${collection} collection from ${database}`,
 			};
 		} finally {
-			this.close();
+			await this.close();
 		}
 	}
 	/**
@@ -161,7 +161,7 @@ export default class MongoClientWrapper {
 				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
 			};
 		} finally {
-			this.close();
+			await this.close();
 		}
 	}
 	/**
@@ -187,7 +187,7 @@ export default class MongoClientWrapper {
 				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
 			};
 		} finally {
-			this.close();
+			await this.close();
 		}
 	}
 	async has<dto>(
