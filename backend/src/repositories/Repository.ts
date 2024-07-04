@@ -46,4 +46,8 @@ export default class Repository<dto> {
 	delete(filters: DatabaseFilters<dto>) {
 		return this.client.deleteOne(this.database, this.collection, filters);
 	}
+
+	closeConnections() {
+		return this.client.close();
+	}
 }

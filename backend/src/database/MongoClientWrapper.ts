@@ -140,6 +140,7 @@ export default class MongoClientWrapper {
 	}
 	/**
 	 * Returns a cursor for the actual data
+	 * @warning - connection must be closed after usages
 	 */
 	async find<dto>(
 		database: string,
@@ -160,8 +161,6 @@ export default class MongoClientWrapper {
 				error,
 				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
 			};
-		} finally {
-			await this.close();
 		}
 	}
 	/**
