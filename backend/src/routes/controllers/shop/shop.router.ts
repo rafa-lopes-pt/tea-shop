@@ -3,7 +3,7 @@ import products from "./initial-products.json";
 
 const router = express.Router();
 
-router.get("/shop", (_, res) => {
+router.get("/", (_, res) => {
 	res.status(200).json({ products });
 });
 

@@ -11,11 +11,11 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.put(
-	"/profile",
+	"/",
 	createBodyValidatorMiddleware(UpdateProfileSchema),
 	updateProfileController
 );
 
-router.delete("/profile", deleteAccountController, logoutController);
+router.delete("/", deleteAccountController, logoutController);
 
 export default router;
