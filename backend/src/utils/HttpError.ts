@@ -3,6 +3,7 @@ import HTTPCodes from "simple-http-codes";
 const ErrorCodes = {
 	...HTTPCodes.ClientError,
 	...HTTPCodes.ServerError,
+	...HTTPCodes.Redirection,
 } as const;
 
 type ErrorNumbers = (typeof ErrorCodes)[keyof typeof ErrorCodes];
