@@ -1,70 +1,48 @@
-import { ShopItemSchemaType } from "../../../shared/schemas/shop-item.schema";
+import { LoginSchemaType } from "../../../shared/schemas/login.schema";
+import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
+import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
 
-namespace ServerAPI {
-	async function baseFetch(endpoint: string, method = "GET", body: any) {
-		return await fetch(import.meta.env.VITE_BACKEND_URI + endpoint, {
+const BASE_URI: string = import.meta.env.VITE_REST_API_URI;
+type ApiMethods = "POST" | "GET" | "PATCH" | "DELETE";
+
+namespace RestAPI {
+	async function baseFetch(
+		endpoint: string,
+		method: ApiMethods = "GET",
+		body: unknown = undefined
+	) {
+		return await fetch(BASE_URI + endpoint, {
 			headers: {},
 			method,
-			body: JSON.stringify({ data: body }),
+			body: body ? JSON.stringify({ data: body }) : undefined,
 		});
 	}
-	const fakeFetch = async <T>(returnData: T) =>
-		new Promise<T>((resolve) =>
-			setTimeout(() => {
-				resolve(returnData);
-			}, 1500)
-		);
 
-	export async function getShopItems() {
-		// return baseFetch(...)
-		const DUMMY_ShopItems: ShopItemSchemaType[] = [
-			{
-				image: "/media/white_tea.jpg",
-				name: "White Tea Leaves",
-				slogan: "The amazing white tea",
-				text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
-				benefits:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				pairings:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				price: 19.99,
-			},
-			{
-				image: "/media/tea.jpg",
-				name: "Dried Tea Leaves",
-				slogan: "The amazing tea",
-				text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
-				benefits:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				pairings:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				price: 22.99,
-			},
-			{
-				image: "/media/tea.jpg",
-				name: "Immortality Tea Leaves",
-				slogan: "The amazing tea",
-				text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
-				benefits:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				pairings:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				price: 189.99,
-			},
-			{
-				image: "/media/tea.jpg",
-				name: "Deathbringer Tea Leaves",
-				slogan: "The amazing tea",
-				text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum. Officiis nostrum eaque tempora illum reiciendis porro non? Tempore, molestiae. Error, iste!",
-				benefits:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				pairings:
-					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae sit culpa natus ipsum ducimus unde dignissimos ad nostrum.",
-				price: 0.75,
-			},
-		];
-		return await fakeFetch(DUMMY_ShopItems);
+	//============== auth endpoints
+	export function signup(data: SignupSchemaType) {
+		return baseFetch("/signup", "POST", data);
+	}
+	export function activate(token: string) {
+		return baseFetch("/activate/" + token);
+	}
+	export function login(data: LoginSchemaType) {
+		return baseFetch("/login", "POST", data);
+	}
+	//============== shop endpoints
+	export function getShopItems() {
+		return baseFetch("/shop");
+	}
+	//============== profile endpoints
+	export function updateProfile(data: UpdateProfileSchemaType) {
+		return baseFetch("/profile", "PATCH", data);
+	}
+	export function deleteProfile() {
+		return baseFetch("/profile", "DELETE");
+	}
+	//============== orders endpoints
+	export function getOrders() {
+		return baseFetch("/orders");
 	}
 }
 
-export default ServerAPI;
+export default RestAPI;
