@@ -9,7 +9,10 @@ let GCP_ID: string | undefined;
 try {
 	GCP_ID = process.env.GCP_ID;
 } catch (error) {
-	throw new Error("Could not load GCP_ID from env");
+	throw new HttpError(
+		HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
+		"missing GCP_ID env variable"
+	);
 }
 
 export default async function createOauthClientMiddleware(

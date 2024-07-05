@@ -5,6 +5,16 @@ import renewRefreshTokenController from "./controllers/renewRefreshToken.control
 import sendMailController from "./controllers/sendMail.controller";
 import createOauthClientMiddleware from "./middleware/createOauthClient.middleware";
 import createActivationLinkEmail from "./middleware/templates/createActivationLinkEmail.middleware";
+import HTTPCodes from "simple-http-codes";
+import HttpError from "../utils/HttpError";
+
+const SESSION_SECRET = process.env.SESSION_SECRET;
+if (!SESSION_SECRET) {
+	throw new HttpError(
+		HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
+		"missing SESSION_SECRET env variable"
+	);
+}
 
 const router = express.Router();
 
@@ -20,7 +30,7 @@ router.get(
  */
 router.use(
 	session({
-		secret: "your_secure_secret_key",
+		secret: SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
 	})
