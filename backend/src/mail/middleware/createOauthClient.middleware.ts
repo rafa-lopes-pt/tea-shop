@@ -5,10 +5,9 @@ import HTTPCodes from "simple-http-codes";
 import ApisRepository from "../../repositories/APIs.repository";
 import GmailApiCredentials from "../types/GmailApiCredentials.type";
 
-let GCP_ID: string | undefined;
-try {
-	GCP_ID = process.env.GCP_ID;
-} catch (error) {
+const GCP_ID = process.env.GCP_ID;
+
+if (!GCP_ID) {
 	throw new HttpError(
 		HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
 		"missing GCP_ID env variable"
