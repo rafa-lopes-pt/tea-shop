@@ -66,7 +66,7 @@ export default class MongoClientWrapper {
 			return { data: db_response.insertedId };
 		} catch (error) {
 			return {
-				message: `Error while inserting data into into ${collection} collection from ${database} database`,
+				message: `Error while inserting ${JSON.stringify(data)} into into ${collection} collection from ${database} database`,
 				error,
 			};
 		} finally {
@@ -96,7 +96,7 @@ export default class MongoClientWrapper {
 		} catch (error) {
 			return {
 				data: false,
-				message: `Could not delete requested data from ${collection} collection from ${database}`,
+				message: `Could not delete requested ${JSON.stringify(filters)} from ${collection} collection from ${database}`,
 				error,
 			};
 		} finally {
@@ -132,7 +132,7 @@ export default class MongoClientWrapper {
 		} catch (error) {
 			return {
 				error,
-				message: `Could not update requested data: ${data} from ${collection} collection from ${database}`,
+				message: `Could not update requested ${JSON.stringify(data)} from ${collection} collection from ${database}`,
 			};
 		} finally {
 			await this.close();
@@ -159,7 +159,7 @@ export default class MongoClientWrapper {
 		} catch (error) {
 			return {
 				error,
-				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
+				message: `Error while searching for ${JSON.stringify(filters)} on ${collection} collection from ${database}`,
 			};
 		}
 	}
@@ -183,7 +183,7 @@ export default class MongoClientWrapper {
 		} catch (error) {
 			return {
 				error,
-				message: `Error while searching for ${filters} on ${collection} collection from ${database}`,
+				message: `Error while searching for ${JSON.stringify(filters)} on ${collection} collection from ${database}`,
 			};
 		} finally {
 			await this.close();
