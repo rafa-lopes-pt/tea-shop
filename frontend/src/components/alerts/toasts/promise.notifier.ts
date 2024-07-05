@@ -28,6 +28,7 @@ export const notifyToastPromiseSuccess = (id: Id, msg: string) =>
 		render: msg,
 		type: "success",
 		isLoading: false,
+		autoClose: 3000,
 	});
 
 export const notifyToastPromiseError = (id: Id, msg: string) =>
@@ -35,6 +36,7 @@ export const notifyToastPromiseError = (id: Id, msg: string) =>
 		render: msg,
 		type: "error",
 		isLoading: false,
+		autoClose: 2000,
 	});
 
 export const notifyToastPromiseEnd = (id: Id) =>
