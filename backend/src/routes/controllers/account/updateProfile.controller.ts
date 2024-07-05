@@ -2,8 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../utils/HttpError";
-import { UpdateProfileSchemaType } from "./UpdateProfile.schema";
-
+import { UpdateProfileSchemaType } from "../../../../../shared/schemas/UpdateProfile.schema";
 export default async function updateProfileController(
 	req: Request,
 	res: Response,
