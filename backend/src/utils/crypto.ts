@@ -3,9 +3,10 @@ import { configDotenv } from "dotenv";
 import jwt from "jsonwebtoken";
 import HttpError from "./HttpError";
 import HTTPCodes from "simple-http-codes";
+import { randomBytes } from "crypto";
 configDotenv();
-const JWT_SECRET = process.env.JWT_SECRET;
 
+const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
 	throw new HttpError(
 		HTTPCodes.ServerError.SERVICE_UNAVAILABLE,
@@ -27,4 +28,14 @@ export async function signToken(payload: object, expiresIn: string = "1h") {
 }
 export async function verifyToken(token: string) {
 	return jwt.verify(token, JWT_SECRET as string);
+}
+
+export function generateRandomString(length: number = 256) {
+	randomBytes(length, (err, buf) => {
+		if (err) throw err;
+
+		const str = buf.toString("hex");
+		console.log(`${buf.length} bytes of random data: ${str}`);
+		return str;
+	});
 }
