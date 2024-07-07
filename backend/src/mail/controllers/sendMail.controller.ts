@@ -39,8 +39,8 @@ export default async function sendMailController(
 
 		await transporter?.sendMail(res.locals.mail);
 
-		res.status(HTTPCodes.Success.OK).send({
-			message: "Activation link sent to" + res.locals.mail.to,
+		res.status(HTTPCodes.Success.OK).json({
+			data: "Activation link sent to" + res.locals.mail.to,
 		});
 	} catch (error) {
 		return next(error);

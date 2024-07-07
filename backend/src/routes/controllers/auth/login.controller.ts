@@ -76,5 +76,5 @@ export default async function loginController(
 	res.cookie("auth_token", token, { httpOnly: true });
 
 	const { _id, password: _hashedPassword, ...user } = existingUser;
-	res.status(HTTPCodes.Success.OK).json({ user });
+	res.status(HTTPCodes.Success.OK).json({ data: user });
 }

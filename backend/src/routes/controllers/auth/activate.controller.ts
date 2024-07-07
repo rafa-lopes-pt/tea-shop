@@ -74,5 +74,5 @@ export default async function activateController(
 		return next(err);
 	}
 
-	res.status(HTTPCodes.Success.CREATED).json({ message: "Account Created" });
+	res.status(HTTPCodes.Success.CREATED).json({ data: "Account Created" });
 }

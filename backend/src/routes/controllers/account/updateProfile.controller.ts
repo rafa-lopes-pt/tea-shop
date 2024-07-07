@@ -31,7 +31,7 @@ export default async function updateProfileController(
 
 		if (db_response.data) {
 			const { _id: _id, password: _password, ...user } = db_response.data;
-			return res.status(HTTPCodes.Success.OK).json({ user });
+			return res.status(HTTPCodes.Success.OK).json({ data: user });
 		}
 	} catch (error) {
 		next(error);
