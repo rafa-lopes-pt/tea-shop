@@ -3,7 +3,7 @@ import { WithId } from "mongodb";
 import HTTPCodes from "simple-http-codes";
 import { DbUserSchemaType } from "../../../repositories/types/DbUser.type";
 import UserRepository from "../../../repositories/User.repository";
-import HttpError from "../../../utils/HttpError";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import { compareHash, signToken } from "../../../utils/crypto";
 
 export default async function loginController(

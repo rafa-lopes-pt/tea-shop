@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UserRepository from "../../../repositories/User.repository";
-import HttpError from "../../../utils/HttpError";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import OrdersRepository from "../../../repositories/Orders.repository";
 

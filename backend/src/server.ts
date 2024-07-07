@@ -5,7 +5,7 @@ import morgan from "morgan";
 import HTTPCodes from "simple-http-codes";
 import timeoutMiddleware from "./routes/middleware/timeout.middleware";
 import router from "./routes/router";
-import HttpError from "./utils/HttpError";
+import HttpError from "../../shared/types/HttpError/HttpError.type";
 const server = express();
 server.use(morgan("dev"));
 server.use(cors());

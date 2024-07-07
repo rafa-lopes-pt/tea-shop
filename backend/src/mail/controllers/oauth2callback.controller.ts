@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import session from "express-session";
 import url from "url";
 
-import HttpError from "../../utils/HttpError";
+import HttpError from "../../../../shared/types/HttpError/HttpError.type";
 
 import HTTPCodes from "simple-http-codes";
 import ApisRepository from "../../repositories/APIs.repository";

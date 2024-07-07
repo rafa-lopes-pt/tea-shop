@@ -6,7 +6,7 @@ import sendMailController from "./controllers/sendMail.controller";
 import createOauthClientMiddleware from "./middleware/createOauthClient.middleware";
 import createActivationLinkEmail from "./middleware/templates/createActivationLinkEmail.middleware";
 import HTTPCodes from "simple-http-codes";
-import HttpError from "../utils/HttpError";
+import HttpError from "../../../shared/types/HttpError/HttpError.type";
 
 const SESSION_SECRET = process.env.SESSION_SECRET;
 if (!SESSION_SECRET) {

@@ -1,5 +1,5 @@
 import HTTPCodes from "simple-http-codes";
-import HttpError from "../utils/HttpError";
+import HttpError from "../../../shared/types/HttpError/HttpError.type";
 import MongoClientWrapper from "./MongoClientWrapper";
 import dotenv from "dotenv";
 dotenv.config();

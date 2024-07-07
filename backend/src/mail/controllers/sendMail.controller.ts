@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import nodemailer from "nodemailer";
 import HTTPCodes from "simple-http-codes";
-import HttpError from "../../utils/HttpError";
+import HttpError from "../../../../shared/types/HttpError/HttpError.type";
 import GmailApiCredentials from "../types/GmailApiCredentials.type";
 
 export default async function sendMailController(

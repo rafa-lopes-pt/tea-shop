@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { google } from "googleapis";
-import HttpError from "../../utils/HttpError";
+import HttpError from "../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import ApisRepository from "../../repositories/APIs.repository";
 import GmailApiCredentials from "../types/GmailApiCredentials.type";

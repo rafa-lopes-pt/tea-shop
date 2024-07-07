@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { configDotenv } from "dotenv";
 import jwt from "jsonwebtoken";
-import HttpError from "./HttpError";
+import HttpError from "../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import { randomBytes } from "crypto";
 configDotenv();

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import ShopRepository from "../../../repositories/Shop.repository";
-import HttpError from "../../../utils/HttpError";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 
 export default async function listShopItemsController(
 	_req: Request,

@@ -3,7 +3,7 @@ import HTTPCodes from "simple-http-codes";
 import { SignupSchemaType } from "../../../../../shared/schemas/signup.schema";
 import { UserSchemaType } from "../../../../../shared/schemas/user.schema";
 import UserRepository from "../../../repositories/User.repository";
-import HttpError from "../../../utils/HttpError";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import { verifyToken } from "../../../utils/crypto";
 
 export default async function activateController(

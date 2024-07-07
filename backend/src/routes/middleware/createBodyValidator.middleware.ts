@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError, z } from "zod";
-import HttpError from "../../utils/HttpError";
+import HttpError from "../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 
 export default function createBodyValidatorMiddleware(schema: z.ZodSchema) {

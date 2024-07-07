@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../../utils/crypto";
-import HttpError from "../../utils/HttpError";
+import HttpError from "../../../../shared/types/HttpError/HttpError.type";
 import Token from "../../types/Token.type";
 import HTTPCodes from "simple-http-codes";
 
