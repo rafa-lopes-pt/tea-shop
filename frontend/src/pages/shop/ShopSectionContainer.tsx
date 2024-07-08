@@ -7,8 +7,7 @@ export default function ShopSectionContainer({
 }: {
 	className?: string;
 }) {
-	const shopItems = useContext(ShopDataCtx)?.data;
-
+	const shopItems = useContext(ShopDataCtx)?.items;
 
 	return (
 		<div className={"shop-section__wrapper " + className}>

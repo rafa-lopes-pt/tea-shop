@@ -1,32 +1,28 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 import CyclicArray from "../../../../shared/types/ds/CyclicArray.ds";
+import responseHandler from "../../apis/responseHandler";
 import RestAPI from "../../apis/server.endpoints";
 
 type ShopDataCtxProperties = {
-	data: CyclicArray<ShopItemSchemaType> | null;
+	items: CyclicArray<ShopItemSchemaType> | null;
 };
 
 export const ShopDataCtx = createContext<ShopDataCtxProperties | null>(null);
 
-/*
-
-NOTE: Write small note about implementing a reducer to manage sections
-
-*/
-
 export const ShopDataProvider = ({ children }: { children?: ReactNode }) => {
-	const [data, setData] = useState<CyclicArray<ShopItemSchemaType> | null>(
+	const [items, setItems] = useState<CyclicArray<ShopItemSchemaType> | null>(
 		null
 	);
 
 	useEffect(() => {
-		RestAPI.getShopItems().then((res: any) => {
-			setData(new CyclicArray(...res));
-		});
+		responseHandler(() => RestAPI.getShopItems(), async (res: Response) => {
+			setItems(new CyclicArray(...(await res.json()).data))
+		})
+
 	}, []);
 
 	return (
-		<ShopDataCtx.Provider value={{ data }}>{children}</ShopDataCtx.Provider>
+		<ShopDataCtx.Provider value={{ items }}>{children}</ShopDataCtx.Provider>
 	);
 };
