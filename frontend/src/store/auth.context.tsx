@@ -4,6 +4,7 @@ import { UserSchemaType } from "../../../shared/schemas/user.schema";
 import responseHandler from "../apis/responseHandler";
 import RestAPI from "../apis/server.endpoints";
 import {
+	notifyToastPromiseEnd,
 	notifyToastPromiseSuccess
 } from "../components/alerts/toasts/promise.notifier";
 import { Id } from "react-toastify";
@@ -14,6 +15,7 @@ export type AuthCtxProperties = {
 	login: (data: LoginSchemaType) => Promise<boolean>;
 	updateUser: (data: UpdateProfileSchemaType) => Promise<boolean>;
 	logout: () => void;
+	deleteAccount: () => void,
 	user: UserSchemaType | null;
 	setUser: (data: UserSchemaType) => void;
 };
@@ -51,7 +53,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	}
 
 	async function updateUser(body: UpdateProfileSchemaType) {
-		return responseHandler(() => RestAPI.updateProfile(body), async (res: Response, toastId: Id) => {
+		return await responseHandler(() => RestAPI.updateProfile(body), async (res: Response, toastId: Id) => {
 			const data = (await res.json()).data
 			setUser(data)
 			window.sessionStorage.setItem(
@@ -64,20 +66,30 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 	}
 
-
 	async function logout() {
-		await responseHandler(() =>
+		setUser(null);
+		setIsLoggedIn(false);
+		window.sessionStorage.removeItem("session");
+
+		return await responseHandler(() =>
 			RestAPI.logout(), (_res: Response, toastId: Id) => {
-				setUser(null);
-				setIsLoggedIn(false);
-				window.sessionStorage.removeItem("session");
 				notifyToastPromiseSuccess(toastId, "Logged Out");
 
 			})
 	}
 
+	async function deleteAccount() {
+		return await responseHandler(RestAPI.deleteProfile, (_res: Response, toastId: Id) => {
+			setUser(null);
+			setIsLoggedIn(false);
+			window.sessionStorage.removeItem("session");
+			notifyToastPromiseEnd(toastId);
+		}
+		)
+	}
+
 	return (
-		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, logout, user, setUser }}>
+		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, logout, deleteAccount, user, setUser }}>
 			{children}
 		</AuthCtx.Provider>
 	);

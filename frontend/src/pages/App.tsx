@@ -11,7 +11,7 @@ function App() {
 	const auth = useContext(AuthCtx);
 
 
-	const AuthenticatedNavItems =
+	const AuthenticatedNav =
 		<Navbar
 			className="main-navbar">
 			<NavLink to="/">Shop</NavLink>
@@ -20,7 +20,7 @@ function App() {
 			<NavLink to="/" indicateRoute={false} action={auth?.logout}>Logout</NavLink>
 		</Navbar>
 
-	const UnauthenticatedNavItems =
+	const UnauthenticatedNav =
 		<Navbar
 			className="main-navbar">
 			<NavLink to="/">Shop</NavLink>
@@ -31,8 +31,8 @@ function App() {
 		<>
 			<Frame />
 			<main id="main">
-				
-				{auth?.isLoggedIn ? AuthenticatedNavItems : UnauthenticatedNavItems}
+
+				{auth?.isLoggedIn ? AuthenticatedNav : UnauthenticatedNav}
 
 
 
