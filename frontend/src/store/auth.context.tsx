@@ -1,16 +1,18 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { UserSchemaType } from "../../../shared/schemas/user.schema";
+import responseHandler from "../apis/responseHandler";
+import RestAPI from "../apis/server.endpoints";
 import {
-	notifyToastPromiseEnd,
-	notifyToastPromiseError,
-	notifyToastPromiseLoading,
+	notifyToastPromiseSuccess
 } from "../components/alerts/toasts/promise.notifier";
-import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
+import { Id } from "react-toastify";
+import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
 
 export type AuthCtxProperties = {
 	isLoggedIn: boolean;
-	login: (data: LoginSchemaType) => Promise<any>;
+	login: (data: LoginSchemaType) => Promise<boolean>;
+	updateUser: (data: UpdateProfileSchemaType) => Promise<boolean>;
 	logout: () => void;
 	user: UserSchemaType | null;
 	setUser: (data: UserSchemaType) => void;
@@ -24,7 +26,6 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 	useEffect(() => {
 		const localData = window.sessionStorage.getItem("session");
-
 		if (localData) {
 			const { user, isLoggedIn } = JSON.parse(localData);
 			setUser(user);
@@ -32,57 +33,51 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 		}
 	}, []);
 
-	const fakeRequest = (returnData: any) =>
-		new Promise((resolve) => {
-			setTimeout(() => {
-				resolve(returnData);
-			}, 3000);
-		});
+	async function login(body: LoginSchemaType) {
+		return await responseHandler(() => RestAPI.login(body), async (res: Response, toastId: Id) => {
+			console.log(res)
+			const data = (await res.json()).data
+			setIsLoggedIn(true);
+			setUser(data);
 
-	async function login() {
-		const toastId = notifyToastPromiseLoading();
+			window.sessionStorage.setItem(
+				"session",
+				JSON.stringify({ user: data, isLoggedIn: true })
+			);
 
-		return fakeRequest({
-			name: "Rafa",
-			email: "rafalopessecond@gmail.com",
-			image: "https://avatars.githubusercontent.com/u/45339818?v=4",
-			notifyByEmail: true,
-			notifyBySms: false,
-			billingInfo: {
-				country: "Portugal",
-				city: "Tomar",
-				street: "Casal das Cabras",
-				zipCode: "1234-567",
-			},
+			notifyToastPromiseSuccess(toastId, "Logged In");
+			return true
 		})
-			.then((user) => {
-				setIsLoggedIn(true);
-				setUser(user as UserSchemaType);
-				window.sessionStorage.setItem(
-					"session",
-					JSON.stringify({ user, isLoggedIn: true })
-				);
-
-				notifyToastPromiseEnd(toastId);
-			})
-			.catch((err) => {
-				console.log("check err type- 401 or other");
-				if (err.code === 401) {
-					notifyToastPromiseError(toastId, "Invalid Credentials");
-				} else {
-					notifyToastPromiseError(toastId, "Something went wrong");
-				}
-			});
 	}
+
+	async function updateUser(body: UpdateProfileSchemaType) {
+		return responseHandler(() => RestAPI.updateProfile(body), async (res: Response, toastId: Id) => {
+			const data = (await res.json()).data
+			setUser(data)
+			window.sessionStorage.setItem(
+				"session",
+				JSON.stringify({ user: data, isLoggedIn: true })
+			);
+			notifyToastPromiseSuccess(toastId, "Success!")
+			return true
+		})
+
+	}
+
+
 	async function logout() {
-		setUser(null);
-		setIsLoggedIn(false);
-		window.sessionStorage.removeItem("session");
-		notifyInfoToast("Logged Out");
+		await responseHandler(() =>
+			RestAPI.logout(), (_res: Response, toastId: Id) => {
+				setUser(null);
+				setIsLoggedIn(false);
+				window.sessionStorage.removeItem("session");
+				notifyToastPromiseSuccess(toastId, "Logged Out");
+
+			})
 	}
 
 	return (
-		<AuthCtx.Provider value={{ isLoggedIn, login, logout, user, setUser }}>
+		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, logout, user, setUser }}>
 			{children}
 		</AuthCtx.Provider>
 	);

@@ -1,33 +1,24 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-	UserSchema,
-	UserSchemaType,
-} from "../../../../../shared/schemas/user.schema";
+import { UserSchema, UserSchemaType } from "../../../../../shared/schemas/user.schema";
+import { stripEmptyStringValuesFromFormFields } from "../../../../../shared/utils/form-utils";
 import Dialog from "../../../components/alerts/dialogs/Dialog";
 import Button from "../../../components/buttons/Button";
 import { Form } from "../../../components/form/Form";
 import FileInput from "../../../components/input/FileInput";
-import { createPortal } from "react-dom";
+import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
 
 export default function ProfileTab({ user }: { user: UserSchemaType }) {
-
 	const [showDialog, setShowDialog] = useState(false)
-
-
+	const { updateUser } = useContext(AuthCtx) as AuthCtxProperties
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
-		resolver: zodResolver(UserSchema),
-		defaultValues: user,
+		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
+		shouldFocusError: true,
+		values: user
 	});
 
-
-
-	const onSubmitHandler = (data: UserSchemaType) => {
-		console.log(data);
-		console.log("formState", formState);
-
-	};
+	const onSubmitHandler = (data: UserSchemaType) => updateUser(data);
 
 	return (
 		<>
@@ -77,25 +68,25 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 						Billing Information
 					</h3>
 					<Form.Control
-						name="billingInfo.street"
+						name="street"
 						label="Street Address"
 						register={register}
 						formState={formState}
 					/>
 					<Form.Control
-						name="billingInfo.country"
+						name="country"
 						label="Country"
 						register={register}
 						formState={formState}
 					/>
 					<Form.Control
-						name="billingInfo.city"
+						name="city"
 						label="City"
 						register={register}
 						formState={formState}
 					/>
 					<Form.Control
-						name="billingInfo.zipCode"
+						name="zipCode"
 						label="Postal Code"
 						register={register}
 						formState={formState}

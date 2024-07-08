@@ -2,15 +2,13 @@ import { useContext } from "react";
 import TabContainer from "../../components/containers/TabContainer";
 import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 import SectionWrapper from "../misc/SectionWrapper";
-import ProfileTab from "./profile/ProfileTab";
 import PreviousOrdersTab from "./orders/PreviousOrdersTab";
+import ProfileTab from "./profile/ProfileTab";
 
 export default function AccountPage() {
 
 	const { user } = useContext(AuthCtx) as AuthCtxProperties;
 	if (!user) return <></>;
-
-
 
 	return (
 		<SectionWrapper className="account-page">

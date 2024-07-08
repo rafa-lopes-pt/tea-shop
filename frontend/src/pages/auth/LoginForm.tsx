@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../../../shared/schemas/login.schema";
 import Button from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
-import { AuthCtx } from "../../store/auth.context";
+import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 export default function LoginForm({
 	onChangeScreen,
 	animationProps,
@@ -21,20 +21,11 @@ export default function LoginForm({
 	});
 
 
-	const auth = useContext(AuthCtx);
+	const auth = useContext(AuthCtx) as AuthCtxProperties;
 	const navigate = useNavigate();
 
-	const onSubmitHandler = async (data: LoginSchemaType) => {
-		if (!auth?.login) return;
-
-
-		return auth?.login(data)
-			.then(() => navigate("/"))
-			.catch(() => {
-				reset();
-			});
-
-	};
+	const onSubmitHandler = async (data: LoginSchemaType) =>
+		await auth?.login(data) ? navigate("/") : reset();
 
 	return (
 		<Form
