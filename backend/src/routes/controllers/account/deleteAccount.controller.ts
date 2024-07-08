@@ -30,7 +30,7 @@ export default async function deleteAccountController(
 		if (orders_response.data) {
 			return res
 				.status(HTTPCodes.ClientError.CONFLICT)
-				.json({ message: "Can´t delete account with ongoing orders" });
+				.json({ data: "Can´t delete account with ongoing orders" });
 		}
 
 		//delete account

@@ -16,7 +16,7 @@ server.use(
 );
 server.use(cookieParser());
 server.disable("x-powered-by");
-server.use(express.urlencoded())
+server.use(express.urlencoded());
 server.use(express.json());
 server.use(timeoutMiddleware(15000));
 
@@ -24,7 +24,7 @@ server.use(timeoutMiddleware(15000));
 
 server.get("/health", (_, res) => {
 	res.status(HTTPCodes.ClientError.IM_A_TEAPOT).json({
-		message: "Server is running, but refused to brew coffee with a teapot",
+		data: "Server is running, but refused to brew coffee with a teapot",
 	});
 });
 
@@ -38,13 +38,13 @@ server.use(
 			error.log();
 			return res
 				.status(error.statusCode)
-				.json({ ...error, message: error.message });
+				.json({ ...error, data: error.message });
 		}
 
 		console.error(error);
 
 		return res.status(500).json({
-			message: "Unexpected Server Error, please contact development team",
+			data: "Unexpected Server Error, please contact development team",
 			error,
 		});
 
@@ -54,7 +54,7 @@ server.use(
 
 server.use("*", (_, res) => {
 	res.status(HTTPCodes.ServerError.NOT_IMPLEMENTED).json({
-		message: "Endpoint not implemented",
+		data: "Endpoint not implemented",
 	});
 });
 
