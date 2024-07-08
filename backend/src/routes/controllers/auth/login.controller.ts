@@ -40,7 +40,7 @@ export default async function loginController(
 	if (!existingUser) {
 		return res
 			.status(HTTPCodes.ClientError.UNAUTHORIZED)
-			.json({ message: "invalid credentials" });
+			.json({ data: "invalid credentials" });
 	}
 
 	// validate password
@@ -48,7 +48,7 @@ export default async function loginController(
 	if (!(await compareHash(password, existingUser.password))) {
 		return res
 			.status(HTTPCodes.ClientError.UNAUTHORIZED)
-			.json({ message: "invalid credentials" });
+			.json({ data: "invalid credentials" });
 	}
 
 	// create token
@@ -73,7 +73,12 @@ export default async function loginController(
 		);
 	}
 
-	res.cookie("auth_token", token, { httpOnly: true });
+	res.cookie("auth_token", token, {
+		httpOnly: true,
+		secure: false,
+		sameSite: "strict",
+		maxAge: 1000 * 60 * 60 * 3,
+	});
 
 	const { _id, password: _hashedPassword, ...user } = existingUser;
 	res.status(HTTPCodes.Success.OK).json({ data: user });
