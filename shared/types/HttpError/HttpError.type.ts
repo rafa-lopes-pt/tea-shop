@@ -8,11 +8,7 @@ const defaultErrorMessage = (
 	code: (typeof ErrorCodes)[keyof typeof ErrorCodes]
 ) => getErrorName(code).split("_").join(" ").toLowerCase();
 
-export default interface HttpErrorInterface {
-	statusCode: ErrorNumbers;
-	context?: HttpErrorContext;
-}
-export default class HttpError extends Error implements HttpErrorInterface {
+export default class HttpError extends Error {
 	statusCode: ErrorNumbers;
 	context?: HttpErrorContext;
 	/**
