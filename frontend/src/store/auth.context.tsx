@@ -14,8 +14,8 @@ export type AuthCtxProperties = {
 	isLoggedIn: boolean;
 	login: (data: LoginSchemaType) => Promise<boolean>;
 	updateUser: (data: UpdateProfileSchemaType) => Promise<boolean>;
-	logout: () => void;
-	deleteAccount: () => void,
+	logout: () => Promise<boolean>;
+	deleteAccount: () => Promise<boolean>,
 	user: UserSchemaType | null;
 	setUser: (data: UserSchemaType) => void;
 };

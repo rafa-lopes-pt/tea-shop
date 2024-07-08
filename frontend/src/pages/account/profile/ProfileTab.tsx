@@ -11,7 +11,7 @@ import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
 
 export default function ProfileTab({ user }: { user: UserSchemaType }) {
 	const [showDialog, setShowDialog] = useState(false)
-	const { updateUser } = useContext(AuthCtx) as AuthCtxProperties
+	const { updateUser, deleteAccount } = useContext(AuthCtx) as AuthCtxProperties
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
 		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
 		shouldFocusError: true,
@@ -20,6 +20,7 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 
 	const onSubmitHandler = (data: UserSchemaType) => updateUser(data);
 
+
 	return (
 		<>
 
@@ -27,7 +28,7 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 				type="danger"
 				show={showDialog}
 				message={"Deleting your account is an irreversible action! Please proceed with care."}
-				title="Danger" onCancel={() => { setShowDialog(false) }} />
+				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then(() => setShowDialog(false))} />
 
 			<Form
 				className="profile"
