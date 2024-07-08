@@ -1,11 +1,12 @@
 import { AnimatePresence } from "framer-motion";
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import IconButton, { ICONS } from "../components/buttons/IconButton";
+import IconButton from "../components/buttons/IconButton";
+import FontAwesomeIcons from "../components/misc/Icons";
+import NavLink from "../components/navbar/NavLink";
 import Navbar from "../components/navbar/Navbar";
 import { AuthCtx } from "../store/auth.context";
 import Frame from "./misc/Frame";
-import NavLink from "../components/navbar/NavLink";
 
 function App() {
 	const auth = useContext(AuthCtx);
@@ -39,9 +40,9 @@ function App() {
 				{/* social icons */}
 
 				<div className="social-icons">
-					<IconButton icon={ICONS.youtube} />
-					<IconButton icon={ICONS.facebook} />
-					<IconButton icon={ICONS.instagram} />
+					<IconButton icon={FontAwesomeIcons.youtube} />
+					<IconButton icon={FontAwesomeIcons.facebook} />
+					<IconButton icon={FontAwesomeIcons.instagram} />
 				</div>
 
 				<AnimatePresence>

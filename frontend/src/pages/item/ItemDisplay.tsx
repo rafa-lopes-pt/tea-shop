@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/buttons/Button";
+import IconButton from "../../components/buttons/IconButton";
+import FontAwesomeIcons from "../../components/misc/Icons";
 import { ShopDataCtx } from "../../store/shop/shop-data.context";
 import SectionWrapper from "../misc/SectionWrapper";
-import IconButton, { ICONS } from "../../components/buttons/IconButton";
 
 export default function ItemDisplay() {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const shopData = useContext(ShopDataCtx)?.data;
+	const shopData = useContext(ShopDataCtx)?.items;
 
 	if (!shopData) {
 		//Implement skeleton
@@ -25,7 +26,7 @@ export default function ItemDisplay() {
 		<SectionWrapper className="item-display">
 			<header>
 				<IconButton
-					icon={ICONS.left}
+					icon={FontAwesomeIcons.left}
 					className="item-display__navigation item-display__navigation--prev"
 					onClick={() => navigate("/item/" + shopData.previous.name)}
 				/>
@@ -35,7 +36,7 @@ export default function ItemDisplay() {
 				</span>
 
 				<IconButton
-					icon={ICONS.right}
+					icon={FontAwesomeIcons.right}
 					className="item-display__navigation item-display__navigation--next"
 					onClick={() => navigate("/item/" + shopData.next.name)}
 				/>

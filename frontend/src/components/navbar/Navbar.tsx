@@ -1,6 +1,6 @@
 import { Children, ReactElement, cloneElement, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import IconButton, { ICONS } from "../buttons/IconButton";
+import IconButton from "../buttons/IconButton";
+import FontAwesomeIcons from "../misc/Icons";
 import NavLink from "./NavLink";
 export default function Navbar({
 	className = "",
@@ -18,7 +18,7 @@ export default function Navbar({
 		<div className="main-navbar__background" data-show={show}>&nbsp;</div>
 
 		<IconButton
-			icon={ICONS.hamburger}
+			icon={FontAwesomeIcons.hamburger}
 			className="main-navbar__hamburger-icon" onClick={() => setShow(prev => !prev)} />
 		{/*==========================*/}
 

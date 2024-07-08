@@ -1,22 +1,12 @@
-import React from "react";
-import Button from "./Button";
+import FontAwesomeIcons from "../misc/Icons";
 
-export enum ICONS {
-	youtube = "fa-brands fa-youtube",
-	facebook = "fa-brands fa-facebook",
-	instagram = "fa-brands fa-instagram",
-	hamburger = "fa-solid fa-bars",
-	left = "fa-solid fa-circle-chevron-left",
-	right = "fa-solid fa-circle-chevron-right",
-	question = "fa-solid fa-circle-question",
-}
 
 export default function IconButton({
 	icon,
-	onClick = () => {},
+	onClick = () => { },
 	className = "",
 }: {
-	icon: ICONS;
+	icon: FontAwesomeIcons;
 	onClick?: Function;
 	className?: string;
 }) {
