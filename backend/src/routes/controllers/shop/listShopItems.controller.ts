@@ -24,9 +24,7 @@ export default async function listShopItemsController(
 
 		const items = await response.data?.toArray();
 		await ShopRepository.closeConnections();
-		console.log(items);
-
-		return res.status(HTTPCodes.Success.OK).json({ data:items });
+		return res.status(HTTPCodes.Success.OK).json({ data: items });
 	} catch (err) {
 		return next(err);
 	}
