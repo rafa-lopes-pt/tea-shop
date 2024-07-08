@@ -8,8 +8,15 @@ import router from "./routes/router";
 import HttpError from "../../shared/types/HttpError/HttpError.type";
 const server = express();
 server.use(morgan("dev"));
-server.use(cors());
+server.use(
+	cors({
+		origin: "http://localhost:5173",
+		credentials: true,
+	})
+);
 server.use(cookieParser());
+server.disable("x-powered-by");
+server.use(express.urlencoded())
 server.use(express.json());
 server.use(timeoutMiddleware(15000));
 
