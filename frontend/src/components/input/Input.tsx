@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	invalidText?: string;
+	outlined?: boolean
 }
 
 const Input = forwardRef(
@@ -18,7 +19,7 @@ const Input = forwardRef(
 		ref: Ref<HTMLInputElement>
 	) => {
 		return (
-			<div className={"input " + className}>
+			<div className={`input ${props.outlined ? "input--outlined" : ""} ` + className}>
 				<input
 					{...props}
 					ref={ref}

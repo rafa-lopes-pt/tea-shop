@@ -1,0 +1,9 @@
+@use "../../base/colors" as colors;
+
+.textarea {
+	height: max-content;
+
+	&__element {
+		height: 5em;
+	}
+}
