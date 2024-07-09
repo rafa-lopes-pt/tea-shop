@@ -11,6 +11,7 @@ import ShopPage from "./shop/ShopPage";
 import ItemDisplay from "./item/ItemDisplay";
 import AccountPage from "./account/AccountPage";
 import CartPage from "./cart/CartPage";
+import AccountActivation from "./auth/AccountActivation";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -39,7 +40,12 @@ const router = createBrowserRouter(
 					path="login"
 					element={<AuthPage />}
 				/>
+
 			</Route>
+			<Route
+				path="/activate/:token/"
+				element={<AccountActivation />}
+			/>
 			{/* // */}
 			<Route
 				path="*"
