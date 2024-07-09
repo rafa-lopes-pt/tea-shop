@@ -67,6 +67,7 @@ body {
   transition: all 0.17s ease-in-out, box-shadow 0.3s;
   cursor: pointer;
   font-size: 0.8em;
+  text-transform: capitalize;
 }
 .btn--primary {
   background-color: #00482e;

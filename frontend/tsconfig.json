@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../shared/schemas/SupportEmail.schema.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

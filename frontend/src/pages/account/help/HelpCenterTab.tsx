@@ -1,30 +1,23 @@
 import { useState } from "react";
+import Dialog from "../../../components/alerts/dialogs/Dialog";
 import Accordion from "../../../components/containers/accordion/Accordion";
 import { AccordionItem } from "../../../components/containers/accordion/AccordionItem";
 import FontAwesomeIcons from "../../../components/misc/Icons";
+import EmailDialog from "./EmailDialog";
 import SupportIcon from "./SupportIcon";
 import FAQ from "./faq.json";
-import TC from "./terms-and-conditions.json"
-import Dialog from "../../../components/alerts/dialogs/Dialog";
-import EmailDialog from "./EmailDialog";
-import z from "zod"
-import { SupportEmailSchema, SupportEmailSchemaType } from "./SupportEmail.schema";
+import TC from "./terms-and-conditions.json";
 export default function HelpCenterTab() {
 
     const [showDialog, setShowDialog] = useState(false)
     const [showEmail, setShowEmail] = useState(false)
 
-
-    const emailHandler = (data: SupportEmailSchemaType) => {
-        console.log(data);
-        setShowEmail(false)
-
-    }
+    const closeEmailDialog = () => setShowEmail(false)
 
     return (
         <>
-            <Dialog title="Terms & Conditions" message={TC.data} justifyBody show={showDialog} onConfirm={() => setShowDialog(false)} closeOnBackdropClick/>
-            <EmailDialog title="Email Us" message="" show={showEmail} onConfirm={emailHandler} onCancel={() => setShowEmail(false)} closeOnBackdropClick={true} />
+            <Dialog title="Terms & Conditions" message={TC.data} justifyBody show={showDialog} onConfirm={() => setShowDialog(false)} closeOnBackdropClick />
+            <EmailDialog title="Email Us" message="" show={showEmail} onConfirm={closeEmailDialog} onCancel={closeEmailDialog} closeOnBackdropClick={true} />
 
             <div className="help-center">
 

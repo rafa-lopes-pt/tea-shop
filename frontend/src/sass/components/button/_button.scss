@@ -10,6 +10,7 @@
 	cursor: pointer;
 
 	font-size: 0.8em;
+	text-transform: capitalize;
 
 	&--primary {
 		background-color: colors.$primary;

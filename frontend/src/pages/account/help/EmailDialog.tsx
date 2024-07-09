@@ -5,10 +5,14 @@ import { useForm } from 'react-hook-form';
 import { DialogProps } from '../../../components/alerts/dialogs/Dialog';
 import Button from '../../../components/buttons/Button';
 import { Form } from '../../../components/form/Form';
-import { SupportEmailSchema, SupportEmailSchemaType } from './SupportEmail.schema';
+import { SupportEmailSchema, SupportEmailSchemaType } from '../../../../../shared/schemas/SupportEmail.schema';
+import RestAPI from '../../../apis/server.endpoints';
+import responseHandler from '../../../apis/responseHandler';
+import { Id } from 'react-toastify';
+import { notifyToastPromiseSuccess } from '../../../components/alerts/toasts/promise.notifier';
+import { useState } from 'react';
 
 export interface EmailDialogProps extends DialogProps {
-    onConfirm: (data: any) => void
     onCancel: () => void,
 };
 
@@ -19,16 +23,33 @@ const EmailDialog = ({
     ...props
 }: EmailDialogProps) => {
 
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const onBackdropClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target === e.currentTarget) {
-            reset()
-            closeOnBackdropClick && props.onCancel && props.onCancel()
+            handleDialogClose()
         }
     }
 
     const { register, formState, handleSubmit, reset } = useForm<SupportEmailSchemaType>({
         resolver: zodResolver(SupportEmailSchema)
     })
+
+    const [wasSubmitted, setWasSubmitted] = useState(false)
+
+    const onSubmitHandler = async (data: any) => {
+        // reset();
+        await responseHandler(() =>
+            RestAPI.emailSupport(data), (_data: any, toastId: Id) => {
+                setWasSubmitted(true)
+                notifyToastPromiseSuccess(toastId, "Ticket Created")
+            })
+
+    }
+
+    const handleDialogClose = () => {
+        reset();
+        setWasSubmitted(false)
+        props.onCancel()
+    }
 
 
     return createPortal(
@@ -41,7 +62,7 @@ const EmailDialog = ({
 
                 className='dialog '
                 data-backdrop={backdrop}
-                onClick={e => handleBackdropClick(e)}
+                onClick={e => onBackdropClickHandler(e)}
             >
                 <div
                     className='dialog__container'
@@ -52,38 +73,40 @@ const EmailDialog = ({
                         <h1 className='dialog__header__title'>{props.title}</h1>
                     </header>
 
+                    {!wasSubmitted &&
+                        <Form id="support-email-form" className='dialog__body email-dialog-body' onSubmit={handleSubmit(onSubmitHandler)}>
+                            <Form.Email
+                                outlined
+                                name={'user'}
+                                register={register}
+                                formState={formState}
+                            />
 
-                    <Form id="support-email-form" className='dialog__body email-dialog-body' onSubmit={handleSubmit((data) => {
-                        reset();
-                        props.onConfirm(data)
-                    })}>
-                        <Form.Email
-                            outlined
-                            name={'to'}
-                            register={register}
-                            formState={formState}
-                        />
+                            <Form.Textarea
+                                outlined
+                                name="message"
+                                label='Message'
+                                register={register}
+                                formState={formState}
+                            />
+                        </Form>}
 
-                        <Form.Textarea
-                            outlined
-                            name="body"
-                            label='Message'
-                            register={register}
-                            formState={formState}
-                        />
-                    </Form>
+                    {wasSubmitted &&
+                        <div className='dialog__header'>
+                            Thanks for your email. Our team will reply as soon as possible.
+                        </div>
+                    }
 
 
                     <footer className='dialog__footer'>
-                        <Button onClick={() => {
-                            reset()
-                            props.onCancel()
-                        }} variant='outlined'>Cancel</Button>
-                        <Form.Submit
+                        <Button onClick={handleDialogClose} variant='outlined'>{wasSubmitted ? "close" : "cancel"}</Button>
+
+                        {!wasSubmitted && <Form.Submit
                             form='support-email-form'
                             variant={"primary"}
                             className='dialog__confirm'
-                        > Send</Form.Submit >
+                        > Send</Form.Submit >}
+
                     </footer >
                 </div >
 
