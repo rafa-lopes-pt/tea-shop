@@ -9,15 +9,16 @@ import {
 } from "../components/alerts/toasts/promise.notifier";
 import { Id } from "react-toastify";
 import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
+import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 
 export type AuthCtxProperties = {
 	isLoggedIn: boolean;
-	login: (data: LoginSchemaType) => Promise<boolean>;
+	login: (body: LoginSchemaType) => Promise<boolean>;
 	updateUser: (data: UpdateProfileSchemaType) => Promise<boolean>;
 	logout: () => Promise<boolean>;
 	deleteAccount: () => Promise<boolean>,
-	user: UserSchemaType | null;
-	setUser: (data: UserSchemaType) => void;
+	user: UserSchemaType | null,
+	signup: (body:SignupSchemaType) => Promise<boolean>,
 };
 
 export const AuthCtx = createContext<AuthCtxProperties | null>(null);
@@ -74,7 +75,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 		return await responseHandler(() =>
 			RestAPI.logout(), (_res: Response, toastId: Id) => {
 				notifyToastPromiseSuccess(toastId, "Logged Out");
-
+				return true
 			})
 	}
 
@@ -84,12 +85,21 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			setIsLoggedIn(false);
 			window.sessionStorage.removeItem("session");
 			notifyToastPromiseEnd(toastId);
+			return true
+		}
+		)
+	}
+
+	async function signup(body: SignupSchemaType) {
+		return await responseHandler(() => RestAPI.signup(body), (_res: Response, toastId: Id) => {
+			notifyToastPromiseSuccess(toastId, "Check Your Inbox");
+			return true
 		}
 		)
 	}
 
 	return (
-		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, logout, deleteAccount, user, setUser }}>
+		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, logout, deleteAccount, user, signup }}>
 			{children}
 		</AuthCtx.Provider>
 	);

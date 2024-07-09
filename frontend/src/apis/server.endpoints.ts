@@ -53,6 +53,10 @@ namespace RestAPI {
 	export async function getOrders() {
 		return (await baseFetch("/orders")).json();
 	}
+	//============== other
+	export async function emailSupport(data: any) {
+		return await baseFetch("/email-support", "POST", data);
+	}
 }
 
 export default RestAPI;
