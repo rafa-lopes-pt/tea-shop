@@ -19,7 +19,7 @@ export default async function createActivationLinkEmailMiddleware(
 	const email = req.body.email;
 	const token = res.locals.token;
 
-	const activationLink = `${FRONTEND_URI}/activate/${token}`;
+	const activationLink = `${FRONTEND_URI}/activate/${token}/`;
 
 	res.locals.mail = {
 		from: "Rafael Lopes <rafalopessecond@gmail.com>",
