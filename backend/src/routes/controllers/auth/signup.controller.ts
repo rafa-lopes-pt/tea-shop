@@ -18,7 +18,7 @@ export default async function signupController(
 		if (db_response.data) {
 			return res
 				.status(HTTPCodes.ClientError.CONFLICT)
-				.json({ message: "Email already exists" });
+				.json({ data: "Email already exists" });
 		}
 
 		if (db_response.error) {
