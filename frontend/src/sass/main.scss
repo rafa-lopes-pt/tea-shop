@@ -16,6 +16,7 @@
 @use "components/dialog/dialog";
 @use "components/containers/accordion/accordion-item";
 @use "components/containers/accordion/accordion-container";
+@use "components/input/textarea";
 //pages
 @use "pages/frame";
 @use "pages/app";
@@ -23,3 +24,4 @@
 @use "pages/auth";
 @use "pages/item-display";
 @use "pages/profile";
+@use "pages/help-center";

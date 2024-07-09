@@ -4,6 +4,7 @@ import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 import SectionWrapper from "../misc/SectionWrapper";
 import PreviousOrdersTab from "./orders/PreviousOrdersTab";
 import ProfileTab from "./profile/ProfileTab";
+import HelpCenterTab from "./help/HelpCenterTab";
 
 export default function AccountPage() {
 
@@ -16,7 +17,8 @@ export default function AccountPage() {
 			<TabContainer id="account-page-tabs-container" tabs={
 				[
 					{ label: "Profile", content: <ProfileTab user={user} /> },
-					{ label: "Prev Orders", content: <PreviousOrdersTab /> }
+					{ label: "Prev Orders", content: <PreviousOrdersTab /> },
+					{ label: "Help Center", content: <HelpCenterTab /> }
 				]
 			} />
 		</SectionWrapper>
