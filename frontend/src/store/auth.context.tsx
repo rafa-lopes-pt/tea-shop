@@ -85,6 +85,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			setUser(null);
 			setIsLoggedIn(false);
 			window.sessionStorage.removeItem("session");
+			notifyToastPromiseEnd(toastId)
 			return true
 		}
 		)
