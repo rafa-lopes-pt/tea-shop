@@ -1,5 +1,6 @@
-import { Id } from "react-toastify";
+import { Id, toast } from "react-toastify";
 import {
+	notifyToastPromiseEnd,
 	notifyToastPromiseError,
 	notifyToastPromiseLoading,
 } from "../components/alerts/toasts/promise.notifier";
@@ -31,14 +32,20 @@ export default async function responseHandler(
 		const res = await request();
 
 		if (!res.ok) {
-			id && notifyToastPromiseError(id, (await res.json()).data);
+			const data = (await res.json()).data;
+			const message = typeof data === "string" ? data : data?.message;
+			id && notifyToastPromiseError(id, message);
 			return false;
 		}
 
-		return callback(res, id);
+		return await callback(res, id);
 	} catch (err) {
 		console.error(err);
-		id && notifyToastPromiseError(id, "Something went wrong");
+		id &&
+			notifyToastPromiseError(
+				id,
+				(err as Error)?.message || "Something went wrong"
+			);
 		return false;
 	}
 }

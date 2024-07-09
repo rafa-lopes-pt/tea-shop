@@ -5,6 +5,7 @@ import responseHandler from "../apis/responseHandler";
 import RestAPI from "../apis/server.endpoints";
 import {
 	notifyToastPromiseEnd,
+	notifyToastPromiseError,
 	notifyToastPromiseSuccess
 } from "../components/alerts/toasts/promise.notifier";
 import { Id } from "react-toastify";
@@ -18,7 +19,7 @@ export type AuthCtxProperties = {
 	logout: () => Promise<boolean>;
 	deleteAccount: () => Promise<boolean>,
 	user: UserSchemaType | null,
-	signup: (body:SignupSchemaType) => Promise<boolean>,
+	signup: (body: SignupSchemaType) => Promise<boolean>,
 };
 
 export const AuthCtx = createContext<AuthCtxProperties | null>(null);
@@ -84,17 +85,14 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			setUser(null);
 			setIsLoggedIn(false);
 			window.sessionStorage.removeItem("session");
-			notifyToastPromiseEnd(toastId);
 			return true
 		}
 		)
 	}
 
 	async function signup(body: SignupSchemaType) {
-		return await responseHandler(() => RestAPI.signup(body), (_res: Response, toastId: Id) => {
-			notifyToastPromiseSuccess(toastId, "Check Your Inbox");
-			return true
-		}
+		return await responseHandler(() => RestAPI.signup(body), (_res: Response, toastId: Id) =>
+			notifyToastPromiseSuccess(toastId, "Check Your Inbox")
 		)
 	}
 
