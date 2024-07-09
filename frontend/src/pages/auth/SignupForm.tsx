@@ -6,6 +6,8 @@ import {
 } from "../../../../shared/schemas/signup.schema";
 import Button from "../../components/buttons/Button";
 import { Form } from "../../components/form/Form";
+import { useContext } from "react";
+import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 export default function SignupForm({
 	onChangeScreen,
 	animationProps,
@@ -13,14 +15,20 @@ export default function SignupForm({
 	onChangeScreen: Function;
 	animationProps: any;
 }) {
+	const { signup } = useContext(AuthCtx) as AuthCtxProperties
 	const { register, handleSubmit, formState } = useForm<SignupSchemaType>({
 		resolver: zodResolver(SignupSchema),
 	});
 
+	const onSubmitHandler = async (data: SignupSchemaType) => {
+		if (await signup(data))
+			onChangeScreen()
+	}
+
 	return (
 		<Form
 			animationProps={animationProps}
-			onSubmit={handleSubmit((data) => console.log(data))}
+			onSubmit={handleSubmit(onSubmitHandler)}
 			honeyPotFieldName="username"
 		>
 			<Form.Header title="Register">
