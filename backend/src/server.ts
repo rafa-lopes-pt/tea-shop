@@ -18,7 +18,6 @@ server.use(
 );
 server.use(cookieParser());
 server.disable("x-powered-by");
-server.use(express.urlencoded());
 server.use(express.json());
 server.use(timeoutMiddleware(15000));
 
