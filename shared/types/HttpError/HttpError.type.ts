@@ -1,6 +1,5 @@
 import { ErrorCodes, ErrorNames, ErrorNumbers } from "./ErrorCodes.type";
 import HttpErrorContext from "./HttpErrorContext.type";
-
 const getErrorName = (code: ErrorNumbers) =>
 	[...Object.entries(ErrorCodes)].filter((entry) => entry[1] === code)[0][0];
 
@@ -29,11 +28,6 @@ export default class HttpError extends Error {
 	}
 
 	log() {
-		console.error(
-			this.statusCode,
-			this.name,
-			this.message,
-			this.context || ""
-		);
+		console.dir(this, { depth: null });
 	}
 }

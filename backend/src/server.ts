@@ -6,6 +6,8 @@ import HTTPCodes from "simple-http-codes";
 import timeoutMiddleware from "./routes/middleware/timeout.middleware";
 import router from "./routes/router";
 import HttpError from "../../shared/types/HttpError/HttpError.type";
+import { inspect } from "node:util";
+
 const server = express();
 server.use(morgan("dev"));
 server.use(
@@ -36,9 +38,10 @@ server.use(
 	(error: Error, _req: Request, res: Response, _next: NextFunction) => {
 		if (error instanceof HttpError) {
 			error.log();
-			return res
-				.status(error.statusCode)
-				.json({ ...error, data: error.message });
+			return res.status(error.statusCode).json({
+				...error,
+				data: inspect(error.message, { depth: null }),
+			});
 		}
 
 		console.error(error);
