@@ -29,7 +29,9 @@ export default async function activateController(
 		};
 	} catch (error) {
 		next(
-			new HttpError(HTTPCodes.ClientError.UNAUTHORIZED, "Expired token")
+			new HttpError(HTTPCodes.ClientError.UNAUTHORIZED, "Expired token", {
+				cause: "crypto.verifyToken",
+			})
 		);
 	}
 
@@ -49,11 +51,9 @@ export default async function activateController(
 
 		if (alreadyExists.data) {
 			return res.status(HTTPCodes.ClientError.FORBIDDEN).json({
-				message: "Account already activated",
+				data: "Account already activated",
 			});
 		}
-
-		console.log("\n\n\nim here", user, "\n\n\n\n\n\n");
 
 		const response = await UserRepository.insert(
 			user as UserSchemaType & { password: string }
