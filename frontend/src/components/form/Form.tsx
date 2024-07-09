@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import React, { FormEvent, FormHTMLAttributes, HTMLAttributes } from "react";
+import React, { FormEvent, FormHTMLAttributes } from "react";
 import { FieldValues, FormState, Path, UseFormRegister } from "react-hook-form";
 import Button, { ButtonProps } from "../buttons/Button";
-import Input, { InputProps } from "../input/Input";
 import Toggle from "../buttons/Toggle";
+import Input, { InputProps } from "../input/Input";
+import TextareaComponent, { TextareaProps } from "../input/Textarea"
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
 	//NOTE: Couldn't figure out the proper type, ts creates a conflict with HTMLFormAttributes and MotionProps
@@ -72,6 +73,26 @@ export namespace Form {
 		FormControlValidationProps<T> {
 		name?: Path<T>;
 	}
+	interface FormTextareaProps<T extends FieldValues> extends TextareaProps, FormControlValidationProps<T> {
+		name: Path<T>
+	}
+	/**
+		 * Gets the error message of the target formStatus field, even if its nested
+		 */
+	const getErrorMessage = (targetFieldName: string, value: any): string | undefined => {
+		//No error message
+		if (!targetFieldName || !value) { return undefined }
+
+		//Check if the target field is nested inside another field
+		if (/\./.test(targetFieldName)) {
+			return getErrorMessage(targetFieldName.split(".")[1], value[targetFieldName.split(".")[0]]);
+		}
+		//Return the error message of the target field
+		else {
+			return value?.[targetFieldName]?.message as string | undefined;
+		}
+
+	}
 
 	export const Header = ({
 		title,
@@ -112,26 +133,6 @@ export namespace Form {
 				/>
 			);
 		}
-
-		/**
-		 * Gets the error message of the target formStatus field, even if its nested
-		 */
-		const getErrorMessage = (targetFieldName: string, value: any): string | undefined => {
-			//No error message
-			if (!targetFieldName || !value) { return undefined }
-
-			//Check if the target field is nested inside another field
-			if (/\./.test(targetFieldName)) {
-				return getErrorMessage(targetFieldName.split(".")[1], value[targetFieldName.split(".")[0]]);
-			}
-			//Return the error message of the target field
-			else {
-				return value?.[targetFieldName]?.message as string | undefined;
-			}
-
-		}
-
-
 		return (
 			<Input
 				{...props}
@@ -141,7 +142,24 @@ export namespace Form {
 			/>
 		);
 	};
-
+	/**
+	 * 
+	 * @param props 
+	 * @returns 
+	 */
+	export const Textarea = <T extends FieldValues>({
+		register,
+		formState,
+		className = "",
+		...props
+	}: FormTextareaProps<T>) => {
+		return <TextareaComponent
+			{...props}
+			{...register(props.name)}
+			className={"form__control form__textarea" + className}
+			invalidText={getErrorMessage(props.name, formState?.errors)}
+		/>
+	}
 	/**
 	 * Creates a form button with type submit
 	 */
