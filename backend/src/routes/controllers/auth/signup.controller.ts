@@ -63,9 +63,6 @@ export default async function signupController(
 		);
 	}
 
-	//redirect to mailing service
-	res.redirect(
-		HTTPCodes.Success.ACCEPTED,
-		`/send-activation-link/${email}?token=${token}`
-	);
+	res.locals.token = token;
+	next();
 }

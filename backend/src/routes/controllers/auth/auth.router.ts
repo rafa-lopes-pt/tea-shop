@@ -6,13 +6,17 @@ import loginController from "./login.controller";
 import logoutController from "./logout.controller";
 import signupController from "./signup.controller";
 import activateController from "./activate.controller";
+import sendMailController from "../../../mail/controllers/sendMail.controller";
+import createActivationLinkEmailMiddleware from "../../../mail/middleware/templates/createActivationLinkEmail.middleware";
+import { sendMailMiddleware } from "../../../mail/mail.router";
 
 const router = express.Router();
 
 router.post(
 	"/signup",
 	createBodyValidatorMiddleware(SignupSchema),
-	signupController
+	signupController,
+	...sendMailMiddleware(createActivationLinkEmailMiddleware)
 );
 
 router.get("/activate/:token", activateController);

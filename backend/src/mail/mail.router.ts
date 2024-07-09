@@ -7,7 +7,9 @@ import createOauthClientMiddleware from "./middleware/createOauthClient.middlewa
 import createActivationLinkEmail from "./middleware/templates/createActivationLinkEmail.middleware";
 import HTTPCodes from "simple-http-codes";
 import HttpError from "../../../shared/types/HttpError/HttpError.type";
-
+import createSupportEmailMiddleware from "./middleware/templates/createSupportEmail.middleware";
+import createBodyValidatorMiddleware from "../routes/middleware/createBodyValidator.middleware";
+import { SupportEmailSchema } from "../../../shared/schemas/SupportEmail.schema";
 const SESSION_SECRET = process.env.SESSION_SECRET;
 if (!SESSION_SECRET) {
 	throw new HttpError(
@@ -20,9 +22,15 @@ const router = express.Router();
 
 //defines credentials and an oAuthClient in the res.locals
 router.use(createOauthClientMiddleware);
-router.get(
-	"/send-activation-link/:email",
-	createActivationLinkEmail,
+export const sendMailMiddleware = (createTemplate: (...args: any[]) => any) => [
+	createOauthClientMiddleware,
+	createTemplate,
+	sendMailController,
+];
+router.post(
+	"/email-support",
+	createBodyValidatorMiddleware(SupportEmailSchema),
+	createSupportEmailMiddleware,
 	sendMailController
 );
 /*
