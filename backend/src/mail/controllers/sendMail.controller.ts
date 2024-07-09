@@ -25,8 +25,13 @@ export default async function sendMailController(
 
 		const accessToken = await res.locals.oauth2Client.getAccessToken();
 
+		console.log(res.locals.mail);
+
 		transporter = nodemailer.createTransport({
+			host: "smtp.gmail.com",
+			port: 587,
 			service: "gmail",
+			secure: true,
 			auth: {
 				type: "OAuth2",
 				user: "rafalopessecond@gmail.com",
@@ -40,7 +45,7 @@ export default async function sendMailController(
 		await transporter?.sendMail(res.locals.mail);
 
 		res.status(HTTPCodes.Success.OK).json({
-			data: "Activation link sent to" + res.locals.mail.to,
+			data: "mail sent to " + res.locals.mail.to,
 		});
 	} catch (error) {
 		return next(error);
