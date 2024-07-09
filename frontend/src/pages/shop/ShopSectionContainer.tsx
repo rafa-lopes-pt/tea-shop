@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import { useContext, useEffect } from "react";
+import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop/shop-data.context";
 import ShopItem from "./ShopItem";
 
 export default function ShopSectionContainer({
@@ -7,16 +7,20 @@ export default function ShopSectionContainer({
 }: {
 	className?: string;
 }) {
-	const shopItems = useContext(ShopDataCtx)?.items;
+	const { items, refresh } = useContext(ShopDataCtx) as ShopDataCtxProperties;
+
+	useEffect(() => {
+		refresh()
+	}, [])
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
 			{/* FIX: Add skelleton while loading */}
-			{!shopItems && <p>LOADING... PLZ FIX ME</p>}
+			{!items && <p>LOADING... PLZ FIX ME</p>}
 
-			{shopItems && (
+			{items && (
 				<div className={"shop-section"}>
-					{shopItems.map((e, i) => (
+					{items.map((e, i) => (
 						<ShopItem
 							data={e}
 							key={`shop-item-${e?.name}-${e?.price}-${i}`}
