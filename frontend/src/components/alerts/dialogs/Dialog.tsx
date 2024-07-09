@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import Button from '../../buttons/Button';
-type DialogProps = {
+export type DialogProps = {
     type?: "info" | "danger",
     title: string,
     message: string,
+    justifyBody?: boolean
     //
-    onCancel?: () => void,
-    onConfirm?: () => void,
+    onCancel?: (...args: any[]) => void,
+    onConfirm?: (...args: any[]) => void,
     //
     show: boolean
     backdrop?: boolean
@@ -21,10 +22,12 @@ const Dialog = ({
     ...props
 }: DialogProps) => {
 
-    const handleBackdropClick = () => {
-        closeOnBackdropClick && props.onCancel && props.onCancel()
-
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (e.target === e.currentTarget) {
+            closeOnBackdropClick && (props.onCancel && props.onCancel()) || (props.onConfirm && props.onConfirm())
+        }
     }
+
 
     return createPortal(
         <AnimatePresence>
@@ -37,15 +40,19 @@ const Dialog = ({
                 className='dialog '
                 data-backdrop={backdrop}
 
+                onClick={(e) => handleBackdropClick(e)}
             >
-                <div className='dialog__container' autoFocus={true} onBlur={() => handleBackdropClick()
-                }>
+                <div
+                    className='dialog__container'
+                    autoFocus={true}
+                    data-danger={type === "danger"}
+                >
                     <header className='dialog__header' data-danger={type === "danger"}>
                         <i className={`fa-solid fa-circle-${type === "info" ? "info" : "exclamation"} dialog__header__icon`}></i>
                         <h1 className='dialog__header__title'>{props.title}</h1>
                     </header>
 
-                    <p className='dialog__body'>
+                    <p className={`dialog__body ${props.justifyBody ? "dialog__body--justify" : ""}`}>
                         {props.message}
                     </p>
 
