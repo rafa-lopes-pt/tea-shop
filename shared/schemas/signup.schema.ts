@@ -5,7 +5,7 @@ import { LoginSchema } from "./login.schema";
 export const SignupSchema = LoginSchema.merge(
 	z
 		.object({
-			name: ZodValidatorSchema.alphabeticOnly,
+			name: ZodValidatorSchema.alphabeticWithWhiteSpaces,
 		})
 		.required()
 );

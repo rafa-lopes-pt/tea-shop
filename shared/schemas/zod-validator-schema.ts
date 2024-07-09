@@ -8,7 +8,7 @@ namespace ZodValidatorSchema {
 		.trim();
 
 	export const email = requiredNonEmptyString.regex(RegExpValidators.email, {
-		message: "Invalid",
+		message: "Invalid Email",
 	});
 
 	export const alphabeticOnly = requiredNonEmptyString.regex(
