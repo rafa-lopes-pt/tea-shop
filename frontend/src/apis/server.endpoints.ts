@@ -9,7 +9,7 @@ if (!BASE_URI) {
 }
 
 namespace RestAPI {
-	type ApiMethods = "POST" | "GET" | "PATCH" | "DELETE";
+	type ApiMethods = "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
 	export type Request = (data?: unknown) => Promise<Response>;
 	export type ResponseData<dto> = Promise<{ data: dto | string } | HttpError>;
 
@@ -45,6 +45,9 @@ namespace RestAPI {
 	//============== profile endpoints
 	export async function updateProfile(data: UpdateProfileSchemaType) {
 		return baseFetch("/profile", "PATCH", data);
+	}
+	export async function updateImage(data: File) {
+		return baseFetch("/profile", "PUT", data);
 	}
 	export async function deleteProfile() {
 		return baseFetch("/profile", "DELETE");

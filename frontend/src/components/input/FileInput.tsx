@@ -21,8 +21,7 @@ export default function FileInput({
 
 		const img = URL.createObjectURL(file);
 		setSrc(img);
-		onChange(img);
-		return;
+		onChange(file);
 	};
 
 	const ref = useRef<HTMLInputElement | null>(null);

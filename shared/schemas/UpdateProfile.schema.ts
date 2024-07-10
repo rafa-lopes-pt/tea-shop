@@ -2,7 +2,7 @@ import { UserSchema } from "./user.schema";
 import z from "zod";
 
 export const UpdateProfileSchema = UserSchema.partial()
-	.omit({ email: true })
+	.omit({ email: true, image: true })
 	.refine((data) => Object.keys(data).some((e) => e), {
 		message: "Requires at least one field to update",
 		path: [""],

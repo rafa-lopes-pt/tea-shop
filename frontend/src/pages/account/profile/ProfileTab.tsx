@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProfileTab({ user }: { user: UserSchemaType }) {
 	const [showDialog, setShowDialog] = useState(false)
-	const { updateUser, deleteAccount } = useContext(AuthCtx) as AuthCtxProperties
+	const { updateUser, deleteAccount, updateImage } = useContext(AuthCtx) as AuthCtxProperties
 	const navigate = useNavigate()
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
 		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
@@ -22,6 +22,9 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 
 	const onSubmitHandler = (data: UserSchemaType) => updateUser(data);
 
+	const onFileUploadHandler = (data: File) => {
+		updateImage(data)
+	}
 
 	return (
 		<>
@@ -41,7 +44,7 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 				<Form.Body>
 					<header className="user-info">
 						<FileInput
-							onChange={() => { }}
+							onChange={onFileUploadHandler}
 							initialValue={user.image}
 							className="user-info__image"
 						/>
