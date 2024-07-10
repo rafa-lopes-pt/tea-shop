@@ -1,16 +1,15 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
+import { Id } from "react-toastify";
+import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
+import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 import { UserSchemaType } from "../../../shared/schemas/user.schema";
 import responseHandler from "../apis/responseHandler";
 import RestAPI from "../apis/server.endpoints";
 import {
 	notifyToastPromiseEnd,
-	notifyToastPromiseError,
 	notifyToastPromiseSuccess
 } from "../components/alerts/toasts/promise.notifier";
-import { Id } from "react-toastify";
-import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
-import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 
 export type AuthCtxProperties = {
 	isLoggedIn: boolean;
@@ -39,7 +38,6 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 	async function login(body: LoginSchemaType) {
 		return await responseHandler(() => RestAPI.login(body), async (res: Response, toastId: Id) => {
-			console.log(res)
 			const data = (await res.json()).data
 			setIsLoggedIn(true);
 			setUser(data);

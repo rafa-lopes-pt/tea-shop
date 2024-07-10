@@ -1,0 +1,16 @@
+@use "../base/colors" as colors;
+#main.error-container {
+	display: flex;
+    flex-direction: column;
+	place-content: center;
+	place-items: center;
+}
+.error-message {
+	max-width: 70%;
+	border-radius: 10px;
+	background-color: rgba($color: colors.$light, $alpha: 0.1);
+	backdrop-filter: blur(15px);
+	font-size: 1.5rem;
+	padding: 1.5em;
+	line-height: 1.3em;
+}

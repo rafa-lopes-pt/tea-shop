@@ -11,7 +11,8 @@ import ShopPage from "./shop/ShopPage";
 import ItemDisplay from "./item/ItemDisplay";
 import AccountPage from "./account/AccountPage";
 import CartPage from "./cart/CartPage";
-import AccountActivation from "./auth/AccountActivation";
+import ActivationPage from "./auth/ActivationPage";
+import ActivateAccountErrors from "./errorBoundaries/ActivateAccountErrors";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
@@ -43,8 +44,9 @@ const router = createBrowserRouter(
 
 			</Route>
 			<Route
+				errorElement={<ActivateAccountErrors />}
 				path="/activate/:token/"
-				element={<AccountActivation />}
+				element={<ActivationPage />}
 			/>
 			{/* // */}
 			<Route

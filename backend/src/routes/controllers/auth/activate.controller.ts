@@ -28,7 +28,7 @@ export default async function activateController(
 			notifyBySms: false,
 		};
 	} catch (error) {
-		next(
+		return next(
 			new HttpError(HTTPCodes.ClientError.UNAUTHORIZED, "Expired token", {
 				cause: "crypto.verifyToken",
 			})
