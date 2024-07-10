@@ -8,10 +8,12 @@ import Button from "../../../components/buttons/Button";
 import { Form } from "../../../components/form/Form";
 import FileInput from "../../../components/input/FileInput";
 import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileTab({ user }: { user: UserSchemaType }) {
 	const [showDialog, setShowDialog] = useState(false)
 	const { updateUser, deleteAccount } = useContext(AuthCtx) as AuthCtxProperties
+	const navigate = useNavigate()
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
 		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
 		shouldFocusError: true,
@@ -28,7 +30,10 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 				type="danger"
 				show={showDialog}
 				message={"Deleting your account is an irreversible action! Please proceed with care."}
-				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then(() => setShowDialog(false))} />
+				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then(() => {
+					setShowDialog(false)
+					navigate("/")
+				})} />
 
 			<Form
 				className="profile"
