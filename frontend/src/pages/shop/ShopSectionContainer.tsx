@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useMemo } from "react";
 import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop/shop-data.context";
 import ShopItem from "./ShopItem";
 
@@ -9,9 +9,12 @@ export default function ShopSectionContainer({
 }) {
 	const { items, refresh } = useContext(ShopDataCtx) as ShopDataCtxProperties;
 
-	useEffect(() => {
-		refresh()
-	}, [])
+	useMemo(() => {
+		if (!items) {
+			console.log("memo");
+			refresh()
+		}
+	}, [items])
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
