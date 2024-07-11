@@ -1,26 +1,20 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 export default function FileInput({
-	initialValue,
+	src,
 	className = "",
 	onChange,
 	alt,
 }: {
-	initialValue?: string;
+	src?: string;
 	className?: string;
 	onChange: Function;
 	alt?: string;
 }) {
-	const [src, setSrc] = useState(
-		initialValue || "media/user-image-placeholder.jpg"
-	);
-
 	const handleImageUpload = (e: ChangeEvent) => {
 		const file = (e.target as HTMLInputElement).files?.[0];
 
 		if (!file) throw new Error("Unable to get file from input");
 
-		const img = URL.createObjectURL(file);
-		setSrc(img);
 		onChange(file);
 	};
 
@@ -33,6 +27,9 @@ export default function FileInput({
 			<img
 				src={src}
 				alt={alt}
+				onError={e =>
+					(e.target as HTMLImageElement).style.display = "none"
+				}
 			/>
 			<i className="fa-solid fa-file-arrow-up file-input__icon"></i>
 			<input
@@ -40,6 +37,6 @@ export default function FileInput({
 				className="visually-hidden "
 				type="file"
 				onChange={handleImageUpload}></input>
-		</div>
+		</div >
 	);
 }

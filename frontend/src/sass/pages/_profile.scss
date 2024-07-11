@@ -53,4 +53,10 @@
 	&__section-title {
 		font-size: 1.35rem;
 	}
+
+	&__image {
+		background: url("/media/user-image-placeholder.jpg");
+		background-size: contain;
+		background-position: center;
+	}
 }
