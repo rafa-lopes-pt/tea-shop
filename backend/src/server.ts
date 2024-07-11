@@ -7,20 +7,23 @@ import timeoutMiddleware from "./routes/middleware/timeout.middleware";
 import router from "./routes/router";
 import HttpError from "../../shared/types/HttpError/HttpError.type";
 import { inspect } from "node:util";
+import singleImageParser from "./routes/middleware/singleImageParser.middleware";
+import { MulterError } from "multer";
 
 const server = express();
 server.use(morgan("dev"));
+server.use(timeoutMiddleware(15000));
+server.disable("x-powered-by");
 server.use(
 	cors({
 		origin: "http://localhost:5173",
 		credentials: true,
 	})
 );
-server.use(cookieParser());
-server.disable("x-powered-by");
-server.use(express.json());
-server.use(timeoutMiddleware(15000));
 
+server.use(cookieParser());
+server.use(singleImageParser);
+server.use(express.json());
 //====== ROUTES
 
 server.get("/health", (_, res) => {
@@ -41,6 +44,23 @@ server.use(
 				...error,
 				data: inspect(error.message, { depth: null }),
 			});
+		}
+
+		if (error instanceof MulterError) {
+			console.error(inspect(error, { depth: null }));
+			if (error.code === "LIMIT_UNEXPECTED_FILE")
+				return res
+					.status(HTTPCodes.ClientError.BAD_REQUEST)
+					.json({ data: "Unsupported file" });
+			else if (error.code === "LIMIT_FILE_SIZE") {
+				return res
+					.status(HTTPCodes.ClientError.BAD_REQUEST)
+					.json({ data: "File too big" });
+			} else {
+				return res
+					.status(HTTPCodes.ClientError.BAD_REQUEST)
+					.json({ data: "Unsupported Request" });
+			}
 		}
 
 		console.error(error);

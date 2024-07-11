@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import HttpError from "../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import { randomBytes } from "crypto";
+import { v4 } from "uuid";
 configDotenv();
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -31,11 +32,8 @@ export async function verifyToken(token: string) {
 }
 
 export function generateRandomString(length: number = 256) {
-	randomBytes(length, (err, buf) => {
-		if (err) throw err;
-
-		const str = buf.toString("hex");
-		console.log(`${buf.length} bytes of random data: ${str}`);
-		return str;
-	});
+	return randomBytes(length).toString("hex");
+}
+export function generateUUID() {
+	return v4();
 }

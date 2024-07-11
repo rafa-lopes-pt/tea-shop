@@ -14,6 +14,10 @@ dist-ssr
 .env
 NOTES.md
 
+#server disk data
+backend/resources/profile-images/*
+
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
