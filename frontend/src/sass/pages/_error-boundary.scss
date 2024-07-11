@@ -1,4 +1,5 @@
 @use "../base/colors" as colors;
+@use "../utils/media-queries" as media-query;
 #main.error-boundary {
 	display: flex;
 	flex-direction: column;
@@ -14,8 +15,11 @@
 
 	text-align: center;
 
-	// &__title {
-	// }
+	&__title {
+		@include media-query.small-screen() {
+			font-size: 1.3em;
+		}
+	}
 
 	&__error {
 		width: 70%;
@@ -34,6 +38,11 @@
 		border-style: ridge;
 		user-select: text;
 
+		@include media-query.small-screen() {
+			
+			max-height: 50%;
+		}
+
 		&__field-name {
 			font-weight: bold;
 			text-decoration: underline;
@@ -48,6 +57,11 @@
 
 	&__support {
 		font-size: 1.1rem;
+
+		@include media-query.small-screen() {
+			font-size: 0.85em;
+		}
+
 		&__contact {
 			color: colors.$secondary;
 			text-decoration: underline;

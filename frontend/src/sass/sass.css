@@ -1557,6 +1557,11 @@ body {
 .error-boundary > * {
   max-width: 70%;
 }
+@media (hover: none) or (max-width: 750px) {
+  .error-boundary__title {
+    font-size: 1.3em;
+  }
+}
 .error-boundary__error {
   width: 70%;
   height: 100%;
@@ -1574,6 +1579,11 @@ body {
   border-style: ridge;
   user-select: text;
 }
+@media (hover: none) or (max-width: 750px) {
+  .error-boundary__error {
+    max-height: 50%;
+  }
+}
 .error-boundary__error__field-name {
   font-weight: bold;
   text-decoration: underline;
@@ -1585,6 +1595,11 @@ body {
 }
 .error-boundary__support {
   font-size: 1.1rem;
+}
+@media (hover: none) or (max-width: 750px) {
+  .error-boundary__support {
+    font-size: 0.85em;
+  }
 }
 .error-boundary__support__contact {
   color: #e6ac1a;
