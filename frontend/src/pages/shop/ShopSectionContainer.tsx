@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop/shop-data.context";
 import ShopItem from "./ShopItem";
 
@@ -9,12 +9,16 @@ export default function ShopSectionContainer({
 }) {
 	const { items, refresh } = useContext(ShopDataCtx) as ShopDataCtxProperties;
 
-	useMemo(() => {
-		if (!items) {
-			console.log("memo");
+
+	//due to asynchronous code, and the state updates on hoc, this "fix" prevents
+	//unwanted refetch calls to the backend
+	const ref = useRef(true)
+	useEffect(() => {
+		if (ref.current) {
 			refresh()
+			ref.current = false
 		}
-	}, [items])
+	}, [ref.current])
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
