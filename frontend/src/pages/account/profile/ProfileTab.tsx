@@ -23,7 +23,9 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 	const onSubmitHandler = (data: UserSchemaType) => updateUser(data);
 
 	const onFileUploadHandler = (data: File) => {
-		updateImage(data)
+		const f = new FormData()
+		f.append("image", data)
+		updateImage(f)
 	}
 
 	return (
@@ -45,7 +47,7 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 					<header className="user-info">
 						<FileInput
 							onChange={onFileUploadHandler}
-							initialValue={user.image}
+							src={user.image}
 							className="user-info__image"
 						/>
 						<p className="user-info__name">{user.name}</p>
