@@ -15,7 +15,7 @@ export type AuthCtxProperties = {
 	isLoggedIn: boolean;
 	login: (body: LoginSchemaType) => Promise<boolean>;
 	updateUser: (body: UpdateProfileSchemaType) => Promise<boolean>;
-	updateImage: (body: File) => Promise<boolean>
+	updateImage: (body: any) => Promise<boolean>
 	logout: () => Promise<boolean>;
 	deleteAccount: () => Promise<boolean>,
 	user: UserSchemaType | null,
@@ -67,15 +67,26 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 	}
 
-	async function updateImage(body: File) {
+	async function updateImage(body: any) {
 		return await responseHandler(() => RestAPI.updateImage(body), async (res: Response, toastId: Id) => {
-			const data = (await res.json()).data
-			// setUser(data)
-			// window.sessionStorage.setItem(
-			// 	"session",
-			// 	JSON.stringify({ user: data, isLoggedIn: true })
-			// );
-			notifyToastPromiseSuccess(toastId, "Success!")
+			let data
+
+			try {
+				data = (await res?.json())?.data
+			} catch (error) {
+				//server might not contain a response
+			}
+
+			if (data) {
+				setUser(data)
+				window.sessionStorage.setItem(
+					"session",
+					JSON.stringify({ user: data, isLoggedIn: true })
+				);
+			}
+
+
+			notifyToastPromiseSuccess(toastId, "Updated!")
 			return true
 		})
 	}
