@@ -2,6 +2,7 @@ import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.s
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 import HttpError from "../../../shared/types/HttpError/HttpError.type";
+import { notifyErrorToast } from "../components/alerts/toasts/toast.notifier";
 
 const BASE_URI: string = import.meta.env.VITE_REST_API_URI;
 if (!BASE_URI) {
@@ -9,56 +10,75 @@ if (!BASE_URI) {
 }
 
 namespace RestAPI {
-	type ApiMethods = "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
+	type ApiMethods = "POST" | "GET" | "PATCH" | "PUT" | "DELETE";
 	export type Request = (data?: unknown) => Promise<Response>;
 	export type ResponseData<dto> = Promise<{ data: dto | string } | HttpError>;
 
-	async function baseFetch(
+	async function baseRequest(
+		endpoint: string,
+		method: ApiMethods,
+		body?: any,
+		headers?: Record<string, string>
+	) {
+		try {
+			return await fetch(BASE_URI + endpoint, {
+				headers,
+				method,
+				body,
+				credentials: "include",
+			});
+		} catch (error) {
+			console.error(error);
+			throw new Error("Connection Failed");
+		}
+	}
+
+	async function jsonRequest(
 		endpoint: string,
 		method: ApiMethods = "GET",
 		body: unknown = undefined
 	) {
-		return await fetch(BASE_URI + endpoint, {
-			headers: { "Content-Type": "application/json" },
+		return baseRequest(
+			endpoint,
 			method,
-			body: body ? JSON.stringify(body) : undefined,
-			credentials: "include",
-		});
+			body ? JSON.stringify(body) : undefined,
+			{ "Content-Type": "application/json" }
+		);
 	}
 	//============== auth endpoints
 	export async function signup(data: SignupSchemaType) {
-		return baseFetch("/signup", "POST", data);
+		return jsonRequest("/signup", "POST", data);
 	}
 	export async function activate(token: string) {
-		return baseFetch("/activate/" + token);
+		return jsonRequest("/activate/" + token);
 	}
 	export async function login(data: LoginSchemaType) {
-		return baseFetch("/login", "POST", data);
+		return jsonRequest("/login", "POST", data);
 	}
 	export async function logout() {
-		return baseFetch("/logout");
+		return jsonRequest("/logout");
 	}
 	//============== shop endpoints
 	export async function getShopItems() {
-		return baseFetch("/shop");
+		return jsonRequest("/shop");
 	}
 	//============== profile endpoints
 	export async function updateProfile(data: UpdateProfileSchemaType) {
-		return baseFetch("/profile", "PATCH", data);
+		return jsonRequest("/profile", "PATCH", data);
 	}
-	export async function updateImage(data: File) {
-		return baseFetch("/profile", "PUT", data);
+	export async function updateImage(data: any) {
+		return baseRequest("/profile/image", "PUT", data);
 	}
 	export async function deleteProfile() {
-		return baseFetch("/profile", "DELETE");
+		return jsonRequest("/profile", "DELETE");
 	}
 	//============== orders endpoints
 	export async function getOrders() {
-		return (await baseFetch("/orders")).json();
+		return jsonRequest("/orders");
 	}
 	//============== other
 	export async function emailSupport(data: any) {
-		return await baseFetch("/email-support", "POST", data);
+		return await jsonRequest("/email-support", "POST", data);
 	}
 }
 

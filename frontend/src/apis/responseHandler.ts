@@ -4,6 +4,7 @@ import {
 	notifyToastPromiseError,
 	notifyToastPromiseLoading,
 } from "../components/alerts/toasts/promise.notifier";
+import { notifyErrorToast } from "../components/alerts/toasts/toast.notifier";
 
 export default async function responseHandler(
 	request: () => Promise<Response>,
@@ -31,7 +32,7 @@ export default async function responseHandler(
 	try {
 		const res = await request();
 
-		if (!res.ok) {
+		if (res && !res?.ok) {
 			const data = (await res.json()).data;
 			const message = typeof data === "string" ? data : data?.message;
 			id && notifyToastPromiseError(id, message);
@@ -41,11 +42,19 @@ export default async function responseHandler(
 		return await callback(res, id);
 	} catch (err) {
 		console.error(err);
-		id &&
+
+		if (id) {
 			notifyToastPromiseError(
 				id,
 				(err as Error)?.message || "Something went wrong"
 			);
+		} else if (
+			err instanceof Error &&
+			err.message === "Connection Failed"
+		) {
+			notifyErrorToast(err.message);
+		}
+
 		return false;
 	}
 }
