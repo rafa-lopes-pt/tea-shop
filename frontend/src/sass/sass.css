@@ -1543,21 +1543,52 @@ body {
   gap: 1.3em;
 }
 
-#main.error-container {
+#main.error-boundary {
   display: flex;
   flex-direction: column;
   place-content: center;
   place-items: center;
+  gap: 1rem;
 }
 
-.error-message {
+.error-boundary {
+  text-align: center;
+}
+.error-boundary > * {
   max-width: 70%;
+}
+.error-boundary__error {
+  width: 70%;
+  height: 100%;
+  max-height: 300px;
+  overflow-y: auto;
   border-radius: 10px;
   background-color: rgba(235, 255, 248, 0.1);
   backdrop-filter: blur(15px);
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 1.5em;
   line-height: 1.3em;
+  font-family: monospace;
+  border: 0.2em #ebfff8;
+  text-align: start;
+  border-style: ridge;
+  user-select: text;
+}
+.error-boundary__error__field-name {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #e6ac1a;
+}
+.error-boundary__actions {
+  display: flex;
+  gap: 2rem;
+}
+.error-boundary__support {
+  font-size: 1.1rem;
+}
+.error-boundary__support__contact {
+  color: #e6ac1a;
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=sass.css.map */

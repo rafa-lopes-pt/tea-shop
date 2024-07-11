@@ -1,16 +1,56 @@
 @use "../base/colors" as colors;
-#main.error-container {
+#main.error-boundary {
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 	place-content: center;
 	place-items: center;
+	gap: 1rem;
 }
-.error-message {
-	max-width: 70%;
-	border-radius: 10px;
-	background-color: rgba($color: colors.$light, $alpha: 0.1);
-	backdrop-filter: blur(15px);
-	font-size: 1.5rem;
-	padding: 1.5em;
-	line-height: 1.3em;
+
+.error-boundary {
+	& > * {
+		max-width: 70%;
+	}
+
+	text-align: center;
+
+	// &__title {
+	// }
+
+	&__error {
+		width: 70%;
+		height: 100%;
+		max-height: 300px;
+		overflow-y: auto;
+		border-radius: 10px;
+		background-color: rgba($color: colors.$light, $alpha: 0.1);
+		backdrop-filter: blur(15px);
+		font-size: 1rem;
+		padding: 1.5em;
+		line-height: 1.3em;
+		font-family: monospace;
+		border: 0.2em colors.$light;
+		text-align: start;
+		border-style: ridge;
+		user-select: text;
+
+		&__field-name {
+			font-weight: bold;
+			text-decoration: underline;
+			color: colors.$secondary;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		gap: 2rem;
+	}
+
+	&__support {
+		font-size: 1.1rem;
+		&__contact {
+			color: colors.$secondary;
+			text-decoration: underline;
+		}
+	}
 }

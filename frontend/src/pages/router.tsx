@@ -5,19 +5,20 @@ import {
 	createRoutesFromChildren,
 } from "react-router-dom";
 import App from "./App";
-import AuthPage from "./auth/AuthPage";
-import SectionWrapper from "./misc/SectionWrapper";
-import ShopPage from "./shop/ShopPage";
-import ItemDisplay from "./item/ItemDisplay";
 import AccountPage from "./account/AccountPage";
-import CartPage from "./cart/CartPage";
 import ActivationPage from "./auth/ActivationPage";
+import AuthPage from "./auth/AuthPage";
+import CartPage from "./cart/CartPage";
 import ActivateAccountErrors from "./errorBoundaries/ActivateAccountErrors";
+import GenericErrorBoundary from "./errorBoundaries/GenericError";
+import ItemDisplay from "./item/ItemDisplay";
+import ShopPage from "./shop/ShopPage";
 
 const router = createBrowserRouter(
 	createRoutesFromChildren(
 		<>
 			<Route
+				errorElement={<GenericErrorBoundary />}
 				path="/"
 				element={<App />}>
 				<Route
