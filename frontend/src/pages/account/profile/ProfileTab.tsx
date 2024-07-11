@@ -34,11 +34,12 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 			<Dialog
 				type="danger"
 				show={showDialog}
-				message={"Deleting your account is an irreversible action! Please proceed with care."}
 				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then(() => {
 					setShowDialog(false)
 					navigate("/")
-				})} />
+				})} >
+				Deleting your account is an irreversible action! Please proceed with care.
+			</Dialog>
 
 			<Form
 				className="profile"

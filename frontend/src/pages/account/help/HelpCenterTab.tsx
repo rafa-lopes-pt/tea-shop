@@ -16,8 +16,11 @@ export default function HelpCenterTab() {
 
     return (
         <>
-            <Dialog title="Terms & Conditions" message={TC.data} justifyBody show={showDialog} onConfirm={() => setShowDialog(false)} closeOnBackdropClick />
-            <EmailDialog title="Email Us" message="" show={showEmail} onConfirm={closeEmailDialog} onCancel={closeEmailDialog} closeOnBackdropClick={true} />
+            <Dialog title="Terms & Conditions" justifyBody show={showDialog} onConfirm={() => setShowDialog(false)} closeOnBackdropClick >
+                {TC.data}
+            </Dialog>
+            <EmailDialog title="Email Us" show={showEmail} onConfirm={closeEmailDialog} onCancel={closeEmailDialog} closeOnBackdropClick={true} />
+
 
             <div className="help-center">
 

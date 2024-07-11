@@ -1,18 +1,23 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 import Button from '../../buttons/Button';
 export type DialogProps = {
     type?: "info" | "danger",
     title: string,
-    message: string,
+    children?: string | ReactElement,
     justifyBody?: boolean
+    formId?: string,
     //
     onCancel?: (...args: any[]) => void,
+    onCancelText?: string
     onConfirm?: (...args: any[]) => void,
+    onConfirmText?: string
     //
     show: boolean
     backdrop?: boolean
     closeOnBackdropClick?: boolean,
+
 };
 
 const Dialog = ({
@@ -22,7 +27,7 @@ const Dialog = ({
     ...props
 }: DialogProps) => {
 
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const onBackdropClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target === e.currentTarget) {
             closeOnBackdropClick && (props.onCancel && props.onCancel()) || (props.onConfirm && props.onConfirm())
         }
@@ -40,7 +45,7 @@ const Dialog = ({
                 className='dialog '
                 data-backdrop={backdrop}
 
-                onClick={(e) => handleBackdropClick(e)}
+                onClick={(e) => onBackdropClickHandler(e)}
             >
                 <div
                     className='dialog__container'
@@ -52,9 +57,9 @@ const Dialog = ({
                         <h1 className='dialog__header__title'>{props.title}</h1>
                     </header>
 
-                    <p className={`dialog__body ${props.justifyBody ? "dialog__body--justify" : ""}`}>
-                        {props.message}
-                    </p>
+                    <div className={`dialog__body ${props.justifyBody ? "dialog__body--justify" : ""}`}>
+                        {props.children}
+                    </div>
 
                     <footer className='dialog__footer'>
                         {props.onCancel && <Button onClick={props.onCancel} variant='outlined'>Cancel</Button>}
@@ -62,7 +67,8 @@ const Dialog = ({
                             onClick={props.onConfirm}
                             variant={type === "danger" ? "danger" : "primary"}
                             className='dialog__confirm'
-                            data-danger={type === "danger"}
+                            form={props?.formId}
+                            type={props?.formId ? "submit" : "button"}
                         > Confirm</Button >
                     </footer >
                 </div >
