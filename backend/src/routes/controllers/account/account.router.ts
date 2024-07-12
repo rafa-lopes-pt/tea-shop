@@ -4,9 +4,8 @@ import authMiddleware from "../../middleware/auth.middleware";
 import createBodyValidatorMiddleware from "../../middleware/createBodyValidator.middleware";
 import logoutController from "../auth/logout.controller";
 import deleteAccountController from "./deleteAccount.controller";
-import updateProfileImageMiddleware from "./updateProfileImage.middleware";
 import updateProfileController from "./updateProfile.controller";
-import multer from "multer";
+import updateProfileImageMiddleware from "./updateProfileImage.middleware";
 const router = express.Router();
 
 router.use(authMiddleware);

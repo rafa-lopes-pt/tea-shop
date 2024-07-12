@@ -3,7 +3,7 @@ import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import OrdersRepository from "../../../repositories/Orders.repository";
-
+import fs from "fs";
 export default async function deleteAccountController(
 	_req: Request,
 	res: Response,
@@ -47,6 +47,17 @@ export default async function deleteAccountController(
 					context: "deleting account",
 				}
 			);
+		}
+
+		//delete profile image
+		try {
+			const path =
+				"./resources/profile-images/" + res.locals.email + ".webp";
+			fs.unlinkSync(path);
+		} catch (error) {
+			throw new HttpError(HTTPCodes.ClientError.NOT_FOUND, "Not Found", {
+				error,
+			});
 		}
 
 		next();
