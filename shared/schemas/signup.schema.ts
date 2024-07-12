@@ -3,11 +3,9 @@ import ZodValidatorSchema from "./zod-validator-schema";
 import { LoginSchema } from "./login.schema";
 
 export const SignupSchema = LoginSchema.merge(
-	z
-		.object({
-			name: ZodValidatorSchema.alphabeticWithWhiteSpaces,
-		})
-		.required()
+	z.object({
+		name: ZodValidatorSchema.alphabeticWithWhiteSpaces,
+	})
 );
 
 export type SignupSchemaType = z.infer<typeof SignupSchema>;
