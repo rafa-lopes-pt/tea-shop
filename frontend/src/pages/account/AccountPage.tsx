@@ -9,7 +9,7 @@ import HelpCenterTab from "./help/HelpCenterTab";
 export default function AccountPage() {
 
 	const { user } = useContext(AuthCtx) as AuthCtxProperties;
-	if (!user) return <></>;
+	if (!user) throw new Error("Unauthorized Access.", { cause: "user flow failed to redirect to non-protected route. please close this tab, and open a new one" });
 
 	return (
 		<SectionWrapper className="account-page">

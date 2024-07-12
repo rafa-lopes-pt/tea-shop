@@ -1,5 +1,5 @@
 import express from "express";
-import { UpdateProfileSchema } from "../../../../../shared/schemas/UpdateProfile.schema";
+import { UpdateProfileSchema } from "../../../../../shared/schemas/update-profile.schema";
 import authMiddleware from "../../middleware/auth.middleware";
 import createBodyValidatorMiddleware from "../../middleware/createBodyValidator.middleware";
 import logoutController from "../auth/logout.controller";

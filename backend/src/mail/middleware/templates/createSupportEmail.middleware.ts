@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { SupportEmailSchemaType } from "../../../../../shared/schemas/SupportEmail.schema";
+import { SupportEmailSchemaType } from "../../../../../shared/schemas/support-email.schema";
 
 export default async function createSupportEmailMiddleware(
 	req: Request,

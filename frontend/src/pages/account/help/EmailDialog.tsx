@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Id } from 'react-toastify';
-import { SupportEmailSchema, SupportEmailSchemaType } from '../../../../../shared/schemas/SupportEmail.schema';
+import { SupportEmailSchema, SupportEmailSchemaType } from '../../../../../shared/schemas/support-email.schema';
 import responseHandler from '../../../apis/responseHandler';
 import RestAPI from '../../../apis/server.endpoints';
 import Dialog, { DialogProps } from '../../../components/alerts/dialogs/Dialog';

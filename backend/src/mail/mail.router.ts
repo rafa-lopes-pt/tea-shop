@@ -1,15 +1,14 @@
 import express from "express";
 import session from "express-session";
+import HTTPCodes from "simple-http-codes";
+import { SupportEmailSchema } from "../../../shared/schemas/support-email.schema";
+import HttpError from "../../../shared/types/HttpError/HttpError.type";
+import createBodyValidatorMiddleware from "../routes/middleware/createBodyValidator.middleware";
 import oauth2callbackController from "./controllers/oauth2callback.controller";
 import renewRefreshTokenController from "./controllers/renewRefreshToken.controller";
 import sendMailController from "./controllers/sendMail.controller";
 import createOauthClientMiddleware from "./middleware/createOauthClient.middleware";
-import createActivationLinkEmail from "./middleware/templates/createActivationLinkEmail.middleware";
-import HTTPCodes from "simple-http-codes";
-import HttpError from "../../../shared/types/HttpError/HttpError.type";
 import createSupportEmailMiddleware from "./middleware/templates/createSupportEmail.middleware";
-import createBodyValidatorMiddleware from "../routes/middleware/createBodyValidator.middleware";
-import { SupportEmailSchema } from "../../../shared/schemas/SupportEmail.schema";
 const SESSION_SECRET = process.env.SESSION_SECRET;
 if (!SESSION_SECRET) {
 	throw new HttpError(

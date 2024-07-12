@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { Id } from "react-toastify";
-import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
+import { UpdateProfileSchemaType } from "../../../shared/schemas/update-profile.schema";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 import { UserSchemaType } from "../../../shared/schemas/user.schema";

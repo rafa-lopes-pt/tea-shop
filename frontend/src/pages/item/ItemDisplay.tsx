@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/buttons/Button";
 import IconButton from "../../components/buttons/IconButton";
 import FontAwesomeIcons from "../../components/misc/Icons";
-import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import { ShopDataCtx } from "../../store/shop-data.context";
 import SectionWrapper from "../misc/SectionWrapper";
 
 export default function ItemDisplay() {

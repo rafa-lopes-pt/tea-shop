@@ -1,8 +1,7 @@
-import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.schema";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
+import { UpdateProfileSchemaType } from "../../../shared/schemas/update-profile.schema";
 import HttpError from "../../../shared/types/HttpError/HttpError.type";
-import { notifyErrorToast } from "../components/alerts/toasts/toast.notifier";
 
 const BASE_URI: string = import.meta.env.VITE_REST_API_URI;
 if (!BASE_URI) {
