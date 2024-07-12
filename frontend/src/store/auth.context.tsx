@@ -4,15 +4,12 @@ import { UpdateProfileSchemaType } from "../../../shared/schemas/UpdateProfile.s
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 import { UserSchemaType } from "../../../shared/schemas/user.schema";
+import { CLIENT_SESSION_LIFETIME_MS } from "../../../shared/utils/misc";
 import responseHandler from "../apis/responseHandler";
 import RestAPI from "../apis/server.endpoints";
 import {
-	notifyToastPromiseEnd,
 	notifyToastPromiseSuccess
 } from "../components/alerts/toasts/promise.notifier";
-import { CLIENT_SESSION_LIFETIME_MS } from "../../../shared/utils/misc"
-import { notifyErrorToast } from "../components/alerts/toasts/toast.notifier";
-import { useNavigate } from "react-router-dom";
 
 
 export type AuthCtxProperties = {
