@@ -1,26 +1,46 @@
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { CartItemSchema, CartItemSchemaType } from "../../../../shared/schemas/cart-item.schema";
 import Button from "../../components/buttons/Button";
 import IconButton from "../../components/buttons/IconButton";
 import FontAwesomeIcons from "../../components/misc/Icons";
+import { CartCtx, CartCtxProperties } from "../../store/cart.context";
 import { ShopDataCtx } from "../../store/shop-data.context";
 import SectionWrapper from "../misc/SectionWrapper";
+import { notifyErrorToast, notifySuccessToast } from "../../components/alerts/toasts/toast.notifier";
 
 export default function ItemDisplay() {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const shopData = useContext(ShopDataCtx)?.items;
+	const cart = useContext(CartCtx) as CartCtxProperties
 
 	if (!shopData) {
 		//Implement skeleton
 		return <p>Loading...</p>;
 	}
 
-	const item = shopData?.find((e) => e.name == id);
-	// redirect as a 404 since a use can put anything on the url bar
-	// this is dev code only
+	const item = shopData?.find((e) => e._id == id);
 	if (!item) throw new Error("Shop Item not found");
 
+	const onBuyNowHandler = () => {
+		onAddToCartHandler()
+		navigate("/cart")
+	}
+
+	const onAddToCartHandler = () => {
+		console.log(item);
+
+		const data = CartItemSchema.safeParse({ ...item, quantity: 1 })
+		if (!data.success) {
+			notifyErrorToast("Something went wrong...")
+			console.error(data.error.issues)
+		}
+		else {
+			cart.add(data.data as CartItemSchemaType)
+			notifySuccessToast(`Added ${item.name}!`)
+		}
+	}
 
 	return (
 		<SectionWrapper className="item-display">
@@ -28,7 +48,7 @@ export default function ItemDisplay() {
 				<IconButton
 					icon={FontAwesomeIcons.left}
 					className="item-display__navigation item-display__navigation--prev"
-					onClick={() => navigate("/item/" + shopData.previous.name)}
+					onClick={() => navigate("/item/" + shopData.previous._id)}
 				/>
 				<span className="item-display__title">
 					<h1>{item.name}</h1>
@@ -38,7 +58,7 @@ export default function ItemDisplay() {
 				<IconButton
 					icon={FontAwesomeIcons.right}
 					className="item-display__navigation item-display__navigation--next"
-					onClick={() => navigate("/item/" + shopData.next.name)}
+					onClick={() => navigate("/item/" + shopData.next._id)}
 				/>
 			</header>
 
@@ -48,9 +68,8 @@ export default function ItemDisplay() {
 				<p>{item.price} $</p>
 
 				<span>
-					{" "}
-					<Button>Buy Now</Button>
-					<Button variant="outlined">Add To Cart</Button>
+					<Button onClick={onBuyNowHandler}>Buy Now</Button>
+					<Button onClick={onAddToCartHandler} variant="outlined">Add To Cart</Button>
 				</span>
 			</div>
 

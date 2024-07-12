@@ -11,7 +11,7 @@ export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 
 	const handleShopItemDisplay = () => {
 		shopData.currentIdx = shopData.findIndex((e) => e.name === data.name);
-		navigate(`/item/${data.name}`);
+		navigate(`/item/${data._id}`);
 	};
 
 	return (
