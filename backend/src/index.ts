@@ -10,14 +10,10 @@ server.listen(port, () => {
 	console.log(`[server]: server is running on port ${port}`);
 });
 
-function cleanup() {
-	try {
-		dbClient.close();
-	} catch (error) {
-		//trying to close nonexistent connections
-	}
-
+async function cleanup() {
+	await dbClient.close(true);
 	console.log("a cleanup was performed");
+	process.exit(0);
 }
+
 process.on("SIGINT", cleanup);
-process.on("uncaughtException", cleanup);

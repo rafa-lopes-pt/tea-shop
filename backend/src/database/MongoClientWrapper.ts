@@ -40,8 +40,8 @@ export default class MongoClientWrapper {
 	/**
 	 * Exposes the close method to ensure that a connection is closed
 	 */
-	async close() {
-		return await this._client.close();
+	async close(force?: boolean) {
+		return await this._client.close(force);
 	}
 	/**
 	 * Handles errors and checks if action was successful
