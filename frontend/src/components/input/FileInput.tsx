@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef } from "react";
+import Image from "../misc/Image";
 export default function FileInput({
 	src,
 	className = "",
@@ -24,12 +25,9 @@ export default function FileInput({
 		<div
 			className={"file-input " + className}
 			onClick={() => ref.current?.click()}>
-			<img
+			<Image
 				src={src}
 				alt={alt}
-				onError={e =>
-					(e.target as HTMLImageElement).style.display = "none"
-				}
 			/>
 			<i className="fa-solid fa-file-arrow-up file-input__icon"></i>
 			<input
