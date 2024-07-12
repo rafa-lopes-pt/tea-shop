@@ -11,7 +11,7 @@ export type ShopDataCtxProperties = {
 
 export const ShopDataCtx = createContext<ShopDataCtxProperties | null>(null);
 
-export const ShopDataProvider = ({ children }: { children?: ReactNode }) => {
+export const ShopDataCtxProvider = ({ children }: { children?: ReactNode }) => {
 	const [items, setItems] = useState<CyclicArray<ShopItemSchemaType> | null>(
 		null
 	);
