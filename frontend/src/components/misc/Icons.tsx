@@ -11,6 +11,7 @@ enum FontAwesomeIcons {
     bot = "fa-solid fa-robot",
     document = "fa-solid fa-file-contract",
     add = "fa-regular fa-square-plus",
-    remove = "fa-regular fa-square-minus"
+    remove = "fa-regular fa-square-minus",
+    trash = "fa-solid fa-trash"
 }
 export default FontAwesomeIcons
