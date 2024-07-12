@@ -44,6 +44,8 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	//================= Session Store Handlers ================
 	//=========================================================
 	function loadSessionData() {
+		if (isLoggedIn) return;
+
 		try {
 			const localData = window.sessionStorage.getItem("session") as string;
 			const { user, isLoggedIn } = JSON.parse(localData);
@@ -58,6 +60,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 
 		} catch (error) {
+			console.error(error)
 			deleteSessionData()
 		}
 
@@ -76,7 +79,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			"session",
 			JSON.stringify({ user: data, isLoggedIn: true })
 		);
-		
+
 		if (!isLoggedIn) {
 			//expire a little before the auth cookie to prevent unauthorized access due to blocked event stack
 			// (is that even a real scenario??)
@@ -86,11 +89,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 				JSON.stringify(expiresAt)
 			);
 			setTimeout(() => { deleteSessionData() }, expiresAt)
-			window.addEventListener('beforeunload', function () {
-				//session store may persist if the whole browser is closed
-				//NOTE: cookie may still persist
-				clearSessionStorage()
-			});
+
 		}
 
 	}
