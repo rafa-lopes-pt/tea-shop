@@ -1,10 +1,11 @@
-import { ReactNode, createContext, useEffect, useMemo, useReducer } from "react";
+import { ReactNode, createContext, useEffect, useReducer } from "react";
 import { CartItemSchemaType } from "../../../shared/schemas/cart-item.schema";
 
 export type CartCtxProperties = {
     cart: CartItemSchemaType[] | null;
-    add: (payload: CartItemSchemaType) => void
-    remove: (payload: CartItemSchemaType) => void
+    addItem: (payload: CartItemSchemaType) => void
+    removeItem: (payload: CartItemSchemaType) => void
+    deleteItem: (payload: CartItemSchemaType) => void
     clear: () => void
     totalPrice: () => number
     isEmpty: () => boolean
@@ -15,6 +16,7 @@ export const CartCtx = createContext<CartCtxProperties | null>(null);
 enum CartActionType {
     ADD,
     REMOVE,
+    DELETE,
     CLEAR,
     LOAD
 }
@@ -33,6 +35,26 @@ const cartReducer = (state: CartItemSchemaType[], action: CartAction) => {
             return [...state, action.payload]
         }
         case CartActionType.REMOVE: {
+            if (!action.payload) return state;
+
+            for (let i = 0; i < state.length; i++) {
+
+                if (state[i]?._id === action.payload._id) {
+
+                    const item = state[i]
+
+                    if (item.quantity > 1) {
+                        return [...state].splice(i, 1, { ...state[i], quantity: state[i].quantity-- })
+                    } else {
+                        return [...state].splice(i, 1)
+                    }
+
+                }
+
+            }
+            return [...state, action.payload]
+        }
+        case CartActionType.DELETE: {
             if (action.payload) {
                 for (let i = 0; i < state.length; i++) {
                     if (state[i]?._id === action.payload._id) {
@@ -67,12 +89,16 @@ export const CartCtxProvider = ({ children }: { children?: ReactNode }) => {
         window.localStorage.setItem("cart", JSON.stringify(cart))
     }, [cart])
 
-    const add = (payload: CartItemSchemaType) => {
+    const addItem = (payload: CartItemSchemaType) => {
         dispatch({ type: CartActionType.ADD, payload })
     }
 
-    const remove = (payload: CartItemSchemaType) => {
+    const removeItem = (payload: CartItemSchemaType) => {
         dispatch({ type: CartActionType.REMOVE, payload })
+    }
+
+    const deleteItem = (payload: CartItemSchemaType) => {
+        dispatch({ type: CartActionType.DELETE, payload })
     }
 
     const clear = () => {
@@ -86,6 +112,6 @@ export const CartCtxProvider = ({ children }: { children?: ReactNode }) => {
     const isEmpty = () => cart.length === 0
 
     return (
-        <CartCtx.Provider value={{ cart, add, remove, clear, totalPrice, isEmpty }}>{children}</CartCtx.Provider>
+        <CartCtx.Provider value={{ cart, addItem, removeItem, deleteItem, clear, totalPrice, isEmpty }}>{children}</CartCtx.Provider>
     );
 };
