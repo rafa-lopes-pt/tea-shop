@@ -29,7 +29,9 @@ const cartReducer = (state: CartItemSchemaType[], action: CartAction) => {
 
             for (let i = 0; i < state.length; i++) {
                 if (state[i]?._id === action.payload._id) {
-                    return [...state].splice(i, 1, { ...state[i], quantity: state[i].quantity++ })
+                    const arr = [...state]
+                    arr.splice(i, 1, { ...state[i], quantity: state[i].quantity++ })
+                    return arr
                 }
             }
             return [...state, action.payload]
@@ -41,14 +43,16 @@ const cartReducer = (state: CartItemSchemaType[], action: CartAction) => {
 
                 if (state[i]?._id === action.payload._id) {
 
-                    const item = state[i]
+                    const arr = [...state]
+                    const item = { ...arr[i] }
 
                     if (item.quantity > 1) {
-                        return [...state].splice(i, 1, { ...state[i], quantity: state[i].quantity-- })
+                        item.quantity--
+                        arr[i] = item
                     } else {
-                        return [...state].splice(i, 1)
+                        arr.splice(i, 1)
                     }
-
+                    return arr
                 }
 
             }
@@ -56,9 +60,12 @@ const cartReducer = (state: CartItemSchemaType[], action: CartAction) => {
         }
         case CartActionType.DELETE: {
             if (action.payload) {
+
                 for (let i = 0; i < state.length; i++) {
                     if (state[i]?._id === action.payload._id) {
-                        return [...state].splice(i, 1)
+                        const arr = [...state]
+                        arr.splice(i, 1)
+                        return arr
                     }
                 }
             }
