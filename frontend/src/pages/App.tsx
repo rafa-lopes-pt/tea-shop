@@ -14,11 +14,14 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (location.pathname !== "/login" && location.pathname !== "/" && !auth?.isLoggedIn) {
-			notifyInfoToast("Your session timed out. Please aogin again")
+
+		if (!auth?.loadSessionData()) {
+
+			notifyInfoToast("Your session timed out. Please login again")
 			navigate("/login")
 		}
-	})
+	}, [])
+
 
 	const AuthenticatedNav =
 		<Navbar
@@ -43,10 +46,7 @@ function App() {
 
 				{auth?.isLoggedIn ? AuthenticatedNav : UnauthenticatedNav}
 
-
-
 				{/* social icons */}
-
 				<div className="social-icons">
 					<IconButton icon={FontAwesomeIcons.youtube} />
 					<IconButton icon={FontAwesomeIcons.facebook} />
@@ -54,7 +54,7 @@ function App() {
 				</div>
 
 				<AnimatePresence>
-					<Outlet></Outlet>
+					{!auth?.isLoggedIn && !["/", "/login"].includes(location.pathname) ? <></> : <Outlet></Outlet>}
 				</AnimatePresence>
 			</main >
 		</>

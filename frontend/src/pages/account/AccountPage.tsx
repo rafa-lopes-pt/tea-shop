@@ -1,22 +1,17 @@
-import { useContext } from "react";
 import TabContainer from "../../components/containers/TabContainer";
-import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 import SectionWrapper from "../misc/SectionWrapper";
+import HelpCenterTab from "./help/HelpCenterTab";
 import PreviousOrdersTab from "./orders/PreviousOrdersTab";
 import ProfileTab from "./profile/ProfileTab";
-import HelpCenterTab from "./help/HelpCenterTab";
 
 export default function AccountPage() {
-
-	const { user } = useContext(AuthCtx) as AuthCtxProperties;
-	if (!user) throw new Error("Unauthorized Access.", { cause: "user flow failed to redirect to non-protected route. please close this tab, and open a new one" });
 
 	return (
 		<SectionWrapper className="account-page">
 			<h1>Account</h1>
 			<TabContainer id="account-page-tabs-container" tabs={
 				[
-					{ label: "Profile", content: <ProfileTab user={user} /> },
+					{ label: "Profile", content: <ProfileTab /> },
 					{ label: "Prev Orders", content: <PreviousOrdersTab /> },
 					{ label: "Help Center", content: <HelpCenterTab /> }
 				]

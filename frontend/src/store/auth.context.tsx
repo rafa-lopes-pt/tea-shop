@@ -21,6 +21,10 @@ export type AuthCtxProperties = {
 	deleteAccount: () => Promise<boolean>,
 	user: UserSchemaType | null,
 	signup: (body: SignupSchemaType) => Promise<boolean>,
+	/**
+	 * loads session data, and returns a boolean flag before state updates
+	 */
+	loadSessionData: () => boolean
 };
 
 export const AuthCtx = createContext<AuthCtxProperties | null>(null);
@@ -29,19 +33,11 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState<UserSchemaType | null>(null);
 
-
-	useEffect(() => {
-
-		loadSessionData()
-
-	}, []);
-
-
 	//=========================================================
 	//================= Session Store Handlers ================
 	//=========================================================
 	function loadSessionData() {
-		if (isLoggedIn) return;
+		if (isLoggedIn) return true;
 
 		try {
 			const localData = window.sessionStorage.getItem("session") as string;
@@ -49,19 +45,22 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			const expiresAt = window.sessionStorage.getItem("session-lifetime") as string;
 
 			if (!user || !isLoggedIn || !expiresAt || Date.now() >= new Date(expiresAt).getTime()) {
-				return deleteSessionData()
+				throw new Error("Missing data, or expired session")
+				return false;
 			}
 
 			setUser(user);
 			setIsLoggedIn(isLoggedIn);
-
+			return true
 
 		} catch (error) {
 			console.error(error)
 			deleteSessionData()
+			return false
 		}
 
 	}
+
 
 	const clearSessionStorage = () => {
 		window.sessionStorage.removeItem("session");
@@ -171,7 +170,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 
 	return (
-		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, updateImage, logout, deleteAccount, user, signup }}>
+		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, updateImage, logout, deleteAccount, user, signup, loadSessionData }}>
 			{children}
 		</AuthCtx.Provider>
 	);

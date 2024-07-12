@@ -10,9 +10,9 @@ import FileInput from "../../../components/input/FileInput";
 import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfileTab({ user }: { user: UserSchemaType }) {
+export default function ProfileTab() {
 	const [showDialog, setShowDialog] = useState(false)
-	const { updateUser, deleteAccount, updateImage } = useContext(AuthCtx) as AuthCtxProperties
+	const { user, updateUser, deleteAccount, updateImage } = useContext(AuthCtx) as AuthCtxProperties & { user: UserSchemaType }
 	const navigate = useNavigate()
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
 		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
@@ -30,7 +30,6 @@ export default function ProfileTab({ user }: { user: UserSchemaType }) {
 
 	return (
 		<>
-
 			<Dialog
 				type="danger"
 				show={showDialog}
