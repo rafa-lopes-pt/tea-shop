@@ -9,6 +9,8 @@ enum FontAwesomeIcons {
     question = "fa-solid fa-circle-question",
     chat = "fa-solid fa-headset",
     bot = "fa-solid fa-robot",
-    document = "fa-solid fa-file-contract"
+    document = "fa-solid fa-file-contract",
+    add = "fa-regular fa-square-plus",
+    remove = "fa-regular fa-square-minus"
 }
 export default FontAwesomeIcons
