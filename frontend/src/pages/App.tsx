@@ -1,16 +1,24 @@
 import { AnimatePresence } from "framer-motion";
-import { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import IconButton from "../components/buttons/IconButton";
 import FontAwesomeIcons from "../components/misc/Icons";
 import NavLink from "../components/navbar/NavLink";
 import Navbar from "../components/navbar/Navbar";
 import { AuthCtx } from "../store/auth.context";
 import Frame from "./misc/Frame";
+import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
 
 function App() {
 	const auth = useContext(AuthCtx);
+	const navigate = useNavigate()
 
+	useEffect(() => {
+		if (location.pathname !== "/login" && location.pathname !== "/" && !auth?.isLoggedIn) {
+			notifyInfoToast("Your session timed out. Please aogin again")
+			navigate("/login")
+		}
+	})
 
 	const AuthenticatedNav =
 		<Navbar

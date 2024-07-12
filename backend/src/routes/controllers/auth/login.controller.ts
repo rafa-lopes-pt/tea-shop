@@ -5,7 +5,7 @@ import { DbUserSchemaType } from "../../../repositories/types/DbUser.type";
 import UserRepository from "../../../repositories/User.repository";
 import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import { compareHash, signToken } from "../../../utils/crypto";
-
+import { CLIENT_SESSION_LIFETIME_MS } from "../../../../../shared/utils/misc";
 export default async function loginController(
 	req: Request,
 	res: Response,
@@ -77,7 +77,8 @@ export default async function loginController(
 		httpOnly: true,
 		secure: false,
 		sameSite: "strict",
-		maxAge: 1000 * 60 * 60 * 3,
+		maxAge: CLIENT_SESSION_LIFETIME_MS,
+		
 	});
 
 	const { _id, password: _hashedPassword, ...user } = existingUser;

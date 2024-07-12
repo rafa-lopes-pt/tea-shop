@@ -1,0 +1,1 @@
+export const CLIENT_SESSION_LIFETIME_MS = 1 * 1 * 60 * 1000;
