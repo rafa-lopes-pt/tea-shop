@@ -39,7 +39,6 @@
 		user-select: text;
 
 		@include media-query.small-screen() {
-			
 			max-height: 50%;
 		}
 
@@ -65,6 +64,7 @@
 		&__contact {
 			color: colors.$secondary;
 			text-decoration: underline;
+			user-select: text;
 		}
 	}
 }

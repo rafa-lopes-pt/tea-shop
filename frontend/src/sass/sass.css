@@ -1604,6 +1604,7 @@ body {
 .error-boundary__support__contact {
   color: #e6ac1a;
   text-decoration: underline;
+  user-select: text;
 }
 
 /*# sourceMappingURL=sass.css.map */

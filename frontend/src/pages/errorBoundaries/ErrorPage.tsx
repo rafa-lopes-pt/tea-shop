@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import Button from '../../components/buttons/Button'
 import Frame from '../misc/Frame'
 import { useNavigate } from 'react-router-dom'
+import { notifyInfoToast } from '../../components/alerts/toasts/toast.notifier'
 
 export default function ErrorPage({ title, error, showRefreshButton = true }: { title: string, error?: Error | unknown, showRefreshButton?: boolean }) {
     const navigate = useNavigate()
@@ -58,7 +59,12 @@ export default function ErrorPage({ title, error, showRefreshButton = true }: { 
 
                 </span>
                 <p className="error-boundary__support">
-                    Need a calming cup of support? Contact our team at <span className="error-boundary__support__contact">rafalopessecond@gmail.com</span></p>
+                    Need a calming cup of support? Contact our team at <span className="error-boundary__support__contact" onClick={() => {
+                        if (navigator?.clipboard) {
+                            navigator.clipboard.writeText("rafalopessecond@gmail.com")
+                            notifyInfoToast("Copied to clipboard")
+                        }
+                    }}>rafalopessecond@gmail.com</span></p>
             </main>
         </>
     )
