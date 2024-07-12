@@ -25,7 +25,7 @@ export default function ActivationPage() {
                 return true;
 
             }).then(res => {
-                !res && throwError(new Error("There seems to be a problem activating your account. Please request a new link through the sign up form, or try again later. If the error persists, then please contact the developers at: 'rafalopessecond@gmail.com'"))
+                !res && throwError(new Error("There seems to be a problem activating your account. Please request a new link through the sign up form, or try again later."))
             })
 
             ref.current = false

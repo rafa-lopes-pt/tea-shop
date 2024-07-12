@@ -5,6 +5,6 @@ export default function ActivateAccountErrors() {
   const error = useRouteError() as Error
 
   return (
-    <ErrorPage title="We've Spilled The Tea" message={error.message} />
+    <ErrorPage title={error.message} />
   )
 }

@@ -42,7 +42,7 @@ export default function ErrorPage({ title, error, showRefreshButton = true }: { 
                             }}
                             transition={{
                                 duration: 0.15
-                                ,ease:"easeOut"
+                                , ease: "easeOut"
                             }}
                             className="error-boundary__error">
                             {errMessage}
@@ -50,7 +50,8 @@ export default function ErrorPage({ title, error, showRefreshButton = true }: { 
                     }
                 </AnimatePresence>
                 <span className='error-boundary__actions'>
-                    <Button variant={showMessage ? "outlined" : "primary"} onClick={() => setShowMessage(prev => !prev)}>{showMessage ? "Hide" : "Show"} log</Button>
+                    {(error as any) &&
+                        <Button variant={showMessage ? "outlined" : "primary"} onClick={() => setShowMessage(prev => !prev)}>{showMessage ? "Hide" : "Show"} log</Button>}
                     {showRefreshButton &&
                         <Button variant='outlined' onClick={() => location.reload()}>Refresh</Button>}
 
