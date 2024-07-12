@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 import CyclicArray from "../../../../shared/types/ds/CyclicArray.ds";
-import { ShopDataCtx } from "../../store/shop/shop-data.context";
+import { ShopDataCtx } from "../../store/shop-data.context";
 
 export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 	const navigate = useNavigate();
 	const shopData = useContext(ShopDataCtx)
-		?.data as CyclicArray<ShopItemSchemaType>;
+		?.items as CyclicArray<ShopItemSchemaType>;
 
 	const handleShopItemDisplay = () => {
 		shopData.currentIdx = shopData.findIndex((e) => e.name === data.name);

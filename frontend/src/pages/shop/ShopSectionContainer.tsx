@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop/shop-data.context";
+import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop-data.context";
 import ShopItem from "./ShopItem";
 
 export default function ShopSectionContainer({
