@@ -2,9 +2,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import Button from '../../components/buttons/Button'
 import Frame from '../misc/Frame'
+import { useNavigate } from 'react-router-dom'
 
 export default function ErrorPage({ title, error, showRefreshButton = true }: { title: string, error?: Error | unknown, showRefreshButton?: boolean }) {
-
+    const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false)
     const errMessage = useMemo(() => error instanceof Error ? <>
         {error?.name && <p>
@@ -53,7 +54,7 @@ export default function ErrorPage({ title, error, showRefreshButton = true }: { 
                     {(error as any) &&
                         <Button variant={showMessage ? "outlined" : "primary"} onClick={() => setShowMessage(prev => !prev)}>{showMessage ? "Hide" : "Show"} log</Button>}
                     {showRefreshButton &&
-                        <Button variant='outlined' onClick={() => location.reload()}>Refresh</Button>}
+                        <Button variant='outlined' onClick={() => navigate("/")}>Refresh</Button>}
 
                 </span>
                 <p className="error-boundary__support">
