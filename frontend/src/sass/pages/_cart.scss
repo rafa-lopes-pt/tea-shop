@@ -7,7 +7,7 @@
 		"payment items";
 	grid-template-rows: auto 1fr;
 	grid-template-columns: 2fr 1fr;
-	gap: 1rem;
+	// gap: 0rem;
 
 	& h1 {
 		grid-area: title;
@@ -17,24 +17,32 @@
 
 .cart-list {
 	grid-area: items;
-	max-height: 100%;
-	overflow-y: auto;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	padding-top: 0.5em;
 	gap: 0.5rem;
-	padding: 1rem;
 	border: ridge 2px colors.$light;
+	position: relative;
+
+	.cart-items-wrapper {
+		overflow-y: scroll;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		padding: 0 1em;
+	}
 
 	&:has(.cart-item:hover) .cart-item {
-		opacity: 0.95;
-		perspective: 1000px;
-		transform: rotateX(20deg);
-		transition: all 0.2s ease 0.1 !important;
+		opacity: 0.9;
+		transform: scale(0.99);
+		transition: all 0.23s ease-out 0.1 !important;
 	}
 
 	& .cart-item:hover {
 		opacity: 1 !important;
-		transform: rotateX(0deg) !important;
+		transform: scale(1) !important;
 	}
 
 	&__empty {
@@ -44,5 +52,60 @@
 		place-content: center;
 		place-items: center;
 		text-align: center;
+	}
+
+	&__total {
+		text-align: center;
+		background-color: colors.$primary;
+		font-size: 1.35em;
+		font-weight: bold;
+		padding: 0.75em;
+		box-shadow: inset 2px 2px 20px 2px
+			rgba($color: colors.$light, $alpha: 0.15);
+	}
+}
+
+.cart-checkout {
+	margin-right: 5%;
+
+	&__shipping {
+		display: grid;
+		grid-template-areas:
+			"header   header"
+			"country city"
+			"street    zipcode";
+		flex-direction: column;
+		gap: 1.75em;
+		& h3 {
+			grid-area: header;
+		}
+
+		& *:nth-child(2) {
+			grid-area: country;
+		}
+		& *:last-child {
+			grid-area: street;
+		}
+	}
+
+	&__payment {
+		&__tbd {
+			display: flex;
+			flex-direction: column;
+			place-content: center;
+			align-items: center;
+			text-align: center;
+			background-color: rgba($color: colors.$light, $alpha: 0.15);
+			border: ridge 2px;
+			padding: 1em;
+			backdrop-filter: blur(15px);
+		}
+	}
+
+	& button[type="submit"] {
+		display: block;
+		width: 80%;
+		margin: auto !important;
+		font-size: 1.5rem;
 	}
 }

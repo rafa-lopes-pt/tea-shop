@@ -7,13 +7,22 @@ import { useNavigate } from 'react-router-dom'
 export default function CartList() {
   const { cart, totalPrice } = useContext(CartCtx) as CartCtxProperties
   const navigate = useNavigate()
+
+
   return (
     <div className='cart-list'>
       {cart?.length === 0 &&
         <span className='cart-list__empty'>
           <h3>Uh oh! Did you forget the most important ingredient... tea?</h3>
           <Button onClick={() => navigate("/")} variant='outlined'>Go to Shop</Button></span>}
-      {cart?.map(e => <CartItem key={e._id} item={e} />)}
+
+      <ul className='cart-items-wrapper'>
+        {cart?.map(e => <CartItem key={e._id} item={e} />)}
+      </ul>
+
+      <div className='cart-list__total'>
+        {totalPrice}$
+      </div>
     </div>
   )
 }

@@ -12,7 +12,7 @@ export default function CartItem({ item }: { item: CartItemSchemaType }) {
     const prettyPrice = (item.price * item.quantity).toFixed(2) + "$"
 
     return (
-        <div className='cart-item'>
+        <li className='cart-item'>
 
 
             <Image className='cart-item__img' src={im} alt="item" />
@@ -29,6 +29,6 @@ export default function CartItem({ item }: { item: CartItemSchemaType }) {
 
             <p className="cart-item__price">{prettyPrice}</p>
 
-        </div>
+        </li>
     )
 }

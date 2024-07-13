@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useReducer } from "react";
+import { ReactNode, createContext, useEffect, useMemo, useReducer } from "react";
 import { CartItemSchemaType } from "../../../shared/schemas/cart-item.schema";
 
 export type CartCtxProperties = {
@@ -7,7 +7,7 @@ export type CartCtxProperties = {
     removeItem: (payload: CartItemSchemaType) => void
     deleteItem: (payload: CartItemSchemaType) => void
     clear: () => void
-    totalPrice: () => number
+    totalPrice: string
     isEmpty: () => boolean
 };
 
@@ -112,9 +112,9 @@ export const CartCtxProvider = ({ children }: { children?: ReactNode }) => {
         dispatch({ type: CartActionType.CLEAR })
     }
 
-    const totalPrice = () => {
-        return cart.reduce((sum, e) => sum + e.price, 0)
-    }
+    const totalPrice = useMemo(() => {
+        return cart.reduce((sum, e) => sum + e.price * e.quantity, 0).toFixed(2)
+    }, [cart])
 
     const isEmpty = () => cart.length === 0
 

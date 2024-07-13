@@ -12,6 +12,7 @@ enum FontAwesomeIcons {
     document = "fa-solid fa-file-contract",
     add = "fa-regular fa-square-plus",
     remove = "fa-regular fa-square-minus",
-    trash = "fa-solid fa-trash"
+    trash = "fa-solid fa-trash",
+    card = "fa-solid fa-credit-card"
 }
 export default FontAwesomeIcons
