@@ -1,4 +1,5 @@
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
+import { OrderSchemaType } from "../../../shared/schemas/order.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
 import { UpdateProfileSchemaType } from "../../../shared/schemas/update-profile.schema";
 import HttpError from "../../../shared/types/HttpError/HttpError.type";
@@ -72,6 +73,9 @@ namespace RestAPI {
 		return jsonRequest("/profile", "DELETE");
 	}
 	//============== orders endpoints
+	export async function placeOrder(data: OrderSchemaType) {
+		return jsonRequest("/orders", "POST", data);
+	}
 	export async function getOrders() {
 		return jsonRequest("/orders");
 	}

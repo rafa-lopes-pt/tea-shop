@@ -1,22 +1,38 @@
-import { useForm } from 'react-hook-form';
-import { Form } from '../../components/form/Form'
-import { BillingInfoSchema, BillingInfoSchemaType } from '../../../../shared/schemas/billing-info.schema';
-import { useContext } from 'react';
-import { AuthCtx, AuthCtxProperties } from '../../store/auth.context';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Elements } from '@stripe/react-stripe-js';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { Id } from 'react-toastify';
+import { OrderSchema, OrderSchemaType } from '../../../../shared/schemas/order.schema';
+import { UserSchemaType } from '../../../../shared/schemas/user.schema';
+import responseHandler from '../../apis/responseHandler';
+import RestAPI from '../../apis/server.endpoints';
+import { notifyToastPromiseSuccess } from '../../components/alerts/toasts/promise.notifier';
+import { Form } from '../../components/form/Form';
 import FontAwesomeIcons from '../../components/misc/Icons';
+import { AuthCtx } from '../../store/auth.context';
+import { CartCtx, CartCtxProperties } from '../../store/cart.context';
 
 export default function PaymentDetails() {
-  const { user } = useContext(AuthCtx) as AuthCtxProperties
-  const { register, handleSubmit, formState } = useForm<BillingInfoSchemaType>({
-    resolver: zodResolver(BillingInfoSchema),
-    values: { ...user }
+  const user = useContext(AuthCtx)?.user as UserSchemaType
+  const { cart, clear } = useContext(CartCtx) as CartCtxProperties
+  const navigate = useNavigate()
+  const { register, handleSubmit, formState, reset } = useForm<OrderSchemaType>({
+    resolver: zodResolver(OrderSchema),
+    values: { email: user.email, billingInfo: { ...user }, items: cart ?? [] }
   });
 
 
 
-  const onSubmitHandler = async (data: BillingInfoSchemaType) => true
+  const onSubmitHandler = async (data: OrderSchemaType) => {
+    console.log(data)
+    await responseHandler(() => RestAPI.placeOrder(data), (_data: Response, toastId: Id) => {
+      notifyToastPromiseSuccess(toastId, "Order in Process!")
+      clear()
+      reset()
+      navigate("/")
+    })
+  }
 
 
 
@@ -26,10 +42,10 @@ export default function PaymentDetails() {
 
         <div className="cart-checkout__shipping">
           <h3>Shipping Details</h3>
-          <Form.Control register={register} formState={formState} name='country' label='Country' />
-          <Form.Control register={register} formState={formState} name='city' label='City' />
-          <Form.Control register={register} formState={formState} name='zipCode' label='Postal Code' />
-          <Form.Control register={register} formState={formState} name='street' label='Street' />
+          <Form.Control register={register} formState={formState} name='billingInfo.country' label='Country' />
+          <Form.Control register={register} formState={formState} name='billingInfo.city' label='City' />
+          <Form.Control register={register} formState={formState} name='billingInfo.zipCode' label='Postal Code' />
+          <Form.Control register={register} formState={formState} name='billingInfo.street' label='Street' />
 
         </div>
 
