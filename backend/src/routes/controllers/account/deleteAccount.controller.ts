@@ -4,6 +4,7 @@ import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
 import OrdersRepository from "../../../repositories/Orders.repository";
 import fs from "fs";
+import { OrderState } from "../../../../../shared/schemas/order.schema";
 export default async function deleteAccountController(
 	_req: Request,
 	res: Response,
@@ -13,7 +14,7 @@ export default async function deleteAccountController(
 		//Check if its possible to delete account
 		const orders_response = await OrdersRepository.has({
 			email: res.locals.email,
-			delivered: true,
+			state: { $or: [OrderState.PROCESSING, OrderState.SHIPPED] },
 		});
 
 		if (orders_response.error) {

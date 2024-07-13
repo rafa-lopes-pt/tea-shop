@@ -1,4 +1,6 @@
 import {
+	Document,
+	Filter,
 	FindCursor,
 	MongoClient,
 	ObjectId,
@@ -87,7 +89,7 @@ export default class MongoClientWrapper {
 			const db_response = await this._client
 				.db(database)
 				.collection(collection)
-				.deleteOne(filters);
+				.deleteOne(filters as Filter<any>);
 
 			if (db_response.deletedCount === 0)
 				throw new Error("Could not find resource");
@@ -119,7 +121,7 @@ export default class MongoClientWrapper {
 				.db(database)
 				.collection(collection)
 				.findOneAndUpdate(
-					filters,
+					filters as Filter<any>,
 					{ $set: data },
 					{ returnDocument: "after" }
 				);
@@ -154,7 +156,7 @@ export default class MongoClientWrapper {
 				data: this._client
 					.db(database)
 					.collection(collection)
-					.find(filters) as FindCursor<WithId<dto>>,
+					.find(filters as Filter<any>) as FindCursor<WithId<dto>>,
 			};
 		} catch (error) {
 			return {
@@ -178,7 +180,7 @@ export default class MongoClientWrapper {
 				data: (await this._client
 					.db(database)
 					.collection(collection)
-					.findOne(filters)) as WithId<dto> | null,
+					.findOne(filters as Filter<any>)) as WithId<dto> | null,
 			};
 		} catch (error) {
 			return {
@@ -194,7 +196,11 @@ export default class MongoClientWrapper {
 		collection: string,
 		filters: DatabaseFilters<dto>
 	): DatabaseResponse<boolean> {
-		const response = await this.findOne(database, collection, filters);
+		const response = await this.findOne(
+			database,
+			collection,
+			filters as Filter<any>
+		);
 		return { ...response, data: response.data ? true : false };
 	}
 }
