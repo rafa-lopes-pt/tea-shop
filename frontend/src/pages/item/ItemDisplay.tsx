@@ -29,15 +29,12 @@ export default function ItemDisplay() {
 	}
 
 	const onAddToCartHandler = () => {
-		console.log(item);
-
 		const data = CartItemSchema.safeParse({ ...item, quantity: 1 })
 		if (!data.success) {
 			notifyErrorToast("Something went wrong...")
-			console.error(data.error.issues)
 		}
 		else {
-			cart.add(data.data as CartItemSchemaType)
+			cart.addItem(data.data as CartItemSchemaType)
 			notifySuccessToast(`Added ${item.name}!`)
 		}
 	}
