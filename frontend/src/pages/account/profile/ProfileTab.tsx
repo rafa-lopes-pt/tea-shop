@@ -28,6 +28,8 @@ export default function ProfileTab() {
 		updateImage(f)
 	}
 
+
+
 	return (
 		<>
 			<Dialog
@@ -111,8 +113,8 @@ export default function ProfileTab() {
 
 						<span>
 
-							<Button disabled={!formState.isDirty} variant="outlined" onClick={() => reset()}>Discard</Button>
-							<Form.Submit disabled={!formState.isDirty}>Save</Form.Submit>
+							<Form.Reset formState={formState} onClick={() => reset()}>Discard</Form.Reset>
+							<Form.Submit formState={formState} >Save</Form.Submit>
 
 						</span>
 

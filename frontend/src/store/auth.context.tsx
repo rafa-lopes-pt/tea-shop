@@ -163,8 +163,10 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 	}
 
 	async function signup(body: SignupSchemaType) {
-		return await responseHandler(() => RestAPI.signup(body), (_res: Response, toastId: Id) =>
+		return await responseHandler(() => RestAPI.signup(body), (_res: Response, toastId: Id) => {
 			notifyToastPromiseSuccess(toastId, "Check Your Inbox")
+			return true
+		}
 		)
 	}
 

@@ -25,6 +25,7 @@ export default function SignupForm({
 			onChangeScreen()
 	}
 
+
 	return (
 		<Form
 			animationProps={animationProps}
@@ -55,7 +56,7 @@ export default function SignupForm({
 					formState={formState}
 				/>
 
-				<Form.Submit>Register</Form.Submit>
+				<Form.Submit formState={formState}>Register</Form.Submit>
 			</Form.Body>
 		</Form>
 	);

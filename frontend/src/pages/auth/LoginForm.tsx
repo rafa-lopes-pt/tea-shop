@@ -18,8 +18,8 @@ export default function LoginForm({
 }) {
 	const { register, handleSubmit, formState, reset } = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
+		defaultValues: { email: "", password: "" }
 	});
-
 
 	const auth = useContext(AuthCtx) as AuthCtxProperties;
 	const navigate = useNavigate();
@@ -37,7 +37,6 @@ export default function LoginForm({
 				<Button
 					variant="link"
 					onClick={() => onChangeScreen()}
-					disabled={formState.isSubmitting}
 				>
 					Don't have an account yet?
 				</Button>
@@ -47,17 +46,15 @@ export default function LoginForm({
 				<Form.Email
 					register={register}
 					formState={formState}
-					disabled={formState.isSubmitting}
 				/>
 
 				<Form.Password
 					register={register}
 					formState={formState}
-					disabled={formState.isSubmitting}
 				/>
 
 
-				<Form.Submit disabled={formState.isSubmitting}>
+				<Form.Submit formState={formState}>
 					Login
 				</Form.Submit>
 			</Form.Body>

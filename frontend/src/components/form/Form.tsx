@@ -59,8 +59,7 @@ export namespace Form {
 	}
 	/**
 	 * Control that requires the definition of name property
-	 */
-	interface FormControlProps<T extends FieldValues>
+	 */interface FormControlProps<T extends FieldValues>
 		extends InputProps,
 		FormControlValidationProps<T> {
 		name: Path<T>;
@@ -130,6 +129,7 @@ export namespace Form {
 					{...props}
 					{...register(props.name)}
 					className={"form__control " + className}
+					disabled={formState?.isSubmitting}
 				/>
 			);
 		}
@@ -139,6 +139,7 @@ export namespace Form {
 				{...register(props.name)}
 				className={"form__control " + className}
 				invalidText={getErrorMessage(props.name, formState?.errors)}
+				disabled={formState?.isSubmitting}
 			/>
 		);
 	};
@@ -163,8 +164,26 @@ export namespace Form {
 	/**
 	 * Creates a form button with type submit
 	 */
-	export const Submit = (props: ButtonProps) => (
-		<Button  {...props} type="submit" />
+	export const Submit = (props: ButtonProps & { formState: FormState<any> }) => (
+		<Button
+			{...props}
+			type="submit"
+			disabled={
+				props.disabled !== undefined ?
+					props.disabled :
+					Object.keys(props.formState.touchedFields).length === 0 || props.formState.isSubmitting
+			} />
+	);
+	export const Reset = ({ variant = "outlined", ...props }: ButtonProps & { formState: FormState<any> }) => (
+		<Button
+			{...props}
+			variant={variant}
+			type="reset"
+			disabled={
+				props.disabled !== undefined ?
+					props.disabled :
+					Object.keys(props.formState.touchedFields).length === 0 || props.formState.isSubmitting
+			} />
 	);
 
 	export const Separator = () => <hr className="form__separator" />;

@@ -10,6 +10,11 @@
 	&:hover .toggle {
 		box-shadow: inset 2px 2px 10px 0px colors.$dark;
 	}
+
+	&:has(.toggle__input:disabled) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 }
 
 .toggle {
