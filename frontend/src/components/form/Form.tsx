@@ -164,17 +164,17 @@ export namespace Form {
 	/**
 	 * Creates a form button with type submit
 	 */
-	export const Submit = (props: ButtonProps & { formState: FormState<any> }) => (
+	export const Submit = ({ formState, ...props }: ButtonProps & { formState: FormState<any> }) => (
 		<Button
 			{...props}
 			type="submit"
 			disabled={
 				props.disabled !== undefined ?
 					props.disabled :
-					Object.keys(props.formState.touchedFields).length === 0 || props.formState.isSubmitting
+					Object.keys(formState.touchedFields).length === 0 || formState.isSubmitting
 			} />
 	);
-	export const Reset = ({ variant = "outlined", ...props }: ButtonProps & { formState: FormState<any> }) => (
+	export const Reset = ({ variant = "outlined", formState, ...props }: ButtonProps & { formState: FormState<any> }) => (
 		<Button
 			{...props}
 			variant={variant}
@@ -182,7 +182,7 @@ export namespace Form {
 			disabled={
 				props.disabled !== undefined ?
 					props.disabled :
-					Object.keys(props.formState.touchedFields).length === 0 || props.formState.isSubmitting
+					Object.keys(formState.touchedFields).length === 0 || formState.isSubmitting
 			} />
 	);
 
