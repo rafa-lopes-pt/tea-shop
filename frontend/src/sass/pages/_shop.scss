@@ -15,10 +15,10 @@
 		& .footer-item {
 			max-width: 400px;
 
-			&__title {
-			}
-			&__text {
-			}
+			// &__title {
+			// }
+			// &__text {
+			// }
 		}
 
 		@include media-query.small-screen() {
@@ -44,6 +44,19 @@
 	display: flex;
 	padding: 1em;
 	gap: 1em;
+
+	&:has(> *:hover) > * {
+		transition: all 0.5s ease-out !important;
+		perspective: 100px;
+		transform: scale(0.95);
+		opacity: 0.8;
+		filter: grayscale(5%);
+	}
+	& > *:hover {
+		transform: scale(1.05);
+		opacity: 1;
+		filter: grayscale(0%);
+	}
 }
 
 .shop-item {
@@ -110,9 +123,11 @@
 
 		background-color: rgba($color: colors.$bg, $alpha: 0.8);
 
-		padding: 1em;
+		padding: 10%;
 
 		p {
+			font-size: 1.35em;
+			text-align: center;
 			overflow: hidden;
 			display: -webkit-box;
 			-webkit-line-clamp: 5;

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
+import useHorizontalScroll from "../../hooks/useHorizontalScroll";
 import { ShopDataCtx, ShopDataCtxProperties } from "../../store/shop-data.context";
 import ShopItem from "./ShopItem";
 
@@ -8,7 +9,6 @@ export default function ShopSectionContainer({
 	className?: string;
 }) {
 	const { items, refresh } = useContext(ShopDataCtx) as ShopDataCtxProperties;
-
 
 	//due to asynchronous code, and the state updates on hoc, this "fix" prevents
 	//unwanted refetch calls to the backend
@@ -20,13 +20,15 @@ export default function ShopSectionContainer({
 		}
 	}, [ref.current])
 
+	const containerRef = useHorizontalScroll<HTMLDivElement>()
+
 	return (
 		<div className={"shop-section__wrapper " + className}>
 			{/* FIX: Add skelleton while loading */}
 			{!items && <p>LOADING... PLZ FIX ME</p>}
 
 			{items && (
-				<div className={"shop-section"}>
+				<div ref={containerRef} className={"shop-section"} >
 					{items.map((e, i) => (
 						<ShopItem
 							data={e}
