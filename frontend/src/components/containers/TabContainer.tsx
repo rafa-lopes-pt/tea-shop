@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { MouseEventHandler, ReactNode, useLayoutEffect, useState } from 'react'
 import Button from '../buttons/Button'
 
-export default function TabContainer({ id, tabs }: { tabs: { label: string, content: ReactNode }[], id: string }) {
+export default function TabContainer({ id, tabs, persist = false }: { tabs: { label: string, content: ReactNode, }[], id: string, persist?: boolean }) {
     let navArr: NavItemProps[] = []
     let contentArr: ReactNode[] = []
     const [currentTabIndex, setCurrentTabIndex] = useState(0)
@@ -10,7 +10,7 @@ export default function TabContainer({ id, tabs }: { tabs: { label: string, cont
 
     const setActiveTab = (index: number) => {
         setCurrentTabIndex(index)
-        window.sessionStorage.setItem("active-tab-" + id, index + "")
+        persist && window.sessionStorage.setItem("active-tab-" + id, index + "")
     }
 
     useLayoutEffect(() => {
@@ -18,6 +18,7 @@ export default function TabContainer({ id, tabs }: { tabs: { label: string, cont
         setCurrentTabIndex(JSON.parse(
             window.sessionStorage.getItem("active-tab-" + id) as string || "0")
         )
+
     }, [])
 
     tabs?.forEach((tab, index) => {

@@ -15,7 +15,9 @@ export default function AccountPage() {
 					{ label: "Prev Orders", content: <PreviousOrdersTab /> },
 					{ label: "Help Center", content: <HelpCenterTab /> }
 				]
-			} />
+			}
+				persist
+			/>
 		</SectionWrapper>
 	);
 }
