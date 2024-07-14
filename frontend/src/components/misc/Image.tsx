@@ -12,6 +12,7 @@ export default function Image({ className, placeholder = "/media/tea-cup.svg", e
 
     return (
         <LazyLoad
+            offset={100}
             className={"image " + className}
             placeholder={<img {...props} src={placeholder} className={"image__img" + className} />}
         >
