@@ -24,6 +24,6 @@ export default function useHorizontalScroll<E extends HTMLElement>(
 					onWheel as unknown as EventListener
 				);
 		}
-	}, []);
+	});
 	return elRef;
 }
