@@ -1,12 +1,30 @@
-@use "../base/colors";
-.orders-list {
+@use "../base/colors" as colors;
+.prev-orders-tab {
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: center;
+
+	&__item {
+		color: colors.$text-secondary;
+		text-transform: capitalize;
+		&:last-child {
+			border-start-start-radius: 10px;
+			border-start-end-radius: 10px;
+		}
+		&:first-child {
+			border-end-start-radius: 10px;
+			border-end-end-radius: 10px;
+		}
+	}
+}
+.order-info__list {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 1em;
 	height: 100%;
 }
-.order-item {
+.order-info__item {
 	display: grid;
 	grid-template-areas:
 		"img price"

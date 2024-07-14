@@ -1783,7 +1783,25 @@ body {
   border-end-start-radius: 75%;
 }
 
-.orders-list {
+.prev-orders-tab {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+}
+.prev-orders-tab__item {
+  color: #000604;
+  text-transform: capitalize;
+}
+.prev-orders-tab__item:last-child {
+  border-start-start-radius: 10px;
+  border-start-end-radius: 10px;
+}
+.prev-orders-tab__item:first-child {
+  border-end-start-radius: 10px;
+  border-end-end-radius: 10px;
+}
+
+.order-info__list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1791,7 +1809,7 @@ body {
   height: 100%;
 }
 
-.order-item {
+.order-info__item {
   display: grid;
   grid-template-areas: "img price" "name name" "qt qt";
   align-items: center;
@@ -1800,10 +1818,10 @@ body {
   box-shadow: 0px 4px 25px 0px rgba(0, 31, 20, 0.5);
   padding: 0.25em;
 }
-.order-item__name {
+.order-info__item__name {
   grid-area: name;
 }
-.order-item__img {
+.order-info__item__img {
   grid-area: img;
   width: 3em;
   height: 3em;
@@ -1811,10 +1829,10 @@ body {
   transition: all 1s ease;
   box-shadow: 2px 8px 15px 1px rgba(0, 72, 46, 0.5);
 }
-.order-item__price {
+.order-info__item__price {
   grid-area: price;
 }
-.order-item__qt {
+.order-info__item__qt {
   grid-area: qt;
 }
 
