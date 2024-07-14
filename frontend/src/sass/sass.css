@@ -1791,7 +1791,15 @@ body {
 .prev-orders-tab {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: center;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+}
+.prev-orders-tab__empty {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  padding-bottom: 10%;
 }
 .prev-orders-tab__item {
   color: #000604;

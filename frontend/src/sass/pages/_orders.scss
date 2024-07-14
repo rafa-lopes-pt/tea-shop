@@ -2,7 +2,16 @@
 .prev-orders-tab {
 	display: flex;
 	flex-direction: column-reverse;
-	justify-content: center;
+	align-items: center;
+	justify-content: start;
+	height: 100%;
+
+	&__empty {
+		text-align: center;
+		width: 50%;
+		margin: auto;
+		padding-bottom: 10%;
+	}
 
 	&__item {
 		color: colors.$text-secondary;
