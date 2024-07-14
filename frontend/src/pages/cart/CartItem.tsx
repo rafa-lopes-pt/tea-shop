@@ -2,9 +2,8 @@ import { useContext } from 'react'
 import { CartItemSchemaType } from '../../../../shared/schemas/cart-item.schema'
 import IconButton from '../../components/buttons/IconButton'
 import FontAwesomeIcons from '../../components/misc/Icons'
-import { CartCtx, CartCtxProperties } from '../../store/cart.context'
 import Image from '../../components/misc/Image'
-import im from "../../../public/media/white_tea.jpg"
+import { CartCtx, CartCtxProperties } from '../../store/cart.context'
 
 export default function CartItem({ item }: { item: CartItemSchemaType }) {
     const { addItem, removeItem, deleteItem } = useContext(CartCtx) as CartCtxProperties
@@ -14,8 +13,7 @@ export default function CartItem({ item }: { item: CartItemSchemaType }) {
     return (
         <li className='cart-item'>
 
-
-            <Image className='cart-item__img' src={im} alt="item" />
+            <Image className='cart-item__img' src={item.image} alt="item" />
             <p className='cart-item__name'>{item.name}</p>
 
             <span className='cart-item__quantity'>

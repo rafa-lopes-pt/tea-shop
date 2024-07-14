@@ -60,6 +60,15 @@ body {
   height: 100%;
 }
 
+.image {
+  width: 100%;
+  height: 100%;
+}
+.image__img {
+  width: 100%;
+  height: 100%;
+}
+
 .btn {
   padding: 0.75em 1em;
   border-radius: 5px;
@@ -1487,9 +1496,6 @@ body {
   font-size: 1.35rem;
 }
 .user-info__image {
-  background: url("/media/user-image-placeholder.jpg");
-  background-size: contain;
-  background-position: center;
   outline: 0.35em solid #e6ac1a;
   box-shadow: 2px 2px 20px 2px #e6ac1a;
 }
@@ -1774,6 +1780,18 @@ body {
   border-radius: 0.25em;
   border-start-end-radius: 75%;
   border-end-start-radius: 75%;
+}
+
+.order-item__name {
+  color: red !important;
+}
+.order-item .img-wrapper {
+  background: url("/media/user-image-placeholder.jpg");
+  background-size: contain;
+  background-position: center;
+  width: 4em;
+  height: 4em;
+  outline: 2px solid red;
 }
 
 /*# sourceMappingURL=sass.css.map */

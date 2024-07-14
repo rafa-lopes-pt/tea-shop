@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Id } from 'react-toastify';
-import { OrderSchema, OrderSchemaType } from '../../../../shared/schemas/order.schema';
+import { OrderSchema, OrderSchemaType, OrderState } from '../../../../shared/schemas/order.schema';
 import { UserSchemaType } from '../../../../shared/schemas/user.schema';
 import responseHandler from '../../apis/responseHandler';
 import RestAPI from '../../apis/server.endpoints';
@@ -19,7 +19,7 @@ export default function PaymentDetails() {
   const navigate = useNavigate()
   const { register, handleSubmit, formState, reset } = useForm<OrderSchemaType>({
     resolver: zodResolver(OrderSchema),
-    values: { email: user.email, billingInfo: { ...user }, items: cart ?? [] }
+    values: { email: user.email, billingInfo: { ...user }, items: cart ?? [], createdAt: 0, state: OrderState.PROCESSING }
   });
 
 

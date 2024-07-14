@@ -4,6 +4,7 @@
 @use "base/typography";
 @use "base/base";
 // components
+@use "components/misc/image";
 @use "components/button/button";
 @use "components/button/icon-button";
 @use "components/navbar/navbar";
@@ -28,3 +29,4 @@
 @use "pages/error-boundary";
 @use "pages/cart";
 @use "pages/cart-item";
+@use "pages/orders";

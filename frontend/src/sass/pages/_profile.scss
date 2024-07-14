@@ -56,9 +56,6 @@
 	}
 
 	&__image {
-		background: url("/media/user-image-placeholder.jpg");
-		background-size: contain;
-		background-position: center;
 		outline: 0.35em solid colors.$secondary;
 		box-shadow: 2px 2px 20px 2px colors.$secondary;
 	}
