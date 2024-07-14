@@ -22,6 +22,8 @@ export type DialogProps = {
 
 const Dialog = ({
     type = "info",
+    onConfirmText = "Confirm",
+    onCancelText = "Cancel",
     backdrop = true,
     closeOnBackdropClick = false,
     ...props
@@ -62,14 +64,14 @@ const Dialog = ({
                     </div>
 
                     <footer className='dialog__footer'>
-                        {props.onCancel && <Button onClick={props.onCancel} variant='outlined'>Cancel</Button>}
+                        {props.onCancel && <Button onClick={props.onCancel} variant='outlined'>{onCancelText}</Button>}
                         <Button
                             onClick={props.onConfirm}
                             variant={type === "danger" ? "danger" : "primary"}
                             className='dialog__confirm'
                             form={props?.formId}
                             type={props?.formId ? "submit" : "button"}
-                        > Confirm</Button >
+                        > {onConfirmText}</Button >
                     </footer >
                 </div >
 
