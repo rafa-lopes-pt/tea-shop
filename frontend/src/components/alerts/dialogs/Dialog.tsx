@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import Button from '../../buttons/Button';
 export type DialogProps = {
     type?: "info" | "danger",
-    title: string,
+    title?: string,
     children?: string | ReactElement,
     justifyBody?: boolean
     formId?: string,
@@ -14,7 +14,7 @@ export type DialogProps = {
     onConfirm?: (...args: any[]) => void,
     onConfirmText?: string
     //
-    show: boolean
+    show?: boolean
     backdrop?: boolean
     closeOnBackdropClick?: boolean,
 

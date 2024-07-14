@@ -5,6 +5,7 @@ import RestAPI from "../../../apis/server.endpoints";
 import Dialog, { DialogProps } from "../../../components/alerts/dialogs/Dialog";
 import Image from "../../../components/misc/Image";
 import { AnimatePresence, motion } from "framer-motion";
+import OrderItem from "./OrderItem";
 
 
 export default function PreviousOrdersTab() {
@@ -51,20 +52,15 @@ export default function PreviousOrdersTab() {
                                 className="prev-orders-tab__item accordion-item__header"
                                 key={"prev-orders-tab-order-#" + e.createdAt}
                                 onClick={() => {
+
                                     setDialogData(
                                         {
-                                            show: dialogData ? true : false,
                                             title: "Order #" + e.createdAt,
-                                            onConfirm: () => setShowDialog(false)
-                                            , onConfirmText: "Close"
-                                            , children: <div className="order-info__list">{
+                                            onConfirm: () => setShowDialog(false),
+                                            onConfirmText: "Close",
+                                            children: <div className="order-info__list">{
                                                 e.items.map(item =>
-                                                    <div className="order-info__item" key={"prev-order-" + e.createdAt + "-" + item._id}>
-                                                        <Image className='order-item__img' src={item.image} alt="" />
-                                                        <p className='order-item__name'>{item.name}</p>
-                                                        <p className="order-item__price">{(item.price * item.quantity).toFixed(2)}$</p>
-                                                        <p className="order-item__qt">Qt: {item.quantity}</p>
-                                                    </div>
+                                                    <OrderItem item={item} key={"prev-order-" + e.createdAt + "-" + item._id} />
                                                 )
                                             }</div>
 
