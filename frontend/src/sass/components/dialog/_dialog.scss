@@ -1,6 +1,7 @@
 @use "../../utils/layout" as layout;
 @use "../../base/colors" as colors;
 @use "../../utils/media-queries" as media-query;
+@use "../../base/base" as base;
 .dialog {
 	overflow: hidden;
 	position: absolute;
@@ -83,6 +84,8 @@
 		max-height: 33vh;
 		overflow-y: auto;
 		overflow-x: hidden;
+
+		@include base.dark-scrollbar();
 
 		&--justify {
 			text-align: justify;
