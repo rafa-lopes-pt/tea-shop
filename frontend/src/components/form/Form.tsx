@@ -159,6 +159,7 @@ export namespace Form {
 			{...register(props.name)}
 			className={"form__control form__textarea" + className}
 			invalidText={getErrorMessage(props.name, formState?.errors)}
+			disabled={formState?.isSubmitting}
 		/>
 	}
 	/**
@@ -177,7 +178,7 @@ export namespace Form {
 	export const Reset = ({ variant = "outlined", formState, ...props }: ButtonProps & { formState: FormState<any> }) => (
 		<Button
 			{...props}
-			variant={variant}
+			variant={variant} 
 			type="reset"
 			disabled={
 				props.disabled !== undefined ?

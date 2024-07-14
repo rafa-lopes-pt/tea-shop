@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Id } from 'react-toastify';
 import { SupportEmailSchema, SupportEmailSchemaType } from '../../../../../shared/schemas/support-email.schema';
@@ -19,28 +18,24 @@ const EmailDialog = ({
         resolver: zodResolver(SupportEmailSchema)
     })
 
-    const [wasSubmitted, setWasSubmitted] = useState(false)
-
     const onSubmitHandler = async (data: SupportEmailSchemaType) => {
-        setWasSubmitted(true)
         await responseHandler(() =>
             RestAPI.emailSupport(data), (_data: any, toastId: Id) => {
-                setWasSubmitted(true)
                 notifyToastPromiseSuccess(toastId, "Ticket Created")
             })
 
     }
 
-    const onDialogCloseHandler = () => {
+    const onDialogCloseHandler = async () => {
         reset();
-        setWasSubmitted(false)
         onCancel && onCancel()
+
     }
 
 
-    return <Dialog {...props} formId='support-email-form' onCancel={onDialogCloseHandler} onConfirm={wasSubmitted ? onDialogCloseHandler : () => { }}>
+    return <Dialog {...props} formId='support-email-form' onCancel={!formState.isSubmitted ? onDialogCloseHandler : undefined} onConfirmText={formState.isSubmitted ? "Close" : "Send"} onConfirm={formState.isSubmitted ? onDialogCloseHandler : () => { }}>
         <>
-            {!wasSubmitted &&
+            {!formState.isSubmitted &&
                 <Form id="support-email-form" className='email-dialog-body' onSubmit={handleSubmit(onSubmitHandler)}>
                     <Form.Email
                         outlined
@@ -58,7 +53,7 @@ const EmailDialog = ({
                     />
                 </Form>}
 
-            {wasSubmitted &&
+            {formState.isSubmitted &&
                 <div className='dialog__header'>
                     Thanks for your email. Our team will reply as soon as possible.
                 </div>
