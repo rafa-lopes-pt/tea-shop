@@ -2,7 +2,7 @@ import { ReactNode, createContext, useEffect, useMemo, useReducer } from "react"
 import { CartItemSchemaType } from "../../../shared/schemas/cart-item.schema";
 
 export type CartCtxProperties = {
-    cart: CartItemSchemaType[] | null;
+    cart: CartItemSchemaType[];
     addItem: (payload: CartItemSchemaType) => void
     removeItem: (payload: CartItemSchemaType) => void
     deleteItem: (payload: CartItemSchemaType) => void
@@ -85,7 +85,7 @@ export const CartCtxProvider = ({ children }: { children?: ReactNode }) => {
 
     function loadPrevCart() {
         try {
-            return JSON.parse(window.localStorage.getItem("cart") as string)
+            return JSON.parse(window.localStorage.getItem("cart") as string) || []
         } catch (error) {
             return []
         }
@@ -113,7 +113,7 @@ export const CartCtxProvider = ({ children }: { children?: ReactNode }) => {
     }
 
     const totalPrice = useMemo(() => {
-        return cart.reduce((sum, e) => sum + e.price * e.quantity, 0).toFixed(2)
+        return cart?.reduce((sum, e) => sum + e.price * e.quantity, 0).toFixed(2)
     }, [cart])
 
     const isEmpty = () => cart.length === 0
