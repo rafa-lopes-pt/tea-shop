@@ -14,7 +14,7 @@ export default async function deleteAccountController(
 		//Check if its possible to delete account
 		const orders_response = await OrdersRepository.has({
 			email: res.locals.email,
-			state: { $or: [OrderState.PROCESSING, OrderState.SHIPPED] },
+			state: { $in: [OrderState.PROCESSING, OrderState.SHIPPED] },
 		});
 
 		if (orders_response.error) {
@@ -56,9 +56,7 @@ export default async function deleteAccountController(
 				"./resources/profile-images/" + res.locals.email + ".webp";
 			fs.unlinkSync(path);
 		} catch (error) {
-			throw new HttpError(HTTPCodes.ClientError.NOT_FOUND, "Not Found", {
-				error,
-			});
+			//user might not have an image...no worries here
 		}
 
 		next();
