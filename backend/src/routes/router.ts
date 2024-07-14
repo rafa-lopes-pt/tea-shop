@@ -12,8 +12,8 @@ const router = express.Router();
 router.use(authRouter);
 router.use("/shop", shopRouter);
 router.use("/profile", accountRouter);
-router.use(mailRouter);
 router.use("/orders", ordersRouter);
+router.use(mailRouter);
 //resource access
 router.get(
 	"/resources/profile-images/:resource",
