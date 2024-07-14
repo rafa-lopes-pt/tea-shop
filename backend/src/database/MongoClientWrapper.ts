@@ -71,8 +71,6 @@ export default class MongoClientWrapper {
 				message: `Error while inserting ${JSON.stringify(data)} into into ${collection} collection from ${database} database`,
 				error,
 			};
-		} finally {
-			await this.close();
 		}
 	}
 	/**
@@ -101,8 +99,6 @@ export default class MongoClientWrapper {
 				message: `Could not delete requested ${JSON.stringify(filters)} from ${collection} collection from ${database}`,
 				error,
 			};
-		} finally {
-			await this.close();
 		}
 	}
 	/**
@@ -136,8 +132,6 @@ export default class MongoClientWrapper {
 				error,
 				message: `Could not update requested ${JSON.stringify(data)} from ${collection} collection from ${database}`,
 			};
-		} finally {
-			await this.close();
 		}
 	}
 	/**
@@ -187,8 +181,6 @@ export default class MongoClientWrapper {
 				error,
 				message: `Error while searching for ${JSON.stringify(filters)} on ${collection} collection from ${database}`,
 			};
-		} finally {
-			await this.close();
 		}
 	}
 	async has<dto>(
