@@ -1836,4 +1836,31 @@ body {
   grid-area: qt;
 }
 
+.dev-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  place-items: center;
+  text-align: center;
+  height: 100%;
+  max-height: max-content;
+}
+.dev-center__note__box {
+  margin: auto;
+  background-color: rgba(235, 255, 248, 0.2);
+  border: ridge 2px #ebfff8;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  max-width: 80%;
+}
+.dev-center__triggers {
+  display: flex;
+  gap: 1rem;
+}
+.dev-center footer a {
+  color: #e6ac1a;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=sass.css.map */

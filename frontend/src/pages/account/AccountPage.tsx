@@ -1,5 +1,6 @@
 import TabContainer from "../../components/containers/TabContainer";
 import SectionWrapper from "../misc/SectionWrapper";
+import DevCenterTab from "./dev/DevCenterTab";
 import HelpCenterTab from "./help/HelpCenterTab";
 import PreviousOrdersTab from "./orders/PreviousOrdersTab";
 import ProfileTab from "./profile/ProfileTab";
@@ -13,7 +14,8 @@ export default function AccountPage() {
 				[
 					{ label: "Profile", content: <ProfileTab /> },
 					{ label: "Prev Orders", content: <PreviousOrdersTab /> },
-					{ label: "Help Center", content: <HelpCenterTab /> }
+					{ label: "Help Center", content: <HelpCenterTab /> },
+					{ label: "Dev Center", content: <DevCenterTab /> }
 				]
 			}
 				persist
