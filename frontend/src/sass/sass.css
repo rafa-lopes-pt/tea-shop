@@ -1716,6 +1716,11 @@ body {
   padding: 1em;
   backdrop-filter: blur(15px);
 }
+.cart-checkout__payment a {
+  color: #e6ac1a;
+  font-weight: bold;
+  text-decoration: underline;
+}
 .cart-checkout button[type=submit] {
   display: block;
   width: 80%;

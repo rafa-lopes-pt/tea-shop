@@ -54,7 +54,7 @@ export default function PaymentDetails() {
         <div className="cart-checkout__payment">
           <h3>Payment Details</h3>
           <div className='cart-checkout__payment__tbd'><h4>Stage 1 Feature</h4>
-            <p>Check out the Github docs for more info</p></div>
+            <p>Check out the <a href="https://github.com/rafa-lopes-pt/tea-shop" target='_blank'>Github docs</a> for more info</p></div>
 
         </div>
 

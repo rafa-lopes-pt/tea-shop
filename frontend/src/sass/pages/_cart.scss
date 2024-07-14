@@ -100,6 +100,12 @@
 			padding: 1em;
 			backdrop-filter: blur(15px);
 		}
+
+		& a {
+			color: colors.$secondary;
+			font-weight: bold;
+			text-decoration: underline;
+		}
 	}
 
 	& button[type="submit"] {
