@@ -1,12 +1,25 @@
 import { ImgHTMLAttributes } from "react";
+import LazyLoad from 'react-lazyload';
 
-export default function Image({ ...props }: ImgHTMLAttributes<HTMLImageElement>) {
+export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+    placeholder?: string
+    error?: string
+}
+
+
+export default function Image({ className, placeholder = "/media/tea-cup.svg", error = placeholder, ...props }: ImageProps) {
+
+
     return (
-        <img
-            {...props}
-            onError={e =>
-                (e.target as HTMLImageElement).style.display = "none"
-            }
-        />
+        <LazyLoad
+            className={"image " + className}
+            placeholder={<img {...props} src={placeholder} className={"image__img" + className} />}
+        >
+            <img className={"image__img"} src={props.src} onError={(e) => {
+                const el = e.target as HTMLImageElement
+                el.src = error
+            }} />
+        </LazyLoad>
     )
 }
+

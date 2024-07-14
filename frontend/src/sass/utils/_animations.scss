@@ -1,0 +1,16 @@
+@keyframes loading {
+	50% {
+		opacity: 0;
+		filter: blur(2px);
+	}
+}
+
+@mixin loading-animation() {
+	animation: loading 2s cubic-bezier(0.8, 0.2, 0.1, 0.8) both infinite;
+}
+
+@keyframes onLoad {
+	from {
+		opacity: 0;
+	}
+}
