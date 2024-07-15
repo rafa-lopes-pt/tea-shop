@@ -1609,11 +1609,17 @@ body {
   justify-content: space-evenly;
   gap: 1em;
 }
+@media (hover: none) or (max-width: 900px) {
+  .help-center .support__items {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .help-center .support__icon {
   text-align: center;
   font-size: 1.5rem;
-  width: 4em;
-  height: 4em;
+  width: 6em;
+  height: 6em;
   background: linear-gradient(#00482e, #001f14);
   box-shadow: inset 2px 2px 20px 2px rgba(235, 255, 248, 0.2);
   display: flex;
@@ -1629,15 +1635,8 @@ body {
 .help-center .support__icon i {
   font-size: 1.5em;
 }
-@media (hover: none) or (max-width: 900px) {
-  .help-center .support__icon i {
-    font-size: 0.9em;
-  }
-}
-@media (hover: none) or (max-width: 900px) {
-  .help-center .support__icon p {
-    font-size: 0.7em;
-  }
+.help-center .support__icon p {
+  font-size: 0.9em;
 }
 .help-center .support__icon:hover {
   box-shadow: inset 2px 2px 30px 2px rgba(235, 255, 248, 0.5);

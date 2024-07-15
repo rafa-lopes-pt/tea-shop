@@ -27,16 +27,16 @@
 			display: flex;
 			justify-content: space-evenly;
 			gap: 1em;
+			@include media-query.small-screen() {
+				flex-direction: column;
+				align-items: center;
+			}
 		}
 
 		&__icon {
 			text-align: center;
 			font-size: 1.5rem;
 			$size: 6em;
-
-			@include media-query.small-screen() {
-				$size: 4em;
-			}
 
 			width: $size;
 			height: $size;
@@ -59,15 +59,9 @@
 
 			& i {
 				font-size: 1.5em;
-
-				@include media-query.small-screen() {
-					font-size: 0.9em;
-				}
 			}
 			& p {
-				@include media-query.small-screen() {
-					font-size: 0.7em;
-				}
+				font-size: 0.9em;
 			}
 
 			&:hover {
