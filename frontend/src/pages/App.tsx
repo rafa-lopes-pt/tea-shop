@@ -34,11 +34,15 @@ function App() {
 	}, [auth?.user])
 
 	useLayoutEffect(() => {
+		const isSessionValid = auth?.checkSessionValidity()
 
-		console.log("was called")
-		if (!auth?.checkSessionValidity() && !location.pathname.match(new RegExp("^\/$|^\/login|^/item", "i"))) {
+		if (!isSessionValid && !location.pathname.match(new RegExp("^\/$|^\/login|^/item", "i"))) {
 			clientSideLogout()
 		}
+		else if (!isSessionValid) {
+			auth?.deleteSessionData()
+		}
+
 	}, [location.pathname])
 
 
