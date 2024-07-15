@@ -5,3 +5,15 @@
 		@content;
 	}
 }
+
+@mixin large-screen() {
+	@media (min-width: 750px) {
+		@content;
+	}
+}
+
+@mixin can-hover() {
+	@media (min-width: 750px) {
+		@content;
+	}
+}
