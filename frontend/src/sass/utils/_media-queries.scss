@@ -1,19 +1,19 @@
 @use "../base/colors" as colors;
 
 @mixin small-screen() {
-	@media (hover: none) or (max-width: 750px) {
+	@media (hover: none) or (max-width: 900px) {
 		@content;
 	}
 }
 
 @mixin large-screen() {
-	@media (min-width: 750px) {
+	@media (min-width: 900px) {
 		@content;
 	}
 }
 
 @mixin can-hover() {
-	@media (min-width: 750px) {
+	@media (hover: hover) {
 		@content;
 	}
 }

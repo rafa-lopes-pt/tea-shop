@@ -9,6 +9,7 @@ import { ShopDataCtx } from "../../store/shop-data.context";
 import SectionWrapper from "../misc/SectionWrapper";
 import { notifyErrorToast, notifyInfoToast, notifySuccessToast } from "../../components/alerts/toasts/toast.notifier";
 import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
+import Image from "../../components/misc/Image";
 
 export default function ItemDisplay() {
 	const { id } = useParams();
@@ -18,8 +19,8 @@ export default function ItemDisplay() {
 	const { isLoggedIn } = useContext(AuthCtx) as AuthCtxProperties
 
 	if (!shopData) {
-		//Implement skeleton
-		return <p>Loading...</p>;
+		navigate("/")
+		return;
 	}
 
 	const item = shopData?.find((e) => e._id == id);
@@ -86,7 +87,7 @@ export default function ItemDisplay() {
 			</footer>
 
 			<div className="item-display__image-wrapper">
-				<img src={item.image} />
+				<Image src={item.image} />
 			</div>
 		</SectionWrapper>
 	);
