@@ -473,13 +473,14 @@ body {
 
 .tabs-container {
   padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 1em;
+  height: 94%;
 }
 .tabs-container__tab {
-  position: absolute;
-  top: calc(20% + 1em);
-  right: 1em;
-  bottom: 1em;
-  left: 1em;
+  overflow: auto;
 }
 .tabs-container__nav__button {
   border-radius: 0%;
@@ -1071,6 +1072,7 @@ body {
   position: relative;
   border: 2px solid red;
   padding: 1em;
+  overflow: hidden;
 }
 
 .main-navbar {
@@ -1501,7 +1503,6 @@ body {
 .profile {
   margin: auto;
   width: 70%;
-  max-height: 100%;
   overflow: auto;
   padding: 1em;
 }

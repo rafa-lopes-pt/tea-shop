@@ -2,12 +2,13 @@
 
 .tabs-container {
 	padding: 1em;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+	gap: 1em;
+	height: 94%;
 	&__tab {
-		position: absolute;
-		top: calc(20% + 1em);
-		right: 1em;
-		bottom: 1em;
-		left: 1em;
+		overflow: auto;
 	}
 
 	&__nav {
