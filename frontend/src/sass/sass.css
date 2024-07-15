@@ -641,6 +641,7 @@ body {
   padding: 0.5em 1em;
   display: grid;
   grid-template-columns: 1fr auto;
+  grid-auto-flow: column;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   border-bottom: 1px ridge rgba(0, 31, 20, 0.3);
@@ -1916,6 +1917,7 @@ body {
 .prev-orders-tab__item {
   color: #000604;
   text-transform: capitalize;
+  grid-template-columns: auto auto auto;
 }
 .prev-orders-tab__item:last-child {
   border-start-start-radius: 10px;
