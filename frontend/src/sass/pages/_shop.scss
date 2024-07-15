@@ -11,6 +11,7 @@
 
 	& footer {
 		display: flex;
+		align-items: center;
 
 		& .footer-item {
 			max-width: 400px;
@@ -45,17 +46,19 @@
 	padding: 1em;
 	gap: 1em;
 
-	&:has(> *:hover) > * {
-		transition: all 0.5s ease-out !important;
-		perspective: 100px;
-		transform: scale(0.95);
-		opacity: 0.8;
-		filter: grayscale(5%);
-	}
-	& > *:hover {
-		transform: scale(1.05);
-		opacity: 1;
-		filter: grayscale(0%);
+	@include media-query.can-hover() {
+		&:has(> *:hover) > * {
+			transition: all 0.5s ease-out !important;
+			perspective: 100px;
+			transform: scale(0.95);
+			opacity: 0.8;
+			filter: grayscale(5%);
+		}
+		& > *:hover {
+			transform: scale(1.05);
+			opacity: 1;
+			filter: grayscale(0%);
+		}
 	}
 }
 
