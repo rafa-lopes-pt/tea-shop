@@ -25,7 +25,7 @@
 
 		background-color: rgba($color: colors.$bg, $alpha: 0.8);
 		backdrop-filter: blur(0.5px);
-		z-index: 1000;
+		z-index: -1;
 
 		opacity: 0;
 
@@ -36,6 +36,7 @@
 		&[data-show="true"] {
 			transform: scale(30);
 			opacity: 1;
+			z-index: 1000;
 		}
 	}
 
