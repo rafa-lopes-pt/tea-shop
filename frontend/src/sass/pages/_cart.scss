@@ -74,6 +74,10 @@
 		text-align: center;
 	}
 
+	&:has(&__empty) &__total {
+		display: none;
+	}
+
 	&__total {
 		text-align: center;
 		background-color: colors.$primary;

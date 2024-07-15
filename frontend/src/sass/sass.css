@@ -1287,7 +1287,7 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 5px 50% 5px 50%;
   transform: translate(-75%, -25%);
-  background: url("/media/tea.jpg") rgba(230, 172, 26, 0.8);
+  background: url("/media/white-tea.webp") rgba(230, 172, 26, 0.8);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1305,7 +1305,7 @@ body {
   z-index: 1;
   border-radius: 50% 5px 50% 5px;
   transform: translate(-25%, -75%);
-  background: url("/media/white_tea.jpg") rgba(230, 172, 26, 0.8);
+  background: url("/media/oolong-tea.webp") rgba(230, 172, 26, 0.8);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1784,6 +1784,9 @@ body {
   place-content: center;
   place-items: center;
   text-align: center;
+}
+.cart-list:has(.cart-list__empty) .cart-list__total {
+  display: none;
 }
 .cart-list__total {
   text-align: center;

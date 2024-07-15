@@ -23,7 +23,7 @@
 				border-radius: 5px 50% 5px 50%;
 				transform: translate(-75%, -25%);
 
-				background: url("/media/tea.jpg")
+				background: url("/media/white-tea.webp")
 					lighten(rgba(colors.$secondary, 0.8), 0%);
 
 				background-repeat: no-repeat;
@@ -44,7 +44,7 @@
 				border-radius: 50% 5px 50% 5px;
 				transform: translate(-25%, -75%);
 
-				background: url("/media/white_tea.jpg")
+				background: url("/media/oolong-tea.webp")
 					lighten(rgba(colors.$secondary, 0.8), 0%);
 				background-repeat: no-repeat;
 				background-size: cover;
