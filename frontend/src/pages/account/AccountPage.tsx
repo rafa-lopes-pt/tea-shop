@@ -6,7 +6,6 @@ import PreviousOrdersTab from "./orders/PreviousOrdersTab";
 import ProfileTab from "./profile/ProfileTab";
 
 export default function AccountPage() {
-
 	return (
 		<SectionWrapper className="account-page">
 			<h1>Account</h1>

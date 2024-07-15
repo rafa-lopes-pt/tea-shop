@@ -1,9 +1,9 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { Id } from "react-toastify";
 import { UpdateProfileSchemaType } from "../../../shared/schemas/update-profile.schema";
 import { LoginSchemaType } from "../../../shared/schemas/login.schema";
 import { SignupSchemaType } from "../../../shared/schemas/signup.schema";
-import { UserSchemaType } from "../../../shared/schemas/user.schema";
+import { UserSchema, UserSchemaType } from "../../../shared/schemas/user.schema";
 import { CLIENT_SESSION_LIFETIME_MS } from "../../../shared/utils/misc";
 import responseHandler from "../apis/responseHandler";
 import RestAPI from "../apis/server.endpoints";
@@ -21,78 +21,73 @@ export type AuthCtxProperties = {
 	deleteAccount: () => Promise<boolean>,
 	user: UserSchemaType | null,
 	signup: (body: SignupSchemaType) => Promise<boolean>,
-	/**
-	 * loads session data, and returns a boolean flag before state updates
-	 */
-	loadSessionData: () => boolean
+	checkSessionValidity: () => boolean
+	deleteSessionData: () => void
 };
 
 export const AuthCtx = createContext<AuthCtxProperties | null>(null);
 
 export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState<UserSchemaType | null>(null);
+
+	useEffect(() => {
+
+		loadSessionData()
+
+	}, [])
+
 
 	//=========================================================
 	//================= Session Store Handlers ================
 	//=========================================================
-	function loadSessionData() {
-		if (isLoggedIn) return true;
-
+	function getSessionStore() {
 		try {
 			const localData = window.sessionStorage.getItem("session") as string;
-			const { user, isLoggedIn } = JSON.parse(localData);
-			const expiresAt = window.sessionStorage.getItem("session-lifetime") as string;
+			const { user } = JSON.parse(localData)
+			const expiresAt = JSON.parse(window.sessionStorage.getItem("session-lifetime") as string);
 
-			if (!user || !isLoggedIn || !expiresAt || Date.now() >= new Date(expiresAt).getTime()) {
-				throw new Error("Missing data, or expired session")
-				return false;
-			}
-
-			setUser(user);
-			setIsLoggedIn(isLoggedIn);
-			return true
-
+			return { user, isValid: UserSchema.safeParse(user).success && Date.now() < expiresAt }
 		} catch (error) {
-			console.error(error)
-			deleteSessionData()
-			return false
+			//console.error(error)
+			return {}
 		}
 
 	}
 
+	function checkSessionValidity() {
+		return getSessionStore()?.isValid as boolean
+	}
 
-	const clearSessionStorage = () => {
+	function loadSessionData() {
+		const { user, isValid } = getSessionStore() as { user: UserSchemaType, isValid: boolean }
+		if (!isValid) return false;
+		setUser(user);
+		return true
+
+	}
+
+	function clearSessionStorage() {
 		window.sessionStorage.removeItem("session");
 		window.sessionStorage.removeItem("session-lifetime")
 	}
 
 	function saveSessionData(data: UserSchemaType) {
-		setIsLoggedIn(true);
 		setUser(data);
 
 		window.sessionStorage.setItem(
 			"session",
-			JSON.stringify({ user: data, isLoggedIn: true })
+			JSON.stringify({ user: data })
 		);
 
-		if (!isLoggedIn) {
-			//expire a little before the auth cookie to prevent unauthorized access due to blocked event stack
-			// (is that even a real scenario??)
-			const expiresAt = CLIENT_SESSION_LIFETIME_MS * 0.99;
-			window.sessionStorage.setItem(
-				"session-lifetime",
-				JSON.stringify(expiresAt)
-			);
-			setTimeout(() => { deleteSessionData() }, expiresAt)
-
-		}
-
+		const expiresAt = CLIENT_SESSION_LIFETIME_MS
+		window.sessionStorage.setItem(
+			"session-lifetime",
+			JSON.stringify(Date.now() + expiresAt)
+		);
 	}
 
 	function deleteSessionData() {
 		setUser(null);
-		setIsLoggedIn(false);
 		clearSessionStorage()
 	}
 	//=========================================================
@@ -101,14 +96,6 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 			const data = (await res.json()).data
 
 			saveSessionData(data)
-			// setIsLoggedIn(true);
-			// setUser(data);
-
-			// window.sessionStorage.setItem(
-			// 	"session",
-			// 	JSON.stringify({ user: data, isLoggedIn: true })
-			// );
-
 			notifyToastPromiseSuccess(toastId, "Logged In");
 			return true
 		})
@@ -172,7 +159,7 @@ export const AuthCtxProvider = ({ children }: { children?: ReactNode }) => {
 
 
 	return (
-		<AuthCtx.Provider value={{ isLoggedIn, login, updateUser, updateImage, logout, deleteAccount, user, signup, loadSessionData }}>
+		<AuthCtx.Provider value={{ isLoggedIn: user ? true : false, login, updateUser, updateImage, logout, deleteAccount, user, signup, checkSessionValidity, deleteSessionData }}>
 			{children}
 		</AuthCtx.Provider>
 	);

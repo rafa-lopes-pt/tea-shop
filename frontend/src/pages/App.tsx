@@ -1,26 +1,44 @@
 import { AnimatePresence } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useLayoutEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
 import IconButton from "../components/buttons/IconButton";
 import FontAwesomeIcons from "../components/misc/Icons";
 import NavLink from "../components/navbar/NavLink";
 import Navbar from "../components/navbar/Navbar";
 import { AuthCtx } from "../store/auth.context";
 import Frame from "./misc/Frame";
-import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
 
 function App() {
 	const auth = useContext(AuthCtx);
 	const navigate = useNavigate()
 
+	const clientSideLogout = () => {
+		auth?.deleteSessionData()
+		notifyInfoToast("Your session timed out. Please login again")
+		navigate("/login")
+
+	}
+
 	useEffect(() => {
 
-		if (!auth?.loadSessionData()) {
 
-			notifyInfoToast("Your session timed out. Please login again")
-			navigate("/login")
+		const id = auth?.isLoggedIn ? setInterval(() => {
+			if (!auth?.checkSessionValidity()) {
+				clientSideLogout()
+			}
+		}, 1000 * 5) : undefined
+
+		return () => clearInterval(id)
+
+	}, [auth?.user])
+
+	useLayoutEffect(() => {
+
+		if (!auth?.checkSessionValidity() && !location.pathname.match(new RegExp("^\/$|^\/login|^/item", "i"))) {
+			clientSideLogout()
 		}
-	}, [])
+	}, [location.pathname])
 
 
 	const AuthenticatedNav =
@@ -54,7 +72,7 @@ function App() {
 				</div>
 
 				<AnimatePresence>
-					{!auth?.isLoggedIn && !["/", "/login"].includes(location.pathname) ? <></> : <Outlet></Outlet>}
+					<Outlet></Outlet>
 				</AnimatePresence>
 			</main >
 		</>

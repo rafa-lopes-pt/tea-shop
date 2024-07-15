@@ -7,13 +7,15 @@ import FontAwesomeIcons from "../../components/misc/Icons";
 import { CartCtx, CartCtxProperties } from "../../store/cart.context";
 import { ShopDataCtx } from "../../store/shop-data.context";
 import SectionWrapper from "../misc/SectionWrapper";
-import { notifyErrorToast, notifySuccessToast } from "../../components/alerts/toasts/toast.notifier";
+import { notifyErrorToast, notifyInfoToast, notifySuccessToast } from "../../components/alerts/toasts/toast.notifier";
+import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
 
 export default function ItemDisplay() {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const shopData = useContext(ShopDataCtx)?.items;
 	const cart = useContext(CartCtx) as CartCtxProperties
+	const { isLoggedIn } = useContext(AuthCtx) as AuthCtxProperties
 
 	if (!shopData) {
 		//Implement skeleton
@@ -24,11 +26,12 @@ export default function ItemDisplay() {
 	if (!item) throw new Error("Shop Item not found");
 
 	const onBuyNowHandler = () => {
-		onAddToCartHandler()
-		navigate("/cart")
+		onAddToCartHandler() && navigate("/cart")
 	}
 
 	const onAddToCartHandler = () => {
+		if (!isLoggedIn) { notifyInfoToast("Please login first"); navigate("/login"); return false; }
+
 		const data = CartItemSchema.safeParse({ ...item, quantity: 1 })
 		if (!data.success) {
 			notifyErrorToast("Something went wrong...")
@@ -36,6 +39,7 @@ export default function ItemDisplay() {
 		else {
 			cart.addItem(data.data as CartItemSchemaType)
 			notifySuccessToast(`Added ${item.name}!`)
+			return true
 		}
 	}
 
