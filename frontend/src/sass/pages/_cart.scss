@@ -1,4 +1,5 @@
 @use "../base/colors" as colors;
+@use "../utils/media-queries" as media-query;
 
 .cart {
 	display: grid;
@@ -7,31 +8,50 @@
 		"payment items";
 	grid-template-rows: auto 1fr;
 	grid-template-columns: 2fr 1fr;
-	// gap: 0rem;
+
+	overflow: hidden;
+
+	@include media-query.small-screen() {
+		grid-template-areas:
+			"title"
+			"payment"
+			"items";
+		grid-template-rows: auto auto auto;
+		grid-template-columns: 1fr;
+		gap: 1em;
+		overflow-y: auto !important;
+		justify-content: center;
+		justify-items: center;
+	}
 
 	& h1 {
 		grid-area: title;
 	}
-	overflow: hidden;
 }
 
 .cart-list {
 	grid-area: items;
 	overflow: hidden;
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: 1fr auto;
+
 	padding-top: 0.5em;
 	gap: 0.5rem;
 	border: ridge 2px colors.$light;
 	position: relative;
 
+	@include media-query.small-screen() {
+		grid-template-rows: auto auto;
+		overflow: visible;
+	}
+
 	.cart-items-wrapper {
 		overflow-y: scroll;
-		height: auto;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5em;
 		padding: 0 1em;
+		height: 100%;
 	}
 
 	&:has(.cart-item:hover) .cart-item {
@@ -67,6 +87,9 @@
 
 .cart-checkout {
 	margin-right: 5%;
+	@include media-query.small-screen() {
+		margin: 0;
+	}
 
 	&__shipping {
 		display: grid;
