@@ -22,8 +22,8 @@ function App() {
 
 	useEffect(() => {
 
-
 		const id = auth?.isLoggedIn ? setInterval(() => {
+
 			if (!auth?.checkSessionValidity()) {
 				clientSideLogout()
 			}
@@ -35,6 +35,7 @@ function App() {
 
 	useLayoutEffect(() => {
 
+		console.log("was called")
 		if (!auth?.checkSessionValidity() && !location.pathname.match(new RegExp("^\/$|^\/login|^/item", "i"))) {
 			clientSideLogout()
 		}

@@ -16,8 +16,7 @@ export default function ItemDisplay() {
 	const navigate = useNavigate();
 	const shopData = useContext(ShopDataCtx)?.items;
 	const cart = useContext(CartCtx) as CartCtxProperties
-	const { isLoggedIn } = useContext(AuthCtx) as AuthCtxProperties
-
+	const isLoggedIn = useContext(AuthCtx)?.isLoggedIn
 	if (!shopData) {
 		navigate("/")
 		return;
