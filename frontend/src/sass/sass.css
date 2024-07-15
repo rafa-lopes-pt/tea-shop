@@ -13,6 +13,7 @@
 
 :root {
   font-size: clamp(16px, 1.5vmax, 20px);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1,
@@ -22,7 +23,7 @@ h4,
 h5,
 h6 {
   color: #e6ac1a;
-  font-family: "Helvetica";
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin-bottom: 0.5em;
   font-weight: bold;
 }
@@ -30,17 +31,37 @@ h6 {
 h1 {
   font-size: 2.3rem;
 }
+@media (hover: none) or (max-width: 900px) {
+  h1 {
+    font-size: 1.85rem;
+  }
+}
 
 h2 {
   font-size: 2rem;
+}
+@media (hover: none) or (max-width: 900px) {
+  h2 {
+    font-size: 1.45rem;
+  }
 }
 
 h3 {
   font-size: 1.5rem;
 }
+@media (hover: none) or (max-width: 900px) {
+  h3 {
+    font-size: 1.15rem;
+  }
+}
 
 h4 {
   font-size: 1.25rem;
+}
+@media (hover: none) or (max-width: 900px) {
+  h4 {
+    font-size: 1.05rem;
+  }
 }
 
 * {
@@ -479,6 +500,11 @@ body {
   gap: 1em;
   height: 94%;
 }
+@media (hover: none) or (max-width: 900px) {
+  .tabs-container {
+    padding: 1em 0em;
+  }
+}
 .tabs-container__tab {
   overflow: auto;
 }
@@ -613,9 +639,8 @@ body {
 .accordion-item__header {
   background-color: #ebfff8;
   padding: 0.5em 1em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   border-bottom: 1px ridge rgba(0, 31, 20, 0.3);
@@ -626,7 +651,8 @@ body {
 }
 .accordion-item__header__content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
+  justify-items: start;
   gap: 1em;
   transition: all 0.15s ease-out;
 }
@@ -1519,7 +1545,7 @@ body {
 }
 .profile header .user-info__name {
   color: #e6ac1a;
-  font-family: "Helvetica";
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin-bottom: 0.5em;
   font-weight: bold;
   margin: 0;
@@ -1569,6 +1595,11 @@ body {
   width: 100%;
   max-width: 80%;
 }
+@media (hover: none) or (max-width: 900px) {
+  .help-center .faq {
+    max-width: 100%;
+  }
+}
 .help-center .support {
   width: 100%;
 }
@@ -1580,8 +1611,8 @@ body {
 .help-center .support__icon {
   text-align: center;
   font-size: 1.5rem;
-  width: 6em;
-  height: 6em;
+  width: 4em;
+  height: 4em;
   background: linear-gradient(#00482e, #001f14);
   box-shadow: inset 2px 2px 20px 2px rgba(235, 255, 248, 0.2);
   display: flex;
@@ -1597,8 +1628,15 @@ body {
 .help-center .support__icon i {
   font-size: 1.5em;
 }
-.help-center .support__icon p {
-  font-size: 1em;
+@media (hover: none) or (max-width: 900px) {
+  .help-center .support__icon i {
+    font-size: 0.9em;
+  }
+}
+@media (hover: none) or (max-width: 900px) {
+  .help-center .support__icon p {
+    font-size: 0.7em;
+  }
 }
 .help-center .support__icon:hover {
   box-shadow: inset 2px 2px 30px 2px rgba(235, 255, 248, 0.5);

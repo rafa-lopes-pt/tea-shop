@@ -1,5 +1,5 @@
 @use "../base/colors" as colors;
-
+@use "../utils/media-queries" as media-query;
 .help-center {
 	display: flex;
 	flex-direction: column;
@@ -9,7 +9,6 @@
 	padding: 0.5em;
 	max-height: 100%;
 	overflow-y: auto;
-
 	& h2 {
 		text-align: center;
 	}
@@ -17,6 +16,9 @@
 	& .faq {
 		width: 100%;
 		max-width: 80%;
+		@include media-query.small-screen() {
+			max-width: 100%;
+		}
 	}
 
 	& .support {
@@ -31,6 +33,11 @@
 			text-align: center;
 			font-size: 1.5rem;
 			$size: 6em;
+
+			@include media-query.small-screen() {
+				$size: 4em;
+			}
+
 			width: $size;
 			height: $size;
 			background: linear-gradient(colors.$primary, colors.$bg);
@@ -52,9 +59,15 @@
 
 			& i {
 				font-size: 1.5em;
+
+				@include media-query.small-screen() {
+					font-size: 0.9em;
+				}
 			}
 			& p {
-				font-size: 1em;
+				@include media-query.small-screen() {
+					font-size: 0.7em;
+				}
 			}
 
 			&:hover {

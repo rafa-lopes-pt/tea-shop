@@ -1,5 +1,5 @@
 @use "../../utils/layout" as layout;
-
+@use "../../utils/media-queries" as media-query;
 .tabs-container {
 	padding: 1em;
 	display: grid;
@@ -7,6 +7,9 @@
 	grid-template-rows: auto 1fr;
 	gap: 1em;
 	height: 94%;
+	@include media-query.small-screen(){
+		padding: 1em 0em;
+	}
 	&__tab {
 		overflow: auto;
 	}
