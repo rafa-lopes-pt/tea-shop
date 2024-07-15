@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ShopItemSchemaType } from "../../../../shared/schemas/shop-item.schema";
 import CyclicArray from "../../../../shared/types/ds/CyclicArray.ds";
 import { ShopDataCtx } from "../../store/shop-data.context";
+import Image from "../../components/misc/Image";
 
 export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 	const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function ShopItem({ data }: { data: ShopItemSchemaType }) {
 		<div
 			className="shop-item"
 			onClick={handleShopItemDisplay}>
-			<img src={data.image} />
+			<Image src={data.image} />
 			<span className="shop-item__title">
 				<h2>{data.name}</h2>
 			</span>

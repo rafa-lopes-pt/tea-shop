@@ -3,9 +3,16 @@
 .image {
 	width: 100%;
 	height: 100%;
-
+	display: flex;
+	place-content: center;
+	place-items: center;
 	&__img {
 		width: 100%;
 		height: 100%;
+
+		&--placeholder,
+		&--error {
+			filter: grayscale(0.7);
+		}
 	}
 }

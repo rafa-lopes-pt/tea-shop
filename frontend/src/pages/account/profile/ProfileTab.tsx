@@ -11,14 +11,15 @@ import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfileTab() {
+	const { user, updateUser, deleteAccount, updateImage, isLoggedIn } = useContext(AuthCtx) as AuthCtxProperties & { user: UserSchemaType }
 	const [showDialog, setShowDialog] = useState(false)
-	const { user, updateUser, deleteAccount, updateImage } = useContext(AuthCtx) as AuthCtxProperties & { user: UserSchemaType }
 	const navigate = useNavigate()
 	const { register, handleSubmit, formState, reset } = useForm<UserSchemaType>({
 		resolver: zodResolver(stripEmptyStringValuesFromFormFields(UserSchema)),
 		shouldFocusError: true,
 		values: user
 	});
+	if (!isLoggedIn) return;
 
 	const onSubmitHandler = (data: UserSchemaType) => updateUser(data);
 

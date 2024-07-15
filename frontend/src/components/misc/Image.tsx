@@ -12,13 +12,16 @@ export default function Image({ className, placeholder = "/media/tea-cup.svg", e
 
     return (
         <LazyLoad
-            offset={100}
+            overflow={true}
+            offset={300}
+            unmountIfInvisible={true}
             className={"image " + className}
-            placeholder={<img {...props} src={placeholder} className={"image__img" + className} />}
+            placeholder={<img {...props} src={placeholder} className={"image__img image__img--placeholder" + className} />}
         >
             <img className={"image__img"} src={props.src} onError={(e) => {
                 const el = e.target as HTMLImageElement
                 el.src = error
+                el.classList.add("image__img--error")
             }} />
         </LazyLoad>
     )
