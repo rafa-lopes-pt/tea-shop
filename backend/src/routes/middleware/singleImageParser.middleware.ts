@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import multer from "multer";
+import sharp from "sharp";
 import HTTPCodes from "simple-http-codes";
 import HttpError from "../../../../shared/types/HttpError/HttpError.type";
-import { generateUUID } from "../../utils/crypto";
-import sharp from "sharp";
-import fs from "fs";
 const upload = multer({
 	storage: multer.memoryStorage(),
 	limits: {
@@ -12,8 +10,6 @@ const upload = multer({
 		files: 1,
 	},
 });
-
-//upload.single("image")
 
 async function singleImageValidatorMiddleware(
 	req: Request,
@@ -24,7 +20,7 @@ async function singleImageValidatorMiddleware(
 	if (!file) {
 		return next();
 	}
-	if (!file.mimetype.match(/jpeg|png|jpg/)) {
+	if (!file.mimetype.match(/\.(jpeg|png|jpg)$/)) {
 		return next(
 			new HttpError(
 				HTTPCodes.ClientError.BAD_REQUEST,
@@ -51,9 +47,14 @@ async function singleImageValidatorMiddleware(
 	}
 	next();
 }
-
+/**
+ * Reads a single jpeg|png|jpg file into memory with 3mb size limit.
+ * Compresses and resizes the image into a 300px² .webp file, and stores it on
+ * `res.locals.fileBuffer`
+ */
 const singleImageParser = [
 	upload.single("image"),
 	singleImageValidatorMiddleware,
 ];
+
 export default singleImageParser;
