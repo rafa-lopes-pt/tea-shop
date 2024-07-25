@@ -22,6 +22,10 @@
 	&__triggers {
 		display: flex;
 		gap: 1rem;
+		flex-wrap: wrap;
+		max-width: 80%;
+		justify-content: center;
+		align-items: center;
 	}
 
 	& footer a {

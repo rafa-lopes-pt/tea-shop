@@ -1991,6 +1991,10 @@ body {
 .dev-center__triggers {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 80%;
+  justify-content: center;
+  align-items: center;
 }
 .dev-center footer a {
   color: #e6ac1a;

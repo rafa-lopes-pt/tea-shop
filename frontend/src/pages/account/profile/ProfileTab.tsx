@@ -9,6 +9,7 @@ import { Form } from "../../../components/form/Form";
 import FileInput from "../../../components/input/FileInput";
 import { AuthCtx, AuthCtxProperties } from "../../../store/auth.context";
 import { useNavigate } from "react-router-dom";
+import { notifyInfoToast } from "../../../components/alerts/toasts/toast.notifier";
 
 export default function ProfileTab() {
 	const { user, updateUser, deleteAccount, updateImage, isLoggedIn } = useContext(AuthCtx) as AuthCtxProperties & { user: UserSchemaType }
@@ -38,7 +39,7 @@ export default function ProfileTab() {
 				show={showDialog}
 				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then((ok: boolean) => {
 					setShowDialog(false)
-					ok && navigate("/")
+					ok ? navigate("/") : notifyInfoToast("You can change this in the dev center")
 				})} >
 				Deleting your account is an irreversible action! Please proceed with care.
 			</Dialog>

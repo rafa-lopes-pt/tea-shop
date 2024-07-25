@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import notifyToastPromise, { notifyToastPromiseSuccess } from '../../../components/alerts/toasts/promise.notifier'
 import Button from '../../../components/buttons/Button'
-import notifyToastPromise from '../../../components/alerts/toasts/promise.notifier'
+import responseHandler from '../../../apis/responseHandler'
+import RestAPI from '../../../apis/server.endpoints'
+import { Id } from 'react-toastify'
 
 export default function DevCenterTab() {
   const [error, setError] = useState<any>(null)
+
 
   const throwError = () => setError({ i_am_the_error_you_triggered_in_the_dev_center: "" })
   const invalidateSession = () => {
@@ -20,6 +24,11 @@ export default function DevCenterTab() {
   const failedAsync = async () => {
     notifyToastPromise(new Promise((_resolve, reject) => setTimeout(() => reject(), 1500)))
   }
+
+  const markAllOrdersAsShipped = async () => {
+    responseHandler(RestAPI.markAllOrdersAsShipped, (_: any, toastId: Id) => notifyToastPromiseSuccess(toastId, "All Orders Shipped"))
+  }
+
   return (
     <div className='dev-center'>
       <div className='dev-center__note'>
@@ -39,6 +48,9 @@ export default function DevCenterTab() {
         </Button>
         <Button variant='outlined' onClick={invalidateSession}>
           Invalidate Session
+        </Button>
+        <Button variant='outlined' onClick={markAllOrdersAsShipped}>
+          Mark All Orders as Shipped
         </Button>
       </div>
 
