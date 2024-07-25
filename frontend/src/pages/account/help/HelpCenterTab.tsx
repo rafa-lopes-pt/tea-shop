@@ -6,7 +6,7 @@ import FontAwesomeIcons from "../../../components/misc/Icons";
 import EmailDialog from "./EmailDialog";
 import SupportIcon from "./SupportIcon";
 import FAQ from "./faq.json";
-import TC from "./terms-and-conditions.json";
+import TC from "../../../resources/terms-and-conditions.json";
 export default function HelpCenterTab() {
 
     const [showDialog, setShowDialog] = useState(false)

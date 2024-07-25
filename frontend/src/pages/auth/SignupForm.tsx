@@ -1,13 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
 	SignupSchema,
 	SignupSchemaType,
 } from "../../../../shared/schemas/signup.schema";
+import Dialog from "../../components/alerts/dialogs/Dialog";
+import { notifyInfoToast } from "../../components/alerts/toasts/toast.notifier";
 import Button from "../../components/buttons/Button";
+import Toggle from "../../components/buttons/Toggle";
 import { Form } from "../../components/form/Form";
-import { useContext } from "react";
 import { AuthCtx, AuthCtxProperties } from "../../store/auth.context";
+import TermsAndConditions from "../../resources/terms-and-conditions.json"
+
 export default function SignupForm({
 	onChangeScreen,
 	animationProps,
@@ -15,14 +20,22 @@ export default function SignupForm({
 	onChangeScreen: Function;
 	animationProps: any;
 }) {
+
+	const [show, setShow] = useState(false)
+	const [isAccepted, setIsAccepted] = useState(false)
+
 	const { signup } = useContext(AuthCtx) as AuthCtxProperties
 	const { register, handleSubmit, formState } = useForm<SignupSchemaType>({
 		resolver: zodResolver(SignupSchema),
 	});
 
 	const onSubmitHandler = async (data: SignupSchemaType) => {
-		if (await signup(data))
-			onChangeScreen()
+		if (isAccepted) {
+			await signup(data) && onChangeScreen();
+		}
+		else {
+			notifyInfoToast("Must Accept Conditions")
+		}
 	}
 
 
@@ -55,6 +68,12 @@ export default function SignupForm({
 					register={register}
 					formState={formState}
 				/>
+
+				<Toggle label="Terms & Conditions" onChange={() => { isAccepted ? setIsAccepted(false) : setShow(true) }} checked={isAccepted} />
+				<Dialog show={show} title="Terms & Conditions" onConfirm={() => { setShow(false); setIsAccepted(true) }} >
+					{TermsAndConditions.data}
+				</Dialog>
+
 
 				<Form.Submit formState={formState}>Register</Form.Submit>
 			</Form.Body>
