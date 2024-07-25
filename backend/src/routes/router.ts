@@ -8,6 +8,7 @@ import authMiddleware from "./middleware/auth.middleware";
 import imageOwnerAuthMiddleware from "./middleware/imageOwnerAuth.middleware";
 import ordersRouter from "./controllers/orders/orders.router";
 import HTTPCodes from "simple-http-codes";
+import MarkOrdersAsDeliveredController from "./controllers/orders/markAllAsShipped";
 
 const router = express.Router();
 
@@ -29,6 +30,12 @@ router.get(
 	imageOwnerAuthMiddleware,
 	mediaController
 );
+
+/*
+
+
+ */
+router.get("/dev/markAllOrdersAsShipped", MarkOrdersAsDeliveredController);
 
 router.all("*", (_, res) =>
 	res.status(404).json({ data: "Endpoint Not Implemented" })
