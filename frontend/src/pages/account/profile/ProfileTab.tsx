@@ -36,9 +36,9 @@ export default function ProfileTab() {
 			<Dialog
 				type="danger"
 				show={showDialog}
-				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then(() => {
+				title="Danger" onCancel={() => { setShowDialog(false) }} onConfirm={() => deleteAccount().then((ok: boolean) => {
 					setShowDialog(false)
-					navigate("/")
+					ok && navigate("/")
 				})} >
 				Deleting your account is an irreversible action! Please proceed with care.
 			</Dialog>
