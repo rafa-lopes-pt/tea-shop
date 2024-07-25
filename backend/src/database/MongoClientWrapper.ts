@@ -5,6 +5,7 @@ import {
 	MongoClient,
 	ObjectId,
 	ServerApiVersion,
+	UpdateFilter,
 	WithId,
 	WithoutId,
 } from "mongodb";
@@ -134,6 +135,36 @@ export default class MongoClientWrapper {
 			};
 		}
 	}
+	/**
+	 * Handles errors and checks if action was successful
+	 */
+	async updateMany<dto>(
+		database: string,
+		collection: string,
+		filters: DatabaseFilters<dto>,
+		data: UpdateFilter<DatabaseData<dto>>
+	): DatabaseResponse<dto> {
+		try {
+			await this._client.connect();
+
+			const db_response = await this._client
+				.db(database)
+				.collection(collection)
+				.updateMany(filters as Filter<any>, data as any);
+
+			if (!db_response) {
+				throw new Error("Data not acknowledged");
+			}
+
+			return { data: db_response as dto };
+		} catch (error) {
+			return {
+				error,
+				message: `Could not update requested ${JSON.stringify(data)} from ${collection} collection from ${database}`,
+			};
+		}
+	}
+
 	/**
 	 * Returns a cursor for the actual data
 	 * @warning - connection must be closed after usages

@@ -1,4 +1,4 @@
-import { ObjectId, WithoutId } from "mongodb";
+import { ObjectId, UpdateFilter, WithoutId } from "mongodb";
 import MongoClientWrapper from "../database/MongoClientWrapper";
 import {
 	DatabaseData,
@@ -37,6 +37,17 @@ export default class Repository<dto> {
 		data: Partial<WithoutId<DatabaseData<dto>>>
 	) {
 		return this.client.updateOne(
+			this.database,
+			this.collection,
+			filters,
+			data
+		);
+	}
+	updateMany(
+		filters: DatabaseFilters<dto>,
+		data: UpdateFilter<DatabaseData<dto>>
+	) {
+		return this.client.updateMany(
 			this.database,
 			this.collection,
 			filters,
