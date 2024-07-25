@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import mailRouter from "../mail/mail.router";
 import accountRouter from "./controllers/account/account.router";
 import authRouter from "./controllers/auth/auth.router";
@@ -7,8 +7,16 @@ import shopRouter from "./controllers/shop/shop.router";
 import authMiddleware from "./middleware/auth.middleware";
 import imageOwnerAuthMiddleware from "./middleware/imageOwnerAuth.middleware";
 import ordersRouter from "./controllers/orders/orders.router";
+import HTTPCodes from "simple-http-codes";
 
 const router = express.Router();
+
+router.get("/health", (_, res) => {
+	res.status(HTTPCodes.ClientError.IM_A_TEAPOT).json({
+		data: "Server is running, but refused to brew coffee with a teapot",
+	});
+});
+
 router.use(authRouter);
 router.use("/shop", shopRouter);
 router.use("/profile", accountRouter);
