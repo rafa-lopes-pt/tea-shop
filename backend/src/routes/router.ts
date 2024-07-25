@@ -30,4 +30,8 @@ router.get(
 	mediaController
 );
 
+router.all("*", (_, res) =>
+	res.status(404).json({ data: "Endpoint Not Implemented" })
+);
+
 export default router;
