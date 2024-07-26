@@ -16,8 +16,8 @@ function App() {
 	const clientSideLogout = () => {
 		auth?.deleteSessionData()
 		notifyInfoToast("Your session timed out. Please login again")
-		navigate("/login")
-
+		navigate("/login") //FIX: navigate does not seem to be working properly...need to force a reload for it to take an effect
+		location.reload()
 	}
 
 	useEffect(() => {
@@ -34,9 +34,10 @@ function App() {
 	}, [auth?.user])
 
 	useLayoutEffect(() => {
+
 		const isSessionValid = auth?.checkSessionValidity()
 
-		if (!isSessionValid && !location.pathname.match(new RegExp("^\/$|^\/login|^/item", "i"))) {
+		if (!isSessionValid && !location.pathname.match(new RegExp("^\/$|^\/login|^\/item", "i"))) {
 			clientSideLogout()
 		}
 		else if (!isSessionValid) {

@@ -4,10 +4,11 @@ import Button from '../../../components/buttons/Button'
 import responseHandler from '../../../apis/responseHandler'
 import RestAPI from '../../../apis/server.endpoints'
 import { Id } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export default function DevCenterTab() {
   const [error, setError] = useState<any>(null)
-
+  const navigate = useNavigate()
 
   const throwError = () => setError({ i_am_the_error_you_triggered_in_the_dev_center: "" })
   const invalidateSession = () => {
@@ -19,6 +20,7 @@ export default function DevCenterTab() {
     ====================================================================
     I'm fully aware of the problems related to this approach...this will be improved on future stages!!!
     */
+    // navigate("/login")
     location.reload()
   }
   const failedAsync = async () => {
