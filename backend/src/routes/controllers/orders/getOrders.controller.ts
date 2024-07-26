@@ -23,6 +23,7 @@ export default async function getOrdersController(
 
 		if (db_response.data) {
 			const orders = await db_response.data.toArray();
+			OrdersRepository.closeConnections();
 			return res.status(HTTPCodes.Success.OK).json({ data: orders });
 		}
 	} catch (error) {

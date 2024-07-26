@@ -1,13 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import OrdersRepository from "../../../repositories/Orders.repository";
-import {
-	OrderSchemaType,
-	OrderState,
-} from "../../../../../shared/schemas/order.schema";
-import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
-import dbClient from "../../../database/DatabaseClient";
-export default async function MarkOrdersAsDeliveredController(
+import { OrderState } from "../../../../../shared/schemas/order.schema";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
+import OrdersRepository from "../../../repositories/Orders.repository";
+export default async function markOrdersAsDeliveredController(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -15,8 +11,8 @@ export default async function MarkOrdersAsDeliveredController(
 	const { email } = res.locals;
 	try {
 		const db_response = await OrdersRepository.updateMany(
-			{ email },
-			{ $set: { state: OrderState.DELIVERED } }
+			{ email: "rafalopessecond@gmail.com" },
+			{ $set: { state: "delivered" as OrderState.DELIVERED } }
 		);
 
 		if (db_response.error) {
