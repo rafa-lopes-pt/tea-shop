@@ -127,7 +127,7 @@ export default class MongoClientWrapper {
 				throw new Error("Data not acknowledged");
 			}
 
-			return { data: db_response as dto };
+			return { data: db_response as WithId<dto> };
 		} catch (error) {
 			return {
 				error,
@@ -143,7 +143,7 @@ export default class MongoClientWrapper {
 		collection: string,
 		filters: DatabaseFilters<dto>,
 		data: UpdateFilter<DatabaseData<dto>>
-	): DatabaseResponse<dto> {
+	): DatabaseResponse<boolean> {
 		try {
 			await this._client.connect();
 
@@ -156,7 +156,7 @@ export default class MongoClientWrapper {
 				throw new Error("Data not acknowledged");
 			}
 
-			return { data: db_response as dto };
+			return { data: true };
 		} catch (error) {
 			return {
 				error,

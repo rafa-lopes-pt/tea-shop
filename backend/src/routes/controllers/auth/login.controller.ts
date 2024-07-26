@@ -15,7 +15,7 @@ export default async function loginController(
 
 	//validate email and retrieve used data
 
-	let existingUser: WithId<DbUserSchemaType> | undefined | null;
+	let existingUser: WithId<DbUserSchemaType>;
 
 	try {
 		const response = await UserRepository.findOne({ email });
@@ -32,7 +32,7 @@ export default async function loginController(
 			);
 		}
 
-		existingUser = response.data;
+		existingUser = response.data as WithId<DbUserSchemaType>;
 	} catch (err) {
 		return next(err);
 	}
@@ -78,7 +78,6 @@ export default async function loginController(
 		secure: false,
 		sameSite: "strict",
 		maxAge: CLIENT_SESSION_LIFETIME_MS,
-		
 	});
 
 	const { _id, password: _hashedPassword, ...user } = existingUser;
