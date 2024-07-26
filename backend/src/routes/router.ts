@@ -13,8 +13,9 @@ import markOrdersAsDeliveredController from "./controllers/orders/markAllAsShipp
 const router = express.Router();
 
 router.get("/health", (_, res) => {
-	res.status(HTTPCodes.ClientError.IM_A_TEAPOT).json({
-		data: "Server is running, but refused to brew coffee with a teapot",
+	// res.status(HTTPCodes.ClientError.IM_A_TEAPOT)
+	res.status(HTTPCodes.Success.OK).json({
+		data: "418 - Server is running, but refused to brew coffee with a teapot",
 	});
 });
 
