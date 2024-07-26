@@ -1,8 +1,7 @@
-import { Id, toast } from "react-toastify";
+import { Id } from "react-toastify";
 import {
-	notifyToastPromiseEnd,
 	notifyToastPromiseError,
-	notifyToastPromiseLoading,
+	notifyToastPromiseLoading
 } from "../components/alerts/toasts/promise.notifier";
 import { notifyErrorToast } from "../components/alerts/toasts/toast.notifier";
 

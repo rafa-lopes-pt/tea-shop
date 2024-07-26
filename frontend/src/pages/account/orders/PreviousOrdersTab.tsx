@@ -1,10 +1,9 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { OrderSchemaType } from "../../../../../shared/schemas/order.schema";
 import responseHandler from "../../../apis/responseHandler";
 import RestAPI from "../../../apis/server.endpoints";
 import Dialog, { DialogProps } from "../../../components/alerts/dialogs/Dialog";
-import Image from "../../../components/misc/Image";
-import { AnimatePresence, motion } from "framer-motion";
 import OrderItem from "./OrderItem";
 
 

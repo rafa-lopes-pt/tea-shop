@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Button from '../../components/buttons/Button'
 import { CartCtx, CartCtxProperties } from '../../store/cart.context'
 import CartItem from './CartItem'
-import Button from '../../components/buttons/Button'
-import { useNavigate } from 'react-router-dom'
 
 export default function CartList() {
   const { cart, totalPrice } = useContext(CartCtx) as CartCtxProperties

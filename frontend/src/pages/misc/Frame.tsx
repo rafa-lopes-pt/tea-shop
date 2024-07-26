@@ -7,7 +7,7 @@ export default function Frame() {
 
 				{Array(13)
 					.fill("")
-					.map((e, i) => (
+					.map((_e, i) => (
 						<div
 							className={"frame__line frame__line--top"}
 							key={"frame__line--top-" + i}></div>
@@ -18,7 +18,7 @@ export default function Frame() {
 			<div className="bottom-lines">{
 				Array(12)
 					.fill("")
-					.map((e, i) => (
+					.map((_e, i) => (
 						<div
 							className={"frame__line frame__line--bottom"}
 							key={"frame__line--bottom-" + i}></div>
@@ -31,7 +31,7 @@ export default function Frame() {
 				<div className="frame__dots__dot"></div>
 				{Array(48)
 					.fill("")
-					.map((e, i) => (
+					.map((_e, i) => (
 						<div
 							className={"frame__dots__dot"}
 							key={"frame__dots__dot-" + i}></div>

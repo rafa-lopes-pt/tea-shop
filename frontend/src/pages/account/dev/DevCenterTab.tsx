@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import notifyToastPromise, { notifyToastPromiseSuccess } from '../../../components/alerts/toasts/promise.notifier'
-import Button from '../../../components/buttons/Button'
+import { Id } from 'react-toastify'
 import responseHandler from '../../../apis/responseHandler'
 import RestAPI from '../../../apis/server.endpoints'
-import { Id } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import notifyToastPromise, { notifyToastPromiseSuccess } from '../../../components/alerts/toasts/promise.notifier'
+import Button from '../../../components/buttons/Button'
 
 export default function DevCenterTab() {
   const [error, setError] = useState<any>(null)
-  const navigate = useNavigate()
 
   const throwError = () => setError({ i_am_the_error_you_triggered_in_the_dev_center: "" })
   const invalidateSession = () => {

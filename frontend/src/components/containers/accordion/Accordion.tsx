@@ -1,4 +1,4 @@
-import { Children, ReactElement, ReactNode, cloneElement, forwardRef, useEffect, useRef, useState } from "react"
+import { Children, ReactElement, cloneElement, useState } from "react";
 import { AccordionItem, AccordionItemProps } from "./AccordionItem";
 
 export interface AccordionProps {

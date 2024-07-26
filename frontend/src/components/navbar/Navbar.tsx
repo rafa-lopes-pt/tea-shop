@@ -12,8 +12,7 @@ export default function Navbar({
 
 	const [show, setShow] = useState(false)
 
-	return <div className="main-navbar">
-
+	return <div className={"main-navbar " + className}>
 		{/*== Only on small screens ==*/}
 		<div className="main-navbar__background" data-show={show}>&nbsp;</div>
 
