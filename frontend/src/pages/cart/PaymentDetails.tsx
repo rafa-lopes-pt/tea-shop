@@ -60,7 +60,7 @@ export default function PaymentDetails() {
 
         <Form.Separator />
 
-        <Form.Submit formState={formState}>Pay <i className={FontAwesomeIcons.card}></i></Form.Submit>
+        <Form.Submit formState={formState} disabled={false}>Pay <i className={FontAwesomeIcons.card}></i></Form.Submit>
 
       </Form>
 
