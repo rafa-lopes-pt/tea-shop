@@ -4,7 +4,7 @@
 	position: relative;
 	z-index: 2;
 	height: 90svh;
-	border: 2px solid palevioletred;
+	// border: 2px solid palevioletred;
 
 	display: grid;
 	grid-template-areas:
@@ -55,7 +55,7 @@
 #main > section {
 	grid-area: content;
 	position: relative;
-	border: 2px solid red;
+	// border: 2px solid red;
 	padding: 1em;
 	overflow: hidden;
 }

@@ -1057,7 +1057,6 @@ body {
   position: relative;
   z-index: 2;
   height: 90svh;
-  border: 2px solid palevioletred;
   display: grid;
   grid-template-areas: ".         nav" "icons content";
   grid-template-columns: 8vw 1fr;
@@ -1098,7 +1097,6 @@ body {
 #main > section {
   grid-area: content;
   position: relative;
-  border: 2px solid red;
   padding: 1em;
   overflow: hidden;
 }
