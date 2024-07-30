@@ -20,7 +20,8 @@ async function singleImageValidatorMiddleware(
 	if (!file) {
 		return next();
 	}
-	if (!file.mimetype.match(/\.(jpeg|png|jpg)$/)) {
+
+	if (!file.mimetype.match(/image\/(jpeg|png|jpg)$/)) {
 		return next(
 			new HttpError(
 				HTTPCodes.ClientError.BAD_REQUEST,
