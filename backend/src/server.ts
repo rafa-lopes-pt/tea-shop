@@ -10,7 +10,7 @@ const server = express();
 server.use(morgan("dev"));
 server.use(
 	cors({
-		origin: ["https://tea-shop-rafa-lopes-pt.netlify.app"],
+		// origin: ["https://tea-shop-rafa-lopes-pt.netlify.app"],
 		credentials: true,
 	})
 );
