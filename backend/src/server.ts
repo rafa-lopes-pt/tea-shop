@@ -1,4 +1,3 @@
-import timeout from "connect-timeout";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
@@ -9,11 +8,9 @@ import router from "./routes/router";
 
 const server = express();
 server.use(morgan("dev"));
-server.use(timeout("5s"));
-server.disable("x-powered-by");
 server.use(
 	cors({
-		origin: "http://localhost:5173",
+		origin: ["https://tea-shop-rafa-lopes-pt.netlify.app"],
 		credentials: true,
 	})
 );
