@@ -76,7 +76,7 @@ export default async function loginController(
 	res.cookie("auth_token", token, {
 		httpOnly: true,
 		secure: true,
-		sameSite: "lax",
+		sameSite: "none",
 		maxAge: CLIENT_SESSION_LIFETIME_MS,
 	});
 
