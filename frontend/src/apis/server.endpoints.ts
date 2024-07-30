@@ -22,7 +22,10 @@ namespace RestAPI {
 	) {
 		try {
 			return await fetch(BASE_URI + endpoint, {
-				headers,
+				headers: {
+					"Access-Control-Allow": "true",
+					...headers,
+				},
 				method,
 				body,
 				credentials: "include",
