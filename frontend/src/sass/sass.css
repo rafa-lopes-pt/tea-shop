@@ -1481,6 +1481,11 @@ body {
     width: 100%;
   }
 }
+@media (hover: none) or (max-width: 900px) {
+  .item-display__image-wrapper {
+    min-height: 25vh;
+  }
+}
 .item-display__text {
   grid-area: text;
   border-left: 5px solid #e6ac1a;
@@ -1989,6 +1994,7 @@ body {
 .dev-center {
   display: flex;
   flex-direction: column;
+  gap: 1em;
   justify-content: space-evenly;
   place-items: center;
   text-align: center;

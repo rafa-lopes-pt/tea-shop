@@ -130,6 +130,9 @@
 		@include media-query.small-screen() {
 			width: 100%;
 		}
+		@include media-query.small-screen() {
+			min-height: 25vh;
+		}
 	}
 
 	&__text {
