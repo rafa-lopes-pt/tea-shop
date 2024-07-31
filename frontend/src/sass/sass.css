@@ -110,8 +110,8 @@ body {
   place-items: center;
 }
 .image__img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  aspect-ratio: square;
 }
 .image__img--placeholder, .image__img--error {
   filter: grayscale(0.7);
@@ -1134,6 +1134,17 @@ body {
   }
 }
 
+@keyframes loading {
+  50% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+@keyframes onLoad {
+  from {
+    opacity: 0;
+  }
+}
 .shop-page {
   display: flex;
   flex-direction: column;
@@ -1170,6 +1181,11 @@ body {
 .shop-section__wrapper {
   background-color: rgba(221, 221, 221, 0.3333333333);
   border-radius: 5px;
+}
+.shop-section--loading {
+  place-content: center;
+  place-items: center;
+  animation: loading 4s cubic-bezier(0.8, 0.2, 0.1, 0.8) both infinite;
 }
 @media (hover: hover) {
   .shop-section:has(> *:hover) > * {
