@@ -87,7 +87,7 @@ namespace RestAPI {
 		return await jsonRequest("/mail/email-support", "POST", data);
 	}
 	export async function markAllOrdersAsShipped() {
-		return await jsonRequest("/dev/markAllOrdersAsShipped");
+		return await jsonRequest("/orders/dev/markAllOrdersAsShipped");
 	}
 }
 
