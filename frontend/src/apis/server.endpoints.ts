@@ -84,7 +84,7 @@ namespace RestAPI {
 	}
 	//============== other
 	export async function emailSupport(data: any) {
-		return await jsonRequest("/email-support", "POST", data);
+		return await jsonRequest("/mail/email-support", "POST", data);
 	}
 	export async function markAllOrdersAsShipped() {
 		return await jsonRequest("/dev/markAllOrdersAsShipped");

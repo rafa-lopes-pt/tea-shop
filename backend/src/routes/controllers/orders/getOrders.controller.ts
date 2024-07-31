@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import OrdersRepository from "../../../repositories/Orders.repository";
-import { OrderSchemaType } from "../../../../../shared/schemas/order.schema";
-import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import HTTPCodes from "simple-http-codes";
+import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
+import OrdersRepository from "../../../repositories/Orders.repository";
 export default async function getOrdersController(
 	req: Request,
 	res: Response,

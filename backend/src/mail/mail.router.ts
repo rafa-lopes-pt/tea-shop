@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import session from "express-session";
 import HTTPCodes from "simple-http-codes";
 import { SupportEmailSchema } from "../../../shared/schemas/support-email.schema";
@@ -21,11 +21,13 @@ const router = express.Router();
 
 //defines credentials and an oAuthClient in the res.locals
 router.use(createOauthClientMiddleware);
-export const sendMailMiddleware = (createTemplate: (...args: any[]) => any) => [
-	createOauthClientMiddleware,
-	createTemplate,
-	sendMailController,
-];
+export const sendMailMiddleware = (
+	createTemplate: (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) => Promise<void>
+) => [createOauthClientMiddleware, createTemplate, sendMailController];
 router.post(
 	"/email-support",
 	createBodyValidatorMiddleware(SupportEmailSchema),

@@ -1,4 +1,4 @@
-import { Document, Filter, ObjectId, OptionalId, WithId } from "mongodb";
+import { Filter, OptionalId, WithId } from "mongodb";
 
 export type DatabaseFilters<dto> = Filter<WithId<dto>>;
 

@@ -1,14 +1,14 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
+import HTTPCodes from "simple-http-codes";
 import mailRouter from "../mail/mail.router";
 import accountRouter from "./controllers/account/account.router";
 import authRouter from "./controllers/auth/auth.router";
 import mediaController from "./controllers/misc/media.controller";
+import markOrdersAsDeliveredController from "./controllers/orders/markAllAsShipped";
+import ordersRouter from "./controllers/orders/orders.router";
 import shopRouter from "./controllers/shop/shop.router";
 import authMiddleware from "./middleware/auth.middleware";
 import imageOwnerAuthMiddleware from "./middleware/imageOwnerAuth.middleware";
-import ordersRouter from "./controllers/orders/orders.router";
-import HTTPCodes from "simple-http-codes";
-import markOrdersAsDeliveredController from "./controllers/orders/markAllAsShipped";
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.use(authRouter);
 router.use("/shop", shopRouter);
 router.use("/profile", accountRouter);
 router.use("/orders", ordersRouter);
-router.use(mailRouter);
+router.use("/mail", mailRouter);
 //resource access
 router.get(
 	"/resources/profile-images/:resource",
@@ -31,13 +31,11 @@ router.get(
 	imageOwnerAuthMiddleware,
 	mediaController
 );
+router.get("/resources/product-images/:resource", mediaController);
 
-/*
-
-
- */
+//STAGE 0 ONLY
 router.get("/dev/markAllOrdersAsShipped", markOrdersAsDeliveredController);
-
+//
 router.all("*", (_, res) =>
 	res.status(404).json({ data: "Endpoint Not Implemented" })
 );
