@@ -11,7 +11,7 @@ export default async function markOrdersAsDeliveredController(
 	const { email } = res.locals;
 	try {
 		const db_response = await OrdersRepository.updateMany(
-			{ email: "rafalopessecond@gmail.com" },
+			{ email },
 			{ $set: { state: "delivered" as OrderState.DELIVERED } }
 		);
 
