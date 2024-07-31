@@ -26,11 +26,11 @@ const cartReducer = (state: CartItemSchemaType[], action: CartAction) => {
     switch (action.type) {
         case CartActionType.ADD: {
             if (!action.payload) return state;
-
             for (let i = 0; i < state.length; i++) {
                 if (state[i]?._id === action.payload._id) {
-                    const arr = [...state]
-                    arr.splice(i, 1, { ...state[i], quantity: state[i].quantity++ })
+                    const arr = [...state], item = { ...arr[i] }
+                    item.quantity++
+                    arr[i] = item
                     return arr
                 }
             }
