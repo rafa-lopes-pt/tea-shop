@@ -1,14 +1,14 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
+import HTTPCodes from "simple-http-codes";
 import mailRouter from "../mail/mail.router";
 import accountRouter from "./controllers/account/account.router";
 import authRouter from "./controllers/auth/auth.router";
 import mediaController from "./controllers/misc/media.controller";
+import markOrdersAsDeliveredController from "./controllers/orders/markAllAsShipped";
+import ordersRouter from "./controllers/orders/orders.router";
 import shopRouter from "./controllers/shop/shop.router";
 import authMiddleware from "./middleware/auth.middleware";
 import imageOwnerAuthMiddleware from "./middleware/imageOwnerAuth.middleware";
-import ordersRouter from "./controllers/orders/orders.router";
-import HTTPCodes from "simple-http-codes";
-import markOrdersAsDeliveredController from "./controllers/orders/markAllAsShipped";
 
 const router = express.Router();
 

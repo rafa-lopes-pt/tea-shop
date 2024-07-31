@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, json } from "express";
+import { NextFunction, Request, Response } from "express";
 import HTTPCodes from "simple-http-codes";
 import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 
