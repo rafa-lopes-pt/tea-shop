@@ -70,7 +70,7 @@ export default function SignupForm({
 				/>
 
 				<Toggle label="Terms & Conditions" onChange={() => { isAccepted ? setIsAccepted(false) : setShow(true) }} checked={isAccepted} />
-				<Dialog show={show} title="Terms & Conditions" onConfirm={() => { setShow(false); setIsAccepted(true) }} >
+				<Dialog show={show} title="Terms & Conditions" onConfirm={() => { setShow(false); setIsAccepted(true) }} justifyBody>
 					{TermsAndConditions.data}
 				</Dialog>
 
