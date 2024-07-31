@@ -1127,15 +1127,16 @@ body {
   gap: 1em;
   padding: 1em 0em;
 }
-.social-icons > * {
+.social-icons * {
   max-width: 100%;
+  margin: auto;
 }
 @media (hover: none) or (max-width: 900px) {
   .social-icons {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
   }
 }
 
