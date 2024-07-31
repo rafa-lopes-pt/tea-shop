@@ -13,17 +13,13 @@ export default function ShopPage() {
 				<div className="footer-item">
 					<h4 className="footer-item__title">Free Shipping</h4>
 					<p className="footer-item__text">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Voluptatum iste cupiditate excepturi tempora vitae
-						tenetur
+						Free shipping on all orders! Enjoy your favorite teas delivered right to your door.
 					</p>
 				</div>
 				<div className="footer-item">
 					<h4 className="footer-item__title">Secure Payments</h4>
 					<p className="footer-item_text">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Voluptatum iste cupiditate excepturi tempora vitae
-						tenetur
+						Enjoy your tea without worry. Our payments are secured by Stripe.
 					</p>
 				</div>
 			</footer>

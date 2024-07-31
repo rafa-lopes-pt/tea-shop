@@ -33,9 +33,6 @@ router.get(
 );
 router.get("/resources/product-images/:resource", mediaController);
 
-//STAGE 0 ONLY
-router.get("/dev/markAllOrdersAsShipped", markOrdersAsDeliveredController);
-//
 router.all("*", (_, res) =>
 	res.status(404).json({ data: "Endpoint Not Implemented" })
 );

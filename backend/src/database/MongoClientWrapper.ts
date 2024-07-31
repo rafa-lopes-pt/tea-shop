@@ -151,11 +151,10 @@ export default class MongoClientWrapper {
 				.collection(collection)
 				.updateMany(filters as Filter<unknown>, data as Document);
 
-			if (!db_response) {
+			if (!db_response.acknowledged) {
 				throw new Error("Data not acknowledged");
 			}
-
-			return { data: true };
+			return { data: db_response.modifiedCount > 0 };
 		} catch (error) {
 			return {
 				error,

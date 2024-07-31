@@ -26,7 +26,7 @@ export default function DevCenterTab() {
   }
 
   const markAllOrdersAsShipped = async () => {
-    responseHandler(RestAPI.markAllOrdersAsShipped, (_: any, toastId: Id) => notifyToastPromiseSuccess(toastId, "All Orders Shipped"))
+    responseHandler(RestAPI.markAllOrdersAsShipped, async (res: Response, toastId: Id) => notifyToastPromiseSuccess(toastId, (await res.json()).data))
   }
 
   return (
@@ -50,7 +50,7 @@ export default function DevCenterTab() {
           Invalidate Session
         </Button>
         <Button variant='outlined' onClick={markAllOrdersAsShipped}>
-          Mark All Orders as Shipped
+          Mark All Orders as Delivered
         </Button>
       </div>
 

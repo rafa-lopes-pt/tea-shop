@@ -4,15 +4,16 @@ import { OrderState } from "../../../../../shared/schemas/order.schema";
 import HttpError from "../../../../../shared/types/HttpError/HttpError.type";
 import OrdersRepository from "../../../repositories/Orders.repository";
 export default async function markOrdersAsDeliveredController(
-	req: Request,
+	_req: Request,
 	res: Response,
 	next: NextFunction
 ) {
 	const { email } = res.locals;
+
 	try {
 		const db_response = await OrdersRepository.updateMany(
 			{ email },
-			{ $set: { state: "delivered" as OrderState.DELIVERED } }
+			{ $set: { state: OrderState.DELIVERED } }
 		);
 
 		if (db_response.error) {
@@ -25,9 +26,9 @@ export default async function markOrdersAsDeliveredController(
 			);
 		}
 
-		if (db_response.data) {
-			return res.status(HTTPCodes.Success.NO_CONTENT).end();
-		}
+		return res.status(HTTPCodes.Success.OK).json({
+			data: db_response.data ? "Orders Delivered" : "Nothing was changed",
+		});
 	} catch (error) {
 		next(error);
 	}
