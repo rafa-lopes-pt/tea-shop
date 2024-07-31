@@ -1387,7 +1387,7 @@ body {
   .item-display {
     grid-template-areas: "img" "title" "text" "price" "footer";
     grid-template-columns: 1fr;
-    overflow-y: auto;
+    overflow-y: auto !important;
     height: 100%;
   }
 }
