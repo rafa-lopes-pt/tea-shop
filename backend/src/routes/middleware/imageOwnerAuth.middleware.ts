@@ -6,6 +6,7 @@ export default async function imageOwnerAuthMiddleware(
 	res: Response,
 	next: NextFunction
 ) {
+	console.log(req.path);
 	if (req.path !== `/resources/profile-images/${res.locals.email}.webp`) {
 		return res
 			.status(HTTPCodes.ClientError.FORBIDDEN)

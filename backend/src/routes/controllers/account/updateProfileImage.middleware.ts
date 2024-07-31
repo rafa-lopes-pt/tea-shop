@@ -9,27 +9,26 @@ export default async function updateProfileImageMiddleware(
 ) {
 	//save image to disk
 	try {
-		const resourceDir = "resources/profile-images/";
-		const path = `${resourceDir}${res.locals.email}.webp`;
+		const resourceDir = "./src/resources/profile-images",
+			file = `${res.locals.email}.webp`,
+			filePath = `${resourceDir}/${file}`;
 		//the file will always have the same name...so this flag prevents unnecessary calls to db
 		let alreadyDefined;
 
 		if (!fs.existsSync(resourceDir)) {
-			fs.mkdirSync("./" + resourceDir, { recursive: true });
+			fs.mkdirSync(resourceDir, { recursive: true });
 		} else {
-			alreadyDefined = fs.existsSync(path);
+			alreadyDefined = fs.existsSync(filePath);
 		}
 
-		fs.writeFileSync("./" + path, res.locals.fileBuffer);
+		fs.writeFileSync(filePath, res.locals.fileBuffer);
 
 		if (alreadyDefined) {
-			console.log("already created");
-
 			return res.status(HTTPCodes.Success.CREATED).end();
 		}
 
 		req.body = {
-			image: `${req.protocol}://${req.headers.host}/${path}`,
+			image: `${req.protocol}://${req.headers.host}/resources/profile-images/${res.locals.email}.webp`,
 		};
 		return next();
 	} catch (error) {

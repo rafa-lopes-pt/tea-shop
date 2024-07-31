@@ -15,7 +15,7 @@ dist-ssr
 NOTES.md
 
 #server disk data
-backend/resources/profile-images/*
+backend/src/resources/profile-images/*
 
 
 # Editor directories and files

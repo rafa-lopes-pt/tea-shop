@@ -9,7 +9,9 @@ export default function mediaController(
 ) {
 	try {
 		const path = req.path;
-		return res.status(200).sendFile(path, { root: "./" });
+		console.log(path);
+
+		return res.status(200).sendFile(path, { root: "./src" });
 	} catch (error) {
 		next(
 			new HttpError(HTTPCodes.ClientError.NOT_FOUND, "Not Found", {
