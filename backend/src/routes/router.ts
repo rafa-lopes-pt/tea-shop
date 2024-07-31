@@ -23,7 +23,7 @@ router.use(authRouter);
 router.use("/shop", shopRouter);
 router.use("/profile", accountRouter);
 router.use("/orders", ordersRouter);
-// router.use(mailRouter);
+router.use("/mail", mailRouter);
 //resource access
 router.get(
 	"/resources/profile-images/:resource",
@@ -31,11 +31,7 @@ router.get(
 	imageOwnerAuthMiddleware,
 	mediaController
 );
-router.get(
-	"/resources/product-images/:resource",
-	mediaController
-);
-
+router.get("/resources/product-images/:resource", mediaController);
 
 //STAGE 0 ONLY
 router.get("/dev/markAllOrdersAsShipped", markOrdersAsDeliveredController);
