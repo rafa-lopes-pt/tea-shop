@@ -72,9 +72,9 @@ function App() {
 
 				{/* social icons */}
 				<div className="social-icons">
-					<IconButton icon={FontAwesomeIcons.youtube} />
-					<IconButton icon={FontAwesomeIcons.facebook} />
-					<IconButton icon={FontAwesomeIcons.instagram} />
+					<a href="https://github.com/rafa-lopes-pt/tea-shop" target="_blank" rel="noopener noreferrer"><IconButton icon={FontAwesomeIcons.github} /></a>
+					<a href="https://www.linkedin.com/in/rafael-lopes-software-developer/" target="_blank" rel="noopener noreferrer"><IconButton icon={FontAwesomeIcons.linkedin} /></a>
+					<a href="mailto:rafalopessecond@gmail.com" target="_blank" rel="noopener noreferrer"><IconButton icon={FontAwesomeIcons.mail} /></a>
 				</div>
 
 				<AnimatePresence>

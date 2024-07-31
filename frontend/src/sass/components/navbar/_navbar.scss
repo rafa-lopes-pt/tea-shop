@@ -81,6 +81,11 @@
 
 		@include media-query.small-screen() {
 			flex-direction: column;
+			& * {
+				width: 55vw;
+				text-align: center;
+				max-width: 100%;
+			}
 			font-size: 1.5rem;
 		}
 	}

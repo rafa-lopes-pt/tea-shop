@@ -70,7 +70,7 @@ export default function PreviousOrdersTab() {
                                 }
                             >
                                 <span>Date: {date}</span>
-                                <span>Total: {total} $</span>
+                                <span>Total: {total.toFixed(2)} $</span>
                                 <span>{e.state}</span>
                             </motion.div >
                         )
