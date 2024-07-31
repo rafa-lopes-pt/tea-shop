@@ -1,7 +1,7 @@
 @use "../base/colors" as colors;
 @use "../utils/layout" as layout;
 @use "../utils/media-queries" as media-query;
-
+@use "../utils/animations" as animations;
 .shop-page {
 	display: flex;
 	flex-direction: column;
@@ -45,6 +45,13 @@
 	display: flex;
 	padding: 1em;
 	gap: 1em;
+
+	&--loading {
+		// background: radial-gradient(transparent, colors.$bg);
+		place-content: center;
+		place-items: center;
+		@include animations.loading-animation(4);
+	}
 
 	@include media-query.can-hover() {
 		&:has(> *:hover) > * {

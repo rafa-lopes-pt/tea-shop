@@ -24,8 +24,8 @@ export default function ShopSectionContainer({
 
 	return (
 		<div className={"shop-section__wrapper " + className}>
-			{/* FIX: Add skelleton while loading */}
-			{!items && <p>LOADING... PLZ FIX ME</p>}
+
+			{!items && <div className="shop-section shop-section--loading"><h4>Looking for the best Tea ...</h4></div>}
 
 			{items && (
 				<div ref={containerRef} className={"shop-section"} >
