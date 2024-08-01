@@ -25,7 +25,6 @@ export default function PaymentDetails() {
 
 
   const onSubmitHandler = async (data: OrderSchemaType) => {
-    console.log(data)
     await responseHandler(() => RestAPI.placeOrder(data), (_data: Response, toastId: Id) => {
       notifyToastPromiseSuccess(toastId, "Order in Process!")
       clear()
@@ -60,7 +59,7 @@ export default function PaymentDetails() {
 
         <Form.Separator />
 
-        <Form.Submit formState={formState} disabled={false}>Pay <i className={FontAwesomeIcons.card}></i></Form.Submit>
+        <Form.Submit formState={formState} disabled={cart.length === 0}>Pay <i className={FontAwesomeIcons.card}></i></Form.Submit>
 
       </Form>
 

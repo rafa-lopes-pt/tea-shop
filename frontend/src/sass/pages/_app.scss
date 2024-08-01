@@ -36,6 +36,15 @@
 		box-shadow: inset 0px 0px 250px 20px colors.$bg;
 	}
 
+	&.booting {
+		display: flex;
+		flex-direction: column;
+		place-content: center;
+		place-items: center;
+		padding: 1rem;
+		text-align: center;
+	}
+
 	@include media-query.small-screen() {
 		grid-template-areas:
 			"content"

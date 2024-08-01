@@ -64,6 +64,12 @@ h4 {
   }
 }
 
+.link {
+  color: #e6ac1a;
+  text-decoration: underline;
+  user-select: text;
+}
+
 * {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -1083,6 +1089,14 @@ body {
   left: 0;
   z-index: -1;
   box-shadow: inset 0px 0px 250px 20px #001f14;
+}
+#main.booting {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  padding: 1rem;
+  text-align: center;
 }
 @media (hover: none) or (max-width: 900px) {
   #main {
