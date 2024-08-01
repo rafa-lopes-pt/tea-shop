@@ -1,7 +1,0 @@
-@use "../../base/colors" as colors;
-@import "react-toastify/dist/ReactToastify.css";
-//LOOKUP: https://fkhadra.github.io/react-toastify/how-to-style
-
-:root {
-	--toastify-text-color-dark: colors.$text-secondary;
-}
