@@ -47,7 +47,6 @@
             <li><a href="#repository-structure-%EF%B8%8F">Repository Structure</a></li>
             <li><a href="#data-privacy-%EF%B8%8F">Data Privacy</a></li>
         </ul>    
-    
     </li>
   </ol>
 </details>
