@@ -85,7 +85,7 @@ Chuck is a nice guy with a passion for tea. He has a strong social media presenc
 He's at a point where he'd like to start selling his own products online and would like to have his own website, something fancy!
 
 <p align="center">
- <img src="/images/chuck.webp" alt="chuck" width="80" height="80">
+ <img src="/images/chuck.webp" alt="chuck" height="280">
 </p>
 
 ### Initial Requirements ( Stage 0-1 )
@@ -105,7 +105,7 @@ Chuck has a friend who is young software developer (hey that's me!) who has as g
 Like any other client, Chuck thinks it's a good idea to assign everything to this junior developer, letting him take care of the design, project setup...choosing whatever tech stack he wishes, implementing security features on the server, and even take care of actual payment processing! After all he IS a developer...and it's cheaper than a full team...
 
 <p align="center">
-  <img href="/images/whatcouldgowrong.gif" alt="What could possibly go wrong?" width="80" height="80"/>
+  <img src="/images/whatcouldgowrong.gif" alt="What could possibly go wrong?" width="300" />
 </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -119,13 +119,13 @@ For the backend, a REST API made with ExpressJS connected to a document databse 
 ### Design and Structuring
 Searching for inspiration, ended up finding this awesome concept by [Akib Abdullah](https://dribbble.com/shots/19996698-Tea-web-ui).
 <p align="center">
-  <img href="/images/concept.jpg" alt="Akib's design" width="80%"/>
+  <img src="/images/concept.jpg" alt="Akib's design" width="350"/>
 </p>
 
-I proceeded to create a [Whimsical board](https://whimsical.com/tea-shop-LxYQkUrFdccPsFU7H4DxR1) where I made a sketch of what the end result should look like, as well as the website's user-flow diagram, server endpoints, and where I documented other technical aspects of the whole app.
+Then I proceeded to create a [Whimsical board](https://whimsical.com/tea-shop-LxYQkUrFdccPsFU7H4DxR1) where I made a sketch of what the end result should look like, as well as the website's user-flow diagram, server endpoints, and where I documented other technical aspects of the whole app.
 
 <p align="center">
-  <img href="/images/whimsical-s0.jpg" alt="Whimsical Board Screenshot" width="100%"/>
+  <img src="/images/whimsical-s0.png" alt="Whimsical Board Screenshot"/>
 </p>
 
 ### Frontend
