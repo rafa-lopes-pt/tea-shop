@@ -133,11 +133,11 @@ Then I proceeded to create a [Whimsical board](https://whimsical.com/tea-shop-Lx
  
 Since SEO is not important in this case, **React JS** seems like a good option. Allowing me to make use of it's huge community and packages like **framer-motion** to create stunning animations.
 - Relevant packages:
-  - **Sass** -> A superset of CSS that supports functions, mixins, variables and other important concepts for high quality code
-  - **Framer-Motion** -> Facilitates complex component animations in react, specially for transitions where items are removed from the DOM
-  - **React-Toastify** -> Displays amazing toast notifications in the easiest, and most costumizable way possible
-  - **Font-Awsome** -> Icon library
-  - **React-Hook-Form** -> Enhanced form handling library that works quite well with **Zod**
+  - **Sass** - A superset of CSS that supports functions, mixins, variables and other important concepts for high quality code
+  - **Framer-Motion** - Facilitates complex component animations in react, specially for transitions where items are removed from the DOM
+  - **React-Toastify** - Displays amazing toast notifications in the easiest, and most costumizable way possible
+  - **Font-Awsome** - Icon library
+  - **React-Hook-Form** - Enhanced form handling library that works quite well with **Zod**
 
 ### Shared
 ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
@@ -148,7 +148,7 @@ Both front and back ends share code related to, but not limited to entities (i.e
 - Useful libraries to implement this include:
   - **Zod** - A library that allows for typechecking during runtime, and that pairs well with **React Hook Form**
   - **Simple-HTTP-Codes** - Provides constants for HTTP response codes, with jsDocs containing detailed information about each.
-  - **Stripe** -> Payment processing
+  - **Stripe** - Payment processing
    
 ### Backend
 
@@ -158,19 +158,24 @@ Both front and back ends share code related to, but not limited to entities (i.e
 
 Considering the simple needs of the project, **Express JS** not only is a good option to implement a REST API, but it also pairs well with React! And since we're going to need a database, MongoDB provides an awsome free service for small projects, and is part of the **MERN** stack (Mongo, Express, React and Node)
 - Relevant packages: 
- - **Multer** -> A library that handles files on express
- - **Nodemailer** -> Simplifies the process of sending emails
- - **Sharp** -> Used to convert and compress images
+ - **Multer** - A library that handles files on express
+ - **Nodemailer** - Simplifies the process of sending emails
+ - **Sharp** - Used to convert and compress images
 
 ### Micro-services
 
-![Static Badge](https://img.shields.io/badge/Stripe%20-%20%23008cdd?style=for-the-badge&logo=stripe&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Google%20APIS%20-%20%23e84234?style=for-the-badge&logo=google%20cloud&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Stripe%20-%20%23008cdd?style=for-the-badge&logo=stripe&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Chat%20Bot%20AI%20-%20%23056cff?style=for-the-badge&logo=chatbot&logoColor=white)
 
 The backend will include 3 separate microservices: Mailing, Payment Processing and Chatbot.
 These won't all be available from stage 0, nor is the project properly organized to support them.
 Their final implementation will be done in stage 2, and all of them will be containerized with docker.
+
+- **Mailing** - Using a google cloud project and the gmail api, this service will be used to send registration email, and contact support
+  - Since this is a portfolio project, I'm using my own email as to promote comunication with a possible recruiter :P
+- **Payment** - StripeJs offers pre-built solutions and also allows for custom components. Integrates well with React, and the server only needs to implement some endpoints to process *"payment-intents"*. Everything else, is handled by stripe.
+- **Chatbot AI** - On the last stage of the project, I aim to implement AI on the project by creating a basic customer service bot to anwser user questions.
 
 ### Database
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
@@ -246,9 +251,9 @@ The final stage is where I will introduce new problems like high server traffic,
 The project will be developed as a monorepo, and will include the following branches:
 - **Intro**
 - **Live**
-- **main** -> Current development and testing
-- **Stage # branch** -> containing the final code that won't ever be changed
-- **issues/features** -> used for development only
+- **main** - Current development and testing
+- **Stage # branch** - containing the final code that won't ever be changed
+- **issues/features** - used for development only
 
 main, live and stage branches include ***ALL*** the code related to the project, you can compare them to see the application progress.
 
