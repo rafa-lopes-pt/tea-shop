@@ -46,3 +46,9 @@ h4 {
 		font-size: 1.05rem;
 	}
 }
+
+.link {
+	color: colors.$secondary;
+	text-decoration: underline;
+	user-select: text;
+}
