@@ -13,7 +13,7 @@
     A Fullstack React SPA, using components <em>made from scratch</em> and featuring it's own Express API
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">Visit the Website</a>
+    <a href="https://tea-shop-rafa-lopes-pt.netlify.app/" target="_blank">Visit the Website</a>
     ·
     <a href="https://github.com/rafa-lopes-pt/tea-shop/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
