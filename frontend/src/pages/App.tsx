@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { notifyInfoToast } from "../components/alerts/toasts/toast.notifier";
 import IconButton from "../components/buttons/IconButton";
@@ -23,7 +23,7 @@ function App() {
 
 	//Check if server is alive
 	useLayoutEffect(() => {
-		RestAPI.isAlive().then(res => res && setWaitingForServer(false)).catch(e => { throw new Error(e) })
+		RestAPI.isAlive().then(res => res.ok && setWaitingForServer(false)).catch(e => { throw new Error(e) })
 	}, [])
 	//Check Session validity
 	useEffect(() => {
@@ -77,6 +77,8 @@ function App() {
 				<h3>We're brewing up something special for you!</h3>
 				<p> Due to some technical limitations of the free tiers in our hosting platforms, the website can take up to 50s to load 😔</p>
 				<p> You can read more about this at the <a href="https://github.com/rafa-lopes-pt/tea-shop" target="_blank" className="link">github repository</a></p>
+				<br />
+				<p>If this page does not disappear, please contact me at <span className="link" onClick={() => { navigator.clipboard.writeText("rafalopessecond@gmail.com"); notifyInfoToast("Copied to clipboard!") }}>rafalopessecond@gmail.com</span></p>
 			</main>
 			}
 			{!waitingForServer && <main id="main">

@@ -24,6 +24,9 @@
 		padding: 0.5em 1em;
 		display: grid;
 		grid-template-columns: 1fr auto;
+
+		align-items: center;
+
 		grid-auto-flow: column;
 		cursor: pointer;
 		transition: all 0.25s ease-in-out;

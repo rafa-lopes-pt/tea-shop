@@ -8,7 +8,7 @@ import OrderItem from "./OrderItem";
 
 
 export default function PreviousOrdersTab() {
-    const [orders, setOrders] = useState<OrderSchemaType[]>([])
+    const [orders, setOrders] = useState<OrderSchemaType[] | null>(null)
 
     const cycleRef = useRef(true)
     useEffect(() => {
@@ -32,13 +32,19 @@ export default function PreviousOrdersTab() {
 
 
             <AnimatePresence presenceAffectsLayout={true} initial={false}>
-                {orders.length === 0 &&
+                {!orders &&
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="prev-orders-tab__empty">
+                        <h3>Our finest china is being polished for your order history...</h3>
+                    </motion.div>
+                }
+
+                {orders && orders.length === 0 &&
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="prev-orders-tab__empty">
                         <h3>We see you haven't embarked on your tea journey yet. Your first cup awaits!</h3>
                     </motion.div>
                 }
                 {
-                    orders.length > 0 && orders.map(e => {
+                    orders && orders.length > 0 && orders.map(e => {
 
                         const date = new Date(e.createdAt).toLocaleDateString("en-GB")
                         const total = e.items.reduce((sum, i) => sum + i.price * i.quantity, 0)

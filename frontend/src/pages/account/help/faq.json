@@ -1,11 +1,15 @@
 [
 	{
-		"q": "Q#1 - Why is login so slow?",
-		"a": "The website uses \"render.com\" to deploy the backend server. It's a service with great free features, safe, compliant with GDPR and with many integrations. One of the drawbacks is that free tiers (such as this), are suspended after a short period of inactivity, and can take up to 50s to get back up running. Therefore, the first request is always slower because it also needs to \"wake up\" the server."
+		"q": "Q#1 - Why are some requests so slow?",
+		"a": "The website uses \"render.com\" to deploy the backend server. It's a service with great free features, but one of the drawbacks is that free tiers (such as this), are suspended after a short period of inactivity, and can take up to 50s to get back up running. Therefore, the first request (after server suspends) is always slower because it also needs to \"wake up\" the server."
 	},
 	{
 		"q": "Q#2 - Why can't I delete my account?",
 		"a": "This is probably due to ongoing orders (either in process, or still being delivered). Once all orders are delivered, you are then able to delete your account. You should see a notification warning about it, however if that's not the case please use the support contact bellow to warn me about this error."
+	},
+	{
+		"q": "Q#2 - Profile Image not loading",
+		"a": "At the moment I'm compressing all uploaded images and storing them directly on the server, this is NOT a good approach because it may also mean that every time the server resets, the images are deleted. However it is the intended scenario for stage 0, and will be fixed on the next stages."
 	},
 	{
 		"q": "Q#3 - Missing authorization token",
@@ -17,7 +21,7 @@
 	},
 	{
 		"q": "Q#5 - My order was not delivered",
-		"a": "Thank you for your interest in reading the FAQ. I do regret to inform that this is not a real shop and thus we don't sell tea. Also...with all due respect...what were you expecting to find here?"
+		"a": "Thank you for your interest in reading the FAQ. I do regret to inform that this is not a real shop and thus we don't sell tea. Also...what were you expecting to find here? ahahaha"
 	},
 	{
 		"q": "Q#? - ...proccessing...DONE!",
