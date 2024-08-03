@@ -109,9 +109,6 @@
 
 <h2 align="center" id="about">Introduction</h2>
 
-<p align="center">
- <img src="/images/landing-page.png" alt="landing page" width="80%">
-</p>
 Wow you're really here!? I'm assuming you've read the <a href="https://github.com/rafa-lopes-pt/tea-shop/tree/Intro" target="_blank"> Intro README </a>
 On this file you'll find more detailed technical information, and some explanations about why stuff was done the way it was. The following sections cover the topics I find most relevant.
 
